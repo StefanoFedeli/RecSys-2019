@@ -1,0 +1,10 @@
+CONTENT BASED
+    ITEM BASED
+        A un utente piacciono item simili
+    USER BASED
+        A utenti simili piacciono gli stessi item
+COLLABORATIVE FILTERING
+    USER BASED
+        Due utenti sono simili se hanno le stesse opinioni su degli item (/vi hanno interagito)
+    ITEM BASED
+        Due item sono simili se molti utenti condividono la stessa opinione su di essi (/vi hanno interagito)
