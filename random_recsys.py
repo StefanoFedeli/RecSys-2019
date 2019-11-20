@@ -3,7 +3,6 @@ import numpy as np
 # import matplotlib.pyplot as pyplot
 # import csv
 
-
 # MY RECOMMENDED SYSTEM
 class RandomRecommender(object):
 
