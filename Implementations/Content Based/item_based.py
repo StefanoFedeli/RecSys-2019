@@ -1,8 +1,8 @@
 import utils
 import numpy as np
-from Notebooks_utils.data_splitter import train_test_holdout
-from Notebooks_utils.evaluation_function import evaluate_algorithm
-from Base.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
+from Zeus.data_splitter import train_test_holdout
+from Zeus.evaluation_function import evaluate_algorithm
+from Zeus.Compute_Similarity_Python import Compute_Similarity_Python
 
 
 URM_matrix = utils.create_coo("../../dataset/data_train.csv")
@@ -51,18 +51,18 @@ class ItemCBFKNNRecommender(object):
         return scores
 
 recommender = ItemCBFKNNRecommender(URM_train, ICM_matrix)
-recommender.fit(shrink=100.0, topK=100)
+recommender.fit(shrink=100, topK=100)
 
 users = utils.get_first_column("../../dataset/data_target_users_test.csv")
 
 
-with open("output.csv", 'w') as f:
+'''with open("output.csv", 'w') as f:
     for user_id in users:
         recommendations = str(recommender.recommend(user_id, at=10))
         recommendations = recommendations.replace("[", "")
         recommendations = recommendations.replace("]", "")
         f.write(str(user_id) + ", " + recommendations + "\n")
-
+'''
 result_dict = evaluate_algorithm(URM_test, recommender)
 
 '''

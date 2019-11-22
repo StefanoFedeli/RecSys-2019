@@ -39,8 +39,8 @@ def create_tuples(path, offset):
 
 
 def create_coo(path):
-    entityList, featuresList, interactionList = create_tuples(path, 14)
-    return sps.coo_matrix(interactionList, (entityList, featuresList))
+    interactionList, entityList, featuresList = create_tuples(path, 14)
+    return sps.coo_matrix((interactionList, (entityList, featuresList)))
 
 
 def get_first_column(path):
@@ -57,7 +57,7 @@ def get_first_column(path):
 
 
 def create_test_matrix(path,offset):
-    userList, itemList, interactionList = create_tuples(path, offset)
+    interactionList, userList, itemList  = create_tuples(path, offset)
     URM_csr = sps.coo_matrix(interactionList, (userList, itemList)).tocsr()
 
     # Build a test set
@@ -70,7 +70,7 @@ def create_test_matrix(path,offset):
         test_mask.append((user, itemList[toRemove], 1))
     URM_csr.eliminate_zeros()
 
-    userList_test, itemList_test, interactionList_test = zip(*test_mask)
+    interactionList_test, userList_test, itemList_test  = zip(*test_mask)
     userList_test = list(userList_test)
     itemList_test = list(itemList_test)
     interactionList_test = list(interactionList_test)
