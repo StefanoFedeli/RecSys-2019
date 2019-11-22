@@ -1,4 +1,5 @@
 import scipy.sparse as sps
+import random as rand
 
 
 # Split input data into tuples, assuming 3 columns
@@ -12,10 +13,11 @@ def rowSplit(row_string):
 
     return tuple(split)
 
-# Creates a coo given the path of a 3 columns csv
-def create_coo(path):
+
+# Creates a coo given the path of a 3 columns dataset
+def create_tuples(path, offset):
     file = open(path, 'r')
-    file.seek(14)
+    file.seek(offset)
     print("Opened: " + path)
 
     tuples = []
@@ -33,7 +35,13 @@ def create_coo(path):
     featuresList = list(featuresList)
     interactionList = list(interactionList)
 
-    return sps.coo_matrix((interactionList, (entityList, featuresList)))
+    return interactionList, entityList, featuresList
+
+
+def create_coo(path):
+    entityList, featuresList, interactionList = create_tuples(path, 14)
+    return sps.coo_matrix(interactionList, (entityList, featuresList))
+
 
 def get_first_column(path):
     file = open(path, 'r')
@@ -46,3 +54,25 @@ def get_first_column(path):
         column.append(int(line))
 
     return column
+
+
+def create_test_matrix(path,offset):
+    userList, itemList, interactionList = create_tuples(path, offset)
+    URM_csr = sps.coo_matrix(interactionList, (userList, itemList)).tocsr()
+
+    # Build a test set
+    test_mask = []
+    for user in set(userList):
+        lowBound = URM_csr.indptr[user]
+        highBound = URM_csr.indptr[user + 1] - 1
+        toRemove = rand.randint(lowBound, highBound)
+        URM_csr.data[toRemove] = 0
+        test_mask.append((user, itemList[toRemove], 1))
+    URM_csr.eliminate_zeros()
+
+    userList_test, itemList_test, interactionList_test = zip(*test_mask)
+    userList_test = list(userList_test)
+    itemList_test = list(itemList_test)
+    interactionList_test = list(interactionList_test)
+
+    return sps.coo_matrix((interactionList_test, (userList_test, itemList_test))).tocsr()

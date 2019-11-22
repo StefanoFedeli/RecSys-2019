@@ -1,5 +1,3 @@
-from matplotlib import pyplot
-
 import utils
 import numpy as np
 from Notebooks_utils.data_splitter import train_test_holdout

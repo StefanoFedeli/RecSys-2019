@@ -1,7 +1,7 @@
 import scipy.sparse as sps
 import numpy as np
 # import matplotlib.pyplot as pyplot
-# import csv
+# import dataset
 
 # MY RECOMMENDED SYSTEM
 class RandomRecommender(object):
@@ -63,7 +63,7 @@ def rowSplit(row_string):
 
 
 # PROGRAM MAIN
-ICM_matrix = open("./train.csv", 'r')
+ICM_matrix = open("./train.dataset", 'r')
 # print(type(ICM_matrix))
 
 # extract tuples and count how many interaction we have
@@ -131,11 +131,11 @@ evaluate_algorithm(URM_test,randomRecommender)
 
 
 """"
-with open('submission.csv', 'w') as csvfile:
-    filewriter = csv.writer(csvfile, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+with open('submission.dataset', 'w') as csvfile:
+    filewriter = dataset.writer(csvfile, delimiter=',',
+                            quotechar='|', quoting=dataset.QUOTE_MINIMAL)
     filewriter.writerow(['playlist_id', 'track_ids'])
-    with open('./target_playlists.csv', 'r') as targets:
+    with open('./target_playlists.dataset', 'r') as targets:
         for line in targets:
             recommendations = str(randomRecommender.recommend(playList_unique, at=10))
             recommendations = recommendations.replace("[", "")

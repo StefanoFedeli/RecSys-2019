@@ -1,18 +1,7 @@
 import scipy.sparse as sps
 import numpy as np
 import random as rand
-
-# Split input data into tuple
-def rowSplit(row_string):
-    split = row_string.split(",")
-    split[2] = split[2].replace("\n", "")
-
-
-    split[0] = int(split[0])  # User
-    split[1] = int(split[1])  # Item
-    split[2] = 1  # Interaction
-
-    return tuple(split)
+import utils as util
 
 
 # MY RECOMMENDED SYSTEM
@@ -22,7 +11,7 @@ class RandomRecommender(object):
     mapping = {}
 
     def fit(self):
-        ICM_matrix = open("../dataset/data_ICM_sub_class.csv", 'r')
+        ICM_matrix = open("../dataset/data_ICM_sub_class.dataset", 'r')
         ICM_matrix.seek(14)
 
         ICM_tuples = []
@@ -75,7 +64,7 @@ def evaluate_algorithm(URM_test, URM_csr, recommender_object, at=10):
     # cumulative_MAP = 0.0
     num_eval = 0
 
-    target = open("../dataset/data_target_users_test.csv", 'r')
+    target = open("../dataset/data_target_users_test.dataset", 'r')
     target.seek(9)
 
     for line in target:
@@ -99,58 +88,17 @@ def evaluate_algorithm(URM_test, URM_csr, recommender_object, at=10):
     print("Recommender performance is: Precision = {:.4f}, Recall = {:.4f}, MAP = {:.4f}".format(cumulative_precision, 0, 0))
 
 
-
-# MAIN
-URM_matrix = open("../dataset/data_train.csv", 'r')
-URM_matrix.seek(14)
-
-URM_tuples = []
-
-print("Fetching data from memory...")
-numberInteractions = 0
-for line in URM_matrix:
-    numberInteractions += 1
-    URM_tuples.append(rowSplit(line))
-
-print("Done! {} tuples (interactions) ingested\n".format(numberInteractions))
-
-userList, itemList, interactionList = zip(*URM_tuples)
-
-userList = list(userList)
-itemList = list(itemList)
-interactionList = list(interactionList)
-
-URM_matrix = sps.coo_matrix((interactionList, (userList, itemList)))
-print("A {} URM with {} element".format(URM_matrix.shape,URM_matrix.nnz))
+###################
+# ./MAIN PROGRAM  #
+###################
+userList, itemList, interactionList = util.create_coo("../dataset/data_train.csv", 14)
+URM_matrix = sps.coo_matrix(interactionList,(userList,itemList))
+print("A {} URM with {} element".format(URM_matrix.shape, URM_matrix.nnz))
 URM_csr = URM_matrix.tocsr()
 
+URM_matrix_test = util.create_test_matrix("../dataset/data_train.csv", 14)
 
-
-
-
-
-
-
-
-test_mask = []
-for user in set(userList):
-    lowBound = URM_csr.indptr[user]
-    highBound = URM_csr.indptr[user+1] -1
-    toRemove = rand.randint(lowBound, highBound)
-    URM_csr.data[toRemove] = 0
-    test_mask.append((user, itemList[toRemove], 1))
-
-URM_csr.eliminate_zeros()
-print(test_mask)
-
-userList_test, itemList_test, interactionList_test = zip(*test_mask)
-userList_test = list(userList_test)
-itemList_test = list(itemList_test)
-interactionList_test = list(interactionList_test)
-
-URM_matrix_test = sps.coo_matrix((interactionList_test, (userList_test, itemList_test))).tocsr()
-
-
+# Create intelligence
 randomRecommender = RandomRecommender()
 randomRecommender.fit()
 liked_items = URM_csr.getrow(0).toarray().nonzero()
@@ -167,7 +115,7 @@ evaluate_algorithm(URM_matrix_test, URM_csr, randomRecommender)
 
 '''
 #MAIN
-URM_matrix = open("../../dataset/data_ICM_sub_class.csv", 'r')
+URM_matrix = open("../../dataset/data_ICM_sub_class.dataset", 'r')
 URM_matrix.seek(14)
 
 URM_tuples = []
