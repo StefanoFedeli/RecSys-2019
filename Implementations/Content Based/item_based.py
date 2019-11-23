@@ -1,42 +1,60 @@
 import utils
 import numpy as np
-from Zeus.data_splitter import train_test_holdout
+from operator import add
+from Zeus.split_train_validation_leave_k_out import split_train_leave_k_out_user_wise as train_test_leaveoneout
 from Zeus.evaluation_function import evaluate_algorithm
 from Zeus.Compute_Similarity_Python import Compute_Similarity_Python
 
 
 URM_matrix = utils.create_coo("../../dataset/data_train.csv")
 ICM_matrix = utils.create_coo("../../refinedDataSet/ICM_sub_class.csv")
+ICM_matrix_price = utils.create_coo("../../refinedDataSet/ICM_prices.csv")
 
-URM_matrix = URM_matrix.tocsr()
+ICM_matrix_price = ICM_matrix_price.tocsr()
 ICM_matrix = ICM_matrix.tocsr()
 
-URM_train, URM_test = train_test_holdout(URM_matrix, train_perc = 0.8)
+URM_train, URM_test = train_test_leaveoneout(URM_matrix, use_validation_set=False)
 
 
 class ItemCBFKNNRecommender(object):
 
-    def __init__(self, URM, ICM):
+    def __init__(self, URM, ICM, ICM_2):
         self.URM = URM
         self.ICM = ICM
+        self.ICMv2 = ICM_2
+        self.W_sparse_class = 0
+        self.W_sparse_price = 0
 
     def fit(self, topK=50, shrink=100, normalize=True, similarity="cosine"):
-        similarity_object = Compute_Similarity_Python(self.ICM.T, shrink=shrink,
+        similarity_object_class = Compute_Similarity_Python(self.ICM.T, shrink=shrink,
                                                       topK=topK, normalize=normalize,
                                                       similarity=similarity)
+        similarity_object_price = Compute_Similarity_Python(self.ICMv2.T, shrink=shrink-25,
+                                                            topK=topK+20, normalize=normalize,
+                                                            similarity=similarity)
 
-        self.W_sparse = similarity_object.compute_similarity()
+        print("Start computing similarity...")
+        self.W_sparse_class = similarity_object_class.compute_similarity()
+        self.W_sparse_price = similarity_object_price.compute_similarity()
+        print("Done!")
 
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
         user_profile = self.URM[user_id]
-        scores = user_profile.dot(self.W_sparse).toarray().ravel()
+        scores_class = user_profile.dot(self.W_sparse_class).toarray().ravel()
+        scores_price = user_profile.dot(self.W_sparse_price).toarray().ravel()
+        print(np.count_nonzero(scores_class))
+        print((scores_class > 5).sum())
+        print((scores_class > 1).sum())
 
         if exclude_seen:
-            scores = self.filter_seen(user_id, scores)
+            scores_class = self.filter_seen(user_id, scores_class)
+            scores_price = self.filter_seen(user_id, scores_price)
 
+        scores = list(map(add, scores_class, scores_price))
         # rank items
-        ranking = scores.argsort()[::-1]
+        ranking = scores[scores != 0].argsort()[::-1]
+        print(ranking)
 
         return ranking[:at]
 
@@ -50,8 +68,9 @@ class ItemCBFKNNRecommender(object):
 
         return scores
 
-recommender = ItemCBFKNNRecommender(URM_train, ICM_matrix)
-recommender.fit(shrink=100, topK=100)
+
+recommender = ItemCBFKNNRecommender(URM_train, ICM_matrix, ICM_matrix_price)
+recommender.fit(shrink=125, topK=80)
 
 users = utils.get_first_column("../../dataset/data_target_users_test.csv")
 
@@ -63,7 +82,7 @@ users = utils.get_first_column("../../dataset/data_target_users_test.csv")
         recommendations = recommendations.replace("]", "")
         f.write(str(user_id) + ", " + recommendations + "\n")
 '''
-result_dict = evaluate_algorithm(URM_test, recommender)
+result_dict = evaluate_algorithm(URM_test, recommender, users)
 
 '''
 x_tick = [10, 50, 100, 200, 500]

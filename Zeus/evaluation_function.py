@@ -47,7 +47,7 @@ def MAP(is_relevant, relevant_items):
 
 
 
-def evaluate_algorithm(URM_test, recommender_object, at=10):
+def evaluate_algorithm(URM_test, recommender_object, n_users, at=10):
 
     cumulative_precision = 0.0
     cumulative_recall = 0.0
@@ -57,25 +57,23 @@ def evaluate_algorithm(URM_test, recommender_object, at=10):
 
     URM_test = sps.csr_matrix(URM_test)
 
-    n_users = URM_test.shape[0]
-    # n_users = 1;
+    n_users = 1
 
     for user_id in range(n_users):
-
-        if user_id % 10000 == 0:
-            print("Evaluated user {} of {}".format(user_id, n_users))
+        if num_eval % 5000 == 0:
+            print("Evaluated user {} of {}".format(num_eval, n_users))
 
         start_pos = URM_test.indptr[user_id]
         end_pos = URM_test.indptr[user_id+1]
 
-        if end_pos-start_pos>0:
+        if end_pos-start_pos > 0:
 
             relevant_items = URM_test.indices[start_pos:end_pos]
             # print(relevant_items)
 
             recommended_items = recommender_object.recommend(user_id, at=at)
             # print(recommended_items)
-            num_eval+=1
+            num_eval += 1
 
             is_relevant = np.in1d(recommended_items, relevant_items, assume_unique=True)
             # print(is_relevant)
