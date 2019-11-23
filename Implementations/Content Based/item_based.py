@@ -1,6 +1,5 @@
 import utils
 import numpy as np
-from operator import add
 from Zeus.split_train_validation_leave_k_out import split_train_leave_k_out_user_wise as train_test_leaveoneout
 from Zeus.evaluation_function import evaluate_algorithm
 from Zeus.Compute_Similarity_Python import Compute_Similarity_Python
@@ -24,6 +23,8 @@ class ItemCBFKNNRecommender(object):
         self.ICMv2 = ICM_2
         self.W_sparse_class = 0
         self.W_sparse_price = 0
+        self.topPop = [0,1,2,3,4,5,6,7,8,9,10]
+
 
     def fit(self, topK=50, shrink=100, normalize=True, similarity="cosine"):
         similarity_object_class = Compute_Similarity_Python(self.ICM.T, shrink=shrink,
@@ -43,18 +44,17 @@ class ItemCBFKNNRecommender(object):
         user_profile = self.URM[user_id]
         scores_class = user_profile.dot(self.W_sparse_class).toarray().ravel()
         scores_price = user_profile.dot(self.W_sparse_price).toarray().ravel()
-        print(np.count_nonzero(scores_class))
-        print((scores_class > 5).sum())
-        print((scores_class > 1).sum())
 
         if exclude_seen:
             scores_class = self.filter_seen(user_id, scores_class)
             scores_price = self.filter_seen(user_id, scores_price)
 
-        scores = list(map(add, scores_class, scores_price))
+        scores = np.array(list(map(lambda x, y: x+y, scores_class.tolist(), scores_price.tolist())))
+
         # rank items
-        ranking = scores[scores != 0].argsort()[::-1]
-        print(ranking)
+        ranking = scores.argsort()[::-1]
+        if (scores > 1).sum() > 0:
+            print("Item with more then one similarity: " + str((scores > 1).sum()))
 
         return ranking[:at]
 
