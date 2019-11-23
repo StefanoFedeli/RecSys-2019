@@ -57,11 +57,11 @@ def evaluate_algorithm(URM_test, recommender_object, n_users, at=10):
 
     URM_test = sps.csr_matrix(URM_test)
 
-    n_users = 1
+    # n_users = 1
 
-    for user_id in range(n_users):
+    for user_id in n_users: #range(4):
         if num_eval % 5000 == 0:
-            print("Evaluated user {} of {}".format(num_eval, n_users))
+            print("Evaluated user {} of {}".format(num_eval, len(n_users)))
 
         start_pos = URM_test.indptr[user_id]
         end_pos = URM_test.indptr[user_id+1]
@@ -72,15 +72,12 @@ def evaluate_algorithm(URM_test, recommender_object, n_users, at=10):
             # print(relevant_items)
 
             recommended_items = recommender_object.recommend(user_id, at=at)
-            # print(recommended_items)
             num_eval += 1
 
             is_relevant = np.in1d(recommended_items, relevant_items, assume_unique=True)
-            # print(is_relevant)
             cumulative_precision += precision(is_relevant, relevant_items)
             cumulative_recall += recall(is_relevant, relevant_items)
             cumulative_MAP += MAP(is_relevant, relevant_items)
-
 
     cumulative_precision /= num_eval
     cumulative_recall /= num_eval
