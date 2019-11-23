@@ -20,11 +20,13 @@ def create_tuples(path, offset):
     file.seek(offset)
     print("Opened: " + path)
 
+
     tuples = []
 
     print("Fetching data from memory...")
     numberInteractions = 0
     for line in file:
+        print(line)
         numberInteractions += 1
         tuples.append(rowSplit(line))
 
@@ -54,6 +56,14 @@ def get_first_column(path):
         column.append(int(line))
 
     return column
+
+def get_features(path):
+    interactionList, entityList, featuresList = create_tuples(path, 14)
+    return featuresList
+
+def get_entity(path):
+    interactionList, entityList, featuresList = create_tuples(path, 14)
+    return entityList
 
 
 def create_test_matrix(path,offset):

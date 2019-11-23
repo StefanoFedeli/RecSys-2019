@@ -25,7 +25,7 @@ def find_key(dictionary, target):
             return key
 
 
-prices_table = open("dataset/data_ICM_price.csv", 'r')
+prices_table = open("../dataset/data_ICM_price.csv", 'r')
 prices_table.seek(14)
 
 prices_tuples = []
@@ -64,8 +64,8 @@ for i in range(0, len(nonDuplicates)):
     myDictionary[i]=nonDuplicates[i]
 print(myDictionary)
 
-with open("refinedDataSet/ICM_prices.csv", 'w') as f:
-    f.write("row,col,data\n")
+with open("../refinedDataSet/ICM_prices.csv", 'w') as f:
+    f.write("row,col,data \n")
     for i in range(0, len(pricesList)):
         first = str(itemList[i])
         second = str(find_key(myDictionary, pricesList[i]))

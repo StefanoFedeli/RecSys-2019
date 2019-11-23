@@ -64,7 +64,7 @@ for i in range(0, len(nonDuplicates)):
 print(myDictionary)
 
 with open("../refinedDataSet/ICM_assets.csv", 'w') as f:
-    f.write("row,col,data\n")
+    f.write("row,col,data \n")
     for i in range(0, len(assetsList)):
         first = str(itemList[i])
         second = str(find_key(myDictionary, assetsList[i]))
