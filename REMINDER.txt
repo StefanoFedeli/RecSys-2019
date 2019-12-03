@@ -8,3 +8,5 @@ COLLABORATIVE FILTERING
         Due utenti sono simili se hanno le stesse opinioni su degli item (/vi hanno interagito)
     ITEM BASED
         Due item sono simili se molti utenti condividono la stessa opinione su di essi (/vi hanno interagito)
+
+IBRIDO COLLABORATIVE-CONTENT

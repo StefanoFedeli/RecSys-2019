@@ -1,4 +1,4 @@
 .idea/*
-dataset/*
+Clean/Original_dataset/*
 output.csv
-refinedDataSet/*
+Old/refinedDataSet/*
