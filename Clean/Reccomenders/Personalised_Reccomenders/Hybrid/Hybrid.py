@@ -45,13 +45,14 @@ URM_test = sps.csr_matrix(URM_test)
 
 # file = open("../Content Based/output.csv", "r")
 # n_users = 1
-recommendations = mergeCSV(open("../../../Outputs/slim.csv", "r"), open("../../../Outputs/matrixFact.csv", "r"))
+recommendations = mergeCSV(open("../../../Outputs/slim.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
 targetUsers = util.get_target_users("../../../dataset/target_users.csv")
+# targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
 
 
 for user in targetUsers:
     if num_eval % 5000 == 0:
-        print("Evaluated user {} of {}".format(num_eval, URM_test.shape[1]))
+        print("Evaluated user {} of {}".format(num_eval, len(targetUsers)))
 
     start_pos = URM_test.indptr[user]
     end_pos = URM_test.indptr[user+1]

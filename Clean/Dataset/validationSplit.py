@@ -1,6 +1,9 @@
 import scipy.sparse as sps
 import Clean.utils_new as util
 
+# Uncomment to generate new dataset
+# util.createDataset(".")
+
 URM = sps.load_npz("data_train.npz")
 URM = URM.tocsr()
 cold_users = []

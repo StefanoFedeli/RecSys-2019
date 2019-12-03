@@ -1,4 +1,5 @@
 import scipy.sparse as sps
+import Clean.External_Libraries.Zeus.split_train_validation_leave_k_out as split_data
 
 # Split input data into tuples, assuming 3 columns
 def rowSplit(row_string):
@@ -70,3 +71,11 @@ def trim(array):
     split = str(string).split(" ")
     split = list(filter(None, split))
     return split[0] + " " + split[1] + " " + split[2] + " " + split[3] + " " + split[4] + " " + split[5] + " " + split[6] + " " + split[7] + " " + split[8] + " " + split[9]
+
+def createDataset(relPath):
+    URM_raw = create_coo(relPath + "/URM.csv")
+    URM_raw, URM_test = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
+    URM_train, URM_validation = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
+    sps.save_npz(relPath + "/data_train.npz", URM_train)
+    sps.save_npz(relPath + "/data_test.npz", URM_test)
+    sps.save_npz(relPath + "/data_validation.npz", URM_validation)

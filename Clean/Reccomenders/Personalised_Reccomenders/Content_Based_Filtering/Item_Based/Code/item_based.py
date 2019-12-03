@@ -1,36 +1,28 @@
-from matplotlib import pyplot
-
 import Clean.utils_new as utils
 import numpy as np
 import scipy.sparse as sps
-from Clean.External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
 from Clean.External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
-from Clean.External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
 
-
-URM_matrix = utils.create_coo("../../../../../Original_dataset/URM.csv")
-URM_matrix = URM_matrix.tocsr()
-
-features1 = utils.get_second_column("../../../../../Original_dataset/ICM_sub_class.csv")
-features2 = utils.get_second_column("../../../../../Original_dataset/ICM_price.csv")
-features3 = utils.get_second_column("../../../../../Original_dataset/ICM_asset.csv")
+features1 = utils.get_second_column("../../../../../Dataset/ICM_sub_class.csv")
+features2 = utils.get_second_column("../../../../../Dataset/ICM_price.csv")
+features3 = utils.get_second_column("../../../../../Dataset/ICM_asset.csv")
 features = features1 + features2 + features3
 
-items1 = utils.get_first_column("../../../../../Original_dataset/ICM_sub_class.csv")
-items2 = utils.get_first_column("../../../../../Original_dataset/ICM_price.csv")
-items3 = utils.get_first_column("../../../../../Original_dataset/ICM_asset.csv")
+items1 = utils.get_first_column("../../../../../Dataset/ICM_sub_class.csv")
+items2 = utils.get_first_column("../../../../../Dataset/ICM_price.csv")
+items3 = utils.get_first_column("../../../../../Dataset/ICM_asset.csv")
 items = items1 + items2 + items3
 
 ones = np.ones(len(features))
 
-n_items = URM_matrix.shape[1]
+URM_train = sps.load_npz("../../../../../Dataset/data_train.npz")
+
+n_items = URM_train.shape[1]
 n_tags = max(features) + 1
 
 ICM_shape = (n_items, n_tags)
 ICM_all = sps.coo_matrix((ones, (items, features)), shape=ICM_shape)
 ICM_all = ICM_all.tocsr()
-
-URM_train, URM_test = train_test_holdout(URM_matrix, train_perc = 0.8)
 
 
 class ItemCBFKNNRecommender(object):
@@ -39,7 +31,7 @@ class ItemCBFKNNRecommender(object):
         self.URM = URM
         self.ICM = ICM
 
-    def fit(self, topK, shrink, normalize, similarity):
+    def fit(self, topK, shrink, similarity, normalize = True):
         similarity_object = Compute_Similarity_Python(self.ICM.T, shrink=shrink,
                                                       topK=topK, normalize=normalize,
                                                       similarity=similarity)
@@ -104,15 +96,12 @@ pyplot.savefig("shrink.png")
 
 '''
 recommender = ItemCBFKNNRecommender(URM_train, ICM_all)
-recommender.fit(shrink=10, topK=10)
-users = utils.get_target_users("../../../../../Original_dataset/target_users.csv")
-with open("output.csv", 'w') as f:
-    f.write("user_id,item_list\n")
+recommender.fit(shrink=10, topK=10, similarity="jaccard")
+users = utils.get_target_users("../../../../../Dataset/target_users_cold.csv")
+with open("../../../../../Outputs/CBI_cold.csv", 'w') as f:
+    # f.write("user_id,item_list\n")
     for user_id in users:
-        recommendations = str(recommender.recommend(user_id, at=10))
-        recommendations = recommendations.replace("[", "")
-        recommendations = recommendations.replace("]", "")
-        f.write(str(user_id) + ", " + recommendations + "\n")
+        f.write(str(user_id) + ", " + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
 
 
 
