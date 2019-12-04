@@ -115,11 +115,11 @@ pyplot.savefig("shrink.png")
 '''
 
 
-recommender = ItemCFKNNRecommender(URM_train)
-recommender.fit(shrink=50, topK=1000)
+recommender = ItemCFKNNRecommender(URM_matrix)
+recommender.fit(shrink=50, topK=10)
 topPopRecommender_removeSeen = TopPopRecommender()
-topPopRecommender_removeSeen.fit(URM_train)
-users = utils.get_target_users("../../../../../Original_dataset/target_users.csv")
+topPopRecommender_removeSeen.fit(URM_matrix)
+users = utils.get_target_users("../../../../../Dataset/target_users.csv")
 with open("output.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:
