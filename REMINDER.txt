@@ -10,3 +10,9 @@ COLLABORATIVE FILTERING
         Due item sono simili se molti utenti condividono la stessa opinione su di essi (/vi hanno interagito)
 
 IBRIDO COLLABORATIVE-CONTENT
+    primo split tra cold users e warm users
+    COLD USERS
+        si clusterizzano i cold users secondo la ucm, ogni coppia età-regione costituisce un cluster, ci saranno
+        utenti completamente contenuti in un cluster e utenti a metà tra più cluster (condividono solo età/regione).
+    WARM USERS
+        collaborative si fa ugualmente
