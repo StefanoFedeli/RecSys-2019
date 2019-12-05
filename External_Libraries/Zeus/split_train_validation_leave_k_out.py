@@ -7,7 +7,7 @@ Created on 23/04/2019
 """
 import numpy as np
 import scipy.sparse as sps
-from Old.Zeus.IncrementalSparseMatrix import IncrementalSparseMatrix
+from External_Libraries.Zeus.IncrementalSparseMatrix import IncrementalSparseMatrix
 
 
 def split_train_leave_k_out_user_wise(URM, k_out=1, use_validation_set=True, leave_random_out=True):

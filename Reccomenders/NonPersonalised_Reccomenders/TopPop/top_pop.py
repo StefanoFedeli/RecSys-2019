@@ -18,12 +18,12 @@ class TopPopRecommender(object):
         return recommended_items
 
 
-URM_train = sps.load_npz("../../../Dataset/data_train.npz")
+URM_train = sps.load_npz("../../../Dataset/data_all.npz")
 topPopRecommender = TopPopRecommender()
 topPopRecommender.fit(URM_train)
 
-users = utils.get_target_users("../../../Dataset/target_users_cold.csv")
-with open("../../../Outputs/TopPop_cold.csv", 'w') as f:
+users = utils.get_target_users("../../../Dataset/target_users_freeze.csv")
+with open("../../../Outputs/TopPop_freeze.csv", 'w') as f:
     # f.write("user_id,item_list\n")
     for user_id in users:
         f.write(str(user_id) + ", " + utils.trim(topPopRecommender.recommend(user_id, at=10)) + "\n")

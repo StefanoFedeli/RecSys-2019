@@ -44,7 +44,7 @@ URM_test = sps.csr_matrix(URM_test)
 
 # file = open("../Content Based/output.csv", "r")
 # n_users = 1
-recommendations = mergeCSV(open("../../../Outputs/slim-e3-100-50-cold.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
+recommendations = mergeCSV( open("../../../Outputs/pytorch-e1-100-25-all.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
 targetUsers = util.get_target_users("../../../dataset/target_users.csv")
 # targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
 
@@ -70,7 +70,7 @@ for user in targetUsers:
     cumulative_recall += recall(is_relevant, relevant_items)
     cumulative_MAP += MAP(is_relevant, relevant_items)
 
-with open("../../../Outputs/SLIM-nosplit.csv", 'w') as f:
+with open("../../../Outputs/Hy3-Top+Slim.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         f.write(str(user_id) + "," + util.trim(np.array(recommendations[user_id])) + "\n")
