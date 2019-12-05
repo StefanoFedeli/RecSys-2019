@@ -74,6 +74,7 @@ def trim(array):
 
 def createDataset(relPath):
     URM_raw = create_coo(relPath + "/URM.csv")
+    sps.save_npz(relPath + "/data_all.npz", URM_raw)
     URM_raw, URM_test = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
     URM_train, URM_validation = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
     sps.save_npz(relPath + "/data_train.npz", URM_train)

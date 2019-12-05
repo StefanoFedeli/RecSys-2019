@@ -45,10 +45,9 @@ URM_test = sps.csr_matrix(URM_test)
 
 # file = open("../Content Based/output.csv", "r")
 # n_users = 1
-recommendations = mergeCSV(open("../../../Outputs/slim.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
+recommendations = mergeCSV(open("../../../Outputs/slim-e3-100-50-cold.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
 targetUsers = util.get_target_users("../../../dataset/target_users.csv")
 # targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
-
 
 for user in targetUsers:
     if num_eval % 5000 == 0:
@@ -64,12 +63,18 @@ for user in targetUsers:
 
         is_relevant = np.in1d(recommendations[user], relevant_items, assume_unique=True)
     else:
+        #num_eval += 1
         is_relevant = np.array([False, False, False, False, False, False, False, False, False, False])
 
     num_eval += 1
     cumulative_precision += precision(is_relevant, relevant_items)
     cumulative_recall += recall(is_relevant, relevant_items)
     cumulative_MAP += MAP(is_relevant, relevant_items)
+
+with open("../../../Outputs/SLIM-nosplit.csv", 'w') as f:
+    f.write("user_id,item_list\n")
+    for user_id in targetUsers:
+        f.write(str(user_id) + "," + util.trim(np.array(recommendations[user_id])) + "\n")
 
 
 cumulative_precision /= num_eval
