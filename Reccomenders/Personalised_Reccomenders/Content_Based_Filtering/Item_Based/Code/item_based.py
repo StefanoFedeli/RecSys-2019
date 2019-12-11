@@ -38,6 +38,7 @@ class ItemCBFKNNRecommender(object):
 
         self.W_sparse = similarity_object.compute_similarity()
         print(self.W_sparse.data)
+        np.save("../../../../../Dataset/Similarity.npy", self.W_sparse)
 
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product

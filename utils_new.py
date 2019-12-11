@@ -42,11 +42,11 @@ def create_coo(path):
 
 def get_first_column(path):
     interactionList, entityList, featuresList = create_tuples(path, 14)
-    return featuresList
+    return entityList
 
 def get_second_column(path):
     interactionList, entityList, featuresList = create_tuples(path, 14)
-    return entityList
+    return featuresList
 
 def get_third_column(path):
     interactionList, entityList, featuresList = create_tuples(path, 14)

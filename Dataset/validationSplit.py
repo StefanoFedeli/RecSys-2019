@@ -9,6 +9,8 @@ URM = URM.tocsr()
 cold_users = []
 targetUsers = util.get_target_users("target_users.csv")
 print(len(targetUsers))
+print(max(targetUsers))
+exit()
 for user in targetUsers:
     if URM.indptr[user]-URM.indptr[user+1] == 0:
         cold_users.append(user)

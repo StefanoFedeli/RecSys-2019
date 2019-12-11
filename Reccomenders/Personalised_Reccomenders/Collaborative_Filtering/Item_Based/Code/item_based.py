@@ -1,9 +1,10 @@
 import utils_new as utils
 import numpy as np
+import scipy.sparse as sps
 from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
 from External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
 
-URM_matrix = utils.create_coo("../../../../../Original_dataset/URM.csv")
+URM_matrix = utils.create_coo("../../../../../Dataset/URM.csv")
 URM_matrix = URM_matrix.tocsr()
 
 warm_users_mask = np.ediff1d(URM_matrix.tocsr().indptr) > 0
@@ -22,6 +23,7 @@ class ItemCFKNNRecommender(object):
                                                       similarity=similarity)
 
         self.W_sparse = similarity_object.compute_similarity()
+        sps.save_npz("../../../../../Dataset/Similarity.npz", self.W_sparse)
 
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
