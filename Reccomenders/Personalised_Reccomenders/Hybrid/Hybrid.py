@@ -3,8 +3,8 @@ import scipy.sparse as sps
 import utils_new as util
 
 
-util.compare_csv("../../../Outputs/TopPop_freeze.csv", "../../../Outputs/LightFM_topPop_3_600.csv")
-exit()
+#util.compare_csv("../../../Outputs/TopPop_freeze.csv", "../../../Outputs/LightFM_topPop_3_1200.csv")
+#exit()
 
 
 def precision(is_relevant, relevant_items):
@@ -50,9 +50,9 @@ URM_test = sps.csr_matrix(URM_test)
 
 # file = open("../Content Based/output.csv", "r")
 # n_users = 1
-recommendations = mergeCSV(open("../../../Outputs/CollStd+NewTopPop.csv", "r"), open("../../../Outputs/LightFM_topPop.csv", "r"))
-targetUsers = util.get_target_users("../../../dataset/target_users.csv")
-# targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
+recommendations = mergeCSV(open("../../../Outputs/TopPop_cold.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
+#targetUsers = util.get_target_users("../../../dataset/target_users.csv")
+targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
 goodUsers = []
 
 for user in targetUsers:
@@ -79,12 +79,12 @@ for user in targetUsers:
     cumulative_recall += recall(is_relevant, relevant_items)
     cumulative_MAP += MAP(is_relevant, relevant_items)
 
-
+'''
 with open("../../../Outputs/CollStd+LightFMTopPop.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         f.write(str(user_id) + "," + util.trim(np.array(recommendations[user_id])) + "\n")
-
+'''
 
 
 cumulative_precision /= num_eval
@@ -107,4 +107,4 @@ result_dict = {
 }
 print(result_dict)
 
-util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/CollStd+LightFMTopPop.csv")
+#util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/CollStd+LightFMTopPop.csv")

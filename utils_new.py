@@ -12,6 +12,28 @@ def rowSplit(row_string):
 
     return tuple(split)
 
+def outputSplit(row_string):
+    #print(row_string)
+    initial_split = row_string.split(",")
+    initial_split[1] = initial_split[1].replace("\n", "")
+    interactions_split = initial_split[1].split(" ")
+    #print(initial_split)
+    #print(interactions_split)
+    split = []
+    split.append(int(initial_split[0]))
+    split.append(int(interactions_split[0]))
+    split.append(int(interactions_split[1]))
+    split.append(int(interactions_split[2]))
+    split.append(int(interactions_split[3]))
+    split.append(int(interactions_split[4]))
+    split.append(int(interactions_split[5]))
+    split.append(int(interactions_split[6]))
+    split.append(int(interactions_split[7]))
+    split.append(int(interactions_split[8]))
+    split.append(int(interactions_split[9]))
+    #print(split)
+    return split
+
 # Creates a coo given the path of a 3 columns dataset
 def create_tuples(path, offset, filter = None):
     file = open(path, 'r')
@@ -119,3 +141,36 @@ def compare_csv(csv1, csv2):
     print("Average similarity " + str(similarity) + "%")
 
 #compare_csv("Outputs/truth.csv", "Outputs/Sslim.csv")
+
+def getURMfromOUTPUT(csv, column, shape=None):
+    f = open(csv, 'r')
+    f.seek(19)
+    tuples = []
+    for line in f:
+        split = outputSplit(line)
+        toAppend = [split[0], split[1 + column], 1.0]
+        '''
+        for i in range(0, 10):
+            toAppend = [split[0], split[1+i], 1.0]
+        '''
+        tuples.append(tuple(toAppend))
+    entityList, featuresList, interactionList = zip(*tuples)
+    entityList = list(entityList)
+    featuresList = list(featuresList)
+    interactionList = list(interactionList)
+    if shape:
+        return sps.coo_matrix((interactionList, (entityList, featuresList)), shape)
+    else:
+        return sps.coo_matrix((interactionList, (entityList, featuresList)))
+
+def mergeFirstChoices(csv):
+    outputs = {}
+    for i in range(0, 10):
+        with open(csv + "_" + str(i) + ".csv") as f:
+            for line in f:
+                split = outputSplit(line)
+                if split[0] not in outputs.keys():
+                    outputs[split[0]] = []
+                outputs[split[0]].append(split[1])
+    return outputs
+
