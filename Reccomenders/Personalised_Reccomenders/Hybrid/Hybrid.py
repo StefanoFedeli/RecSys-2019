@@ -3,6 +3,10 @@ import scipy.sparse as sps
 import utils_new as util
 
 
+util.compare_csv("../../../Outputs/TopPop_freeze.csv", "../../../Outputs/LightFM_topPop_3_600.csv")
+exit()
+
+
 def precision(is_relevant, relevant_items):
     # is_relevant = np.in1d(recommended_items, relevant_items, assume_unique=True)
     precision_score = np.sum(is_relevant, dtype=np.float32) / len(is_relevant)
@@ -26,6 +30,8 @@ def MAP(is_relevant, relevant_items):
 
 def mergeCSV(file1, file2):
     userList = {}
+    file1.seek(19)
+    file2.seek(19)
     # Be aware that if a user is in both files then is overwritten
     for line in file1:
         split = line.split(",")
@@ -44,7 +50,7 @@ URM_test = sps.csr_matrix(URM_test)
 
 # file = open("../Content Based/output.csv", "r")
 # n_users = 1
-recommendations = mergeCSV( open("../../../Outputs/pytorch-e1-500-80-all.csv", "r"), open("../../../Outputs/TopPop_cold.csv", "r"))
+recommendations = mergeCSV(open("../../../Outputs/CollStd+NewTopPop.csv", "r"), open("../../../Outputs/LightFM_topPop.csv", "r"))
 targetUsers = util.get_target_users("../../../dataset/target_users.csv")
 # targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
 goodUsers = []
@@ -73,10 +79,12 @@ for user in targetUsers:
     cumulative_recall += recall(is_relevant, relevant_items)
     cumulative_MAP += MAP(is_relevant, relevant_items)
 
-with open("../../../Outputs/Hy-Top+Py.csv", 'w') as f:
+
+with open("../../../Outputs/CollStd+LightFMTopPop.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         f.write(str(user_id) + "," + util.trim(np.array(recommendations[user_id])) + "\n")
+
 
 
 cumulative_precision /= num_eval
@@ -86,14 +94,17 @@ cumulative_MAP /= num_eval
 print("Recommender performance is: Precision = {:.4f}, Recall = {:.4f}, MAP@10 = {:.4f}".format(
     cumulative_precision, cumulative_recall, cumulative_MAP))
 
+''' 
 with open("../../../Outputs/UserSlim.csv", 'w') as f:
     f.write("user_id\n")
     for user_id in goodUsers:
         f.write(str(user_id) + "\n")
-
+'''
 result_dict = {
     "precision": cumulative_precision,
     "recall": cumulative_recall,
     "MAP": cumulative_MAP,
 }
 print(result_dict)
+
+util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/CollStd+LightFMTopPop.csv")

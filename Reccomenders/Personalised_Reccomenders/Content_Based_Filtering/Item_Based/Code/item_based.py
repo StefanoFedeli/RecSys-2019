@@ -15,12 +15,14 @@ items = items1 + items2 + items3
 
 ones = np.ones(len(features))
 
-URM_train = sps.load_npz("../../../../../Dataset/data_train.npz")
+URM_train = sps.load_npz("../../../../../Dataset/data_all.npz")
 
 n_items = URM_train.shape[1]
 n_tags = max(features) + 1
 
 ICM_shape = (n_items, n_tags)
+print(ICM_shape)
+exit()
 ICM_all = sps.coo_matrix((ones, (items, features)), shape=ICM_shape)
 ICM_all = ICM_all.tocsr()
 
