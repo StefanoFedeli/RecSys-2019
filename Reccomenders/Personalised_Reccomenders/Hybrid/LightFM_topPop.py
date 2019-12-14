@@ -75,8 +75,8 @@ class Recommender(object):
 
 
 COMPONENTS = 3
-NUM_EPOCHS = 600
-ITEM_ALPHA = 1e-5
+NUM_EPOCHS = 1200
+ITEM_ALPHA = 1e-6
 LEARNING = 'adadelta'
 LEARNING_RATE = 1e-5
 LOSS = 'warp'
@@ -135,7 +135,7 @@ result_dict = {
 print(result_dict)
 
 
-with open("../../../Outputs/LightFM_topPop_3_600.csv", 'w') as f:
+with open("../../../Outputs/LightFM_topPop_3_1200.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in target_users:
         f.write(str(user_id) + "," + utils.trim(np.array(recommender.recommend(user_id))) + "\n")
