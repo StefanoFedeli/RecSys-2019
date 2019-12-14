@@ -153,27 +153,24 @@ def create_recommendations():
 
         if target_age>=0 and target_region>=0:
             key = int(str(target_age)+str(target_region))
-            outputs[u].append(recommendations.get(key).recommend(u))
+            outputs[u].append(recommendations.get(key).recommend(u,remove_seen=False))
         elif target_age<0 and target_region>=0:
             for i in range(0, max(age)):
                 key = int(str(i)+str(target_region))
-                outputs[u].append(recommendations.get(key).recommend(u))
+                outputs[u].append(recommendations.get(key).recommend(u,remove_seen=False))
         elif target_age>=0 and target_region<0:
             for i in range(min(region), max(region)):
                 key = int(str(target_age)+str(i))
-                outputs[u].append(recommendations.get(key).recommend(u))
+                outputs[u].append(recommendations.get(key).recommend(u,remove_seen=False))
 
-    with open('../../../Dataset/topPopular.p', 'wb') as fp:
-        pickle.dump(outputs, fp, protocol=pickle.HIGHEST_PROTOCOL)
-
-
-
+    #with open('../../../Dataset/topPopular.p', 'wb') as fp:
+    #    pickle.dump(outputs, fp, protocol=pickle.HIGHEST_PROTOCOL)
+    return outputs
 
 
-#create_recommendations()
-URM_all = sps.load_npz("../../../Dataset/data_all.npz")
-URM_all = sps.csr_matrix(URM_all)
 
+
+#outputs = create_recommendations()
 with open('../../../Dataset/topPopular.p', 'rb') as fp:
     outputs = pickle.load(fp)
 f = open("../../../Outputs/TopPop_freeze.csv", 'w')

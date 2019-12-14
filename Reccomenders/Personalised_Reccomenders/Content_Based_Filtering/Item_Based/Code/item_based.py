@@ -15,23 +15,23 @@ items = items1 + items2 + items3
 
 ones = np.ones(len(features))
 
-URM_train = sps.load_npz("../../../../../Dataset/data_all.npz")
+URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
 
 n_items = URM_train.shape[1]
 n_tags = max(features) + 1
 
 ICM_shape = (n_items, n_tags)
-print(ICM_shape)
-exit()
 ICM_all = sps.coo_matrix((ones, (items, features)), shape=ICM_shape)
 ICM_all = ICM_all.tocsr()
 
 
 class ItemCBFKNNRecommender(object):
 
-    def __init__(self, URM, ICM):
+    def __init__(self, URM, URM_t, ICM):
         self.URM = URM
         self.ICM = ICM
+        self.train = URM_t
 
     def fit(self, topK, shrink, similarity, normalize = True):
         similarity_object = Compute_Similarity_Python(self.ICM.T, shrink=shrink,
@@ -39,9 +39,7 @@ class ItemCBFKNNRecommender(object):
                                                       similarity=similarity)
 
         self.W_sparse = similarity_object.compute_similarity()
-        print(self.W_sparse.data)
-        np.save("../../../../../Dataset/Similarity.npy", self.W_sparse)
-
+        sps.save_npz("../../../../../Dataset/CB-Sim.npz", self.W_sparse)
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
         user_profile = self.URM[user_id]
@@ -56,10 +54,10 @@ class ItemCBFKNNRecommender(object):
         return ranking[:at]
 
     def filter_seen(self, user_id, scores):
-        start_pos = self.URM.indptr[user_id]
-        end_pos = self.URM.indptr[user_id + 1]
+        start_pos = self.train.indptr[user_id]
+        end_pos = self.train.indptr[user_id + 1]
 
-        user_profile = self.URM.indices[start_pos:end_pos]
+        user_profile = self.train.indices[start_pos:end_pos]
 
         scores[user_profile] = -np.inf
 
@@ -98,13 +96,12 @@ pyplot.xlabel('Shrinkage')
 pyplot.savefig("shrink.png")
 
 '''
-recommender = ItemCBFKNNRecommender(URM_train, ICM_all)
-recommender.fit(shrink=10, topK=10, similarity="jaccard")
-users = utils.get_target_users("../../../../../Dataset/target_users_cold.csv")
-with open("../../../../../Outputs/CBI_cold.csv", 'w') as f:
-    # f.write("user_id,item_list\n")
+recommender = ItemCBFKNNRecommender(URM_all,URM_train,ICM_all)
+recommender.fit(shrink=10, topK=21, similarity="jaccard")
+users = utils.get_target_users("../../../../../Dataset/users_clusters/CBI.csv")
+with open("../../../../../Outputs/CBI.csv", 'w') as f:
+    f.write("user_id,item_list\n")
     for user_id in users:
         f.write(str(user_id) + ", " + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
-
 
 
