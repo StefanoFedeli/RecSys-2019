@@ -64,6 +64,7 @@ def run(target_users, URM_test):
     cumulative_MAP = 0.0
     num_eval = 0
 
+    '''
     recommendations = mergeCSV([open("../../../Outputs/truth.csv", "r"),
                                 open("../../../Outputs/TopPop_freeze.csv", "r"),
                                 open("../../../Outputs/Slim.csv", "r"),
@@ -71,6 +72,8 @@ def run(target_users, URM_test):
                                 open("../../../Outputs/Coll_I.csv", "r"),
                                 open("../../../Outputs/CBI.csv", "r")
                                ])
+    '''
+    recommendations = mergeCSV([open("../../../Outputs/Coll_U.csv", "r")])
     goodUsers = []
 
     for user in target_users:
@@ -127,18 +130,19 @@ res_val = run(targetUsers, URM_val)
 print(res_val["MAP"])
 #print(res_val)
 
-'''''
-with open("../../../Dataset/users_clusters/TopPop.csv", 'w') as f:
+
+with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
     f.write("user_id\n")
     for i in range(0, 30911):
         if i in res_test["Users"] and i in res_val["Users"]:
             f.write(str(i) + "\n")
+
+
 '''
-
-
 with open("../../../Outputs/PureHybrid.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         f.write(str(user_id) + "," + util.trim(np.array(res_test["RecSys"][user_id])) + "\n")
         
 util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/PureHybrid.csv")
+'''

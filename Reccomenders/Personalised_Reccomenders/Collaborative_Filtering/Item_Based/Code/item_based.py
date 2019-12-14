@@ -4,7 +4,7 @@ import scipy.sparse as sps
 from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
 from External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
 
-URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
 URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
 
 class ItemCFKNNRecommender(object):
@@ -80,9 +80,10 @@ pyplot.savefig("shrink.png")
 
 
 recommender = ItemCFKNNRecommender(URM_all,URM_train)
-recommender.fit(shrink=50, topK=21)
+recommender.fit(shrink=50, topK=10)
 
-users = utils.get_target_users("../../../../../Dataset/users_clusters/Coll_I.csv")
+#users = utils.get_target_users("../../../../../Dataset/users_clusters/Coll_I.csv")
+users = utils.get_target_users("../../../../../Dataset/target_users.csv")
 with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:

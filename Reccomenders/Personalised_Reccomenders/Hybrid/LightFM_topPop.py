@@ -37,7 +37,7 @@ ICM_all = sps.coo_matrix((ones, (items, features)), shape=ICM_shape)
 ICM_all = ICM_all.tocsr()
 
 cold_u = URM_all.shape[0]-len(utils.get_target_users('../../../Dataset/target_users_freeze.csv'))
-target_users = utils.get_target_users("../../../dataset/target_users_freeze.csv")
+target_users = utils.get_target_users("../../../Dataset/target_users.csv")
 
 print('The dataset has %s users (%s warm) and %s items, '
       'with %s interactions in the test and %s interactions in the training set.'
@@ -46,9 +46,10 @@ URM_all = sps.csr_matrix(URM_all)
 URM_train = sps.csr_matrix(URM_train)
 class Recommender(object):
 
-    def __init__(self, URM, model):
+    def __init__(self, URM, model, URM_train):
         self.URM = URM
         self.model = model
+        self.test=URM_train
 
     def recommend(self, user_id, at=10, exclude_seen=True):
         # compute the scores using the dot product
@@ -64,10 +65,10 @@ class Recommender(object):
         return ranking[:at]
 
     def filter_seen(self, user_id, scores):
-        start_pos = self.URM.indptr[user_id]
-        end_pos = self.URM.indptr[user_id + 1]
+        start_pos = self.test.indptr[user_id]
+        end_pos = self.test.indptr[user_id + 1]
 
-        user_profile = self.URM.indices[start_pos:end_pos]
+        user_profile = self.test.indices[start_pos:end_pos]
 
         scores[user_profile] = -np.inf
 
@@ -92,7 +93,7 @@ print("Currently using LOSS:{0}, COMPONENTS:{1}, LEARNING:{2}, RATE:{3}".format(
 
 # Run 3 epochs and time it.
 model = model.fit(URM_all, user_features=UCM_all, item_features=ICM_all, epochs=NUM_EPOCHS, verbose=True)
-recommender = Recommender(URM_all, model)
+recommender = Recommender(URM_all, model, URM_train)
 
 cumulative_precision = 0.0
 cumulative_recall = 0.0
@@ -135,7 +136,7 @@ result_dict = {
 print(result_dict)
 
 
-with open("../../../Outputs/LightFM_topPop_3_1200.csv", 'w') as f:
+with open("../../../Outputs/LightFM_topPop_3_1200_all.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in target_users:
         f.write(str(user_id) + "," + utils.trim(np.array(recommender.recommend(user_id))) + "\n")

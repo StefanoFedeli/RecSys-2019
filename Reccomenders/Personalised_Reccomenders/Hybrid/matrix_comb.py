@@ -5,7 +5,8 @@ import External_Libraries.Recommender_utils as mauri
 import External_Libraries.Notebooks_utils.evaluation_function as eval
 
 
-def normalize(URM, min, max):
+def normalize(URM_t, min, max):
+    URM = URM_t.copy()
     print(min,max)
     for i in range(URM.nnz):
         URM.data[i] = (URM.data[i]-min)/(max-min)
@@ -44,14 +45,13 @@ class Reccomender(object):
 
         return scores
 
-cumulative_precision = 0.0
-cumulative_recall = 0.0
-cumulative_MAP = 0.0
-num_eval = 0
-URM_1 = sps.csr_matrix(sps.load_npz("../../../Dataset/CB-Sim.npz"))
-URM_2 = sps.csr_matrix(sps.load_npz("../../../Dataset/Col-Sim.npz"))
-URM_3 = sps.csr_matrix(sps.load_npz("../../../Dataset/Slim-Sim.npz"))
+
+URM_1 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/CB-Sim.npz"))
+URM_2 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Col-Sim.npz"))
+URM_3 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Slim-Sim.npz"))
+URM_4 = normalize(URM_3,min(min(URM_1.data), min(URM_2.data)),max(max(URM_1.data), max(URM_2.data)))
 URM_all = sps.csr_matrix(sps.load_npz("../../../Dataset/data_all.npz"))
+URM_train = sps.csr_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
 URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
 print(URM_1.shape)
 print(URM_2.shape)
@@ -59,19 +59,24 @@ print(max(URM_1.data))
 print(max(URM_2.data))
 print(min(URM_1.data))
 print(min(URM_2.data))
-reccomender = Reccomender(URM_all,URM_test)
+reccomender = Reccomender(URM_all,URM_train)
 targetUsers = util.get_target_users("../../../dataset/target_users_other.csv")
 for i in range(0,10):
     for j in range (0,10):
         for z in range(0,10):
-            for norm in (True, False):
+            for norm in (False,True):
+                cumulative_precision = 0.0
+                cumulative_recall = 0.0
+                cumulative_MAP = 0.0
                 num_eval = 0
                 a = 1 - i*0.1
                 b = 1 - j*0.1
                 c = 1 - z*0.1
+
                 if norm:
-                    URM_3 = normalize(URM_3,min(min(URM_1.data), min(URM_2.data)),max(max(URM_1.data), max(URM_2.data)))
-                similarity_matrix = mauri.similarityMatrixTopK(a*URM_1 + b*URM_2 + c*URM_3)
+                    similarity_matrix = mauri.similarityMatrixTopK(a*URM_1 + b*URM_2 + c*URM_4, k=25)
+                else:
+                    similarity_matrix = mauri.similarityMatrixTopK(a * URM_1 + b * URM_2 + c * URM_3)
                 reccomender.fit(similarity_matrix)
                 for user in targetUsers:
                     if num_eval % 1000 == 0:
@@ -81,7 +86,6 @@ for i in range(0,10):
                     end_pos = URM_test.indptr[user + 1]
                     relevant_items = np.array([0])
                     if end_pos - start_pos > 0:
-
                         relevant_items = URM_test.indices[start_pos:end_pos]
                         # print(relevant_items)
 
@@ -109,7 +113,7 @@ for i in range(0,10):
                         f.write(str(user_id) + "," + util.trim(np.array(reccomender.recommend(user_id))) + "\n")
                 util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/Sslim.csv")
                 '''
-
+                print(cumulative_MAP)
                 cumulative_precision /= num_eval
                 cumulative_recall /= num_eval
                 cumulative_MAP /= num_eval
