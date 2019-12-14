@@ -73,7 +73,7 @@ def run(target_users, URM_test):
                                 open("../../../Outputs/CBI.csv", "r")
                                ])
     '''
-    recommendations = mergeCSV([open("../../../Outputs/Coll_U.csv", "r")])
+    recommendations = mergeCSV([open("../../../Outputs/Sslim+TopPop.csv", "r")])
     goodUsers = []
 
     for user in target_users:
@@ -119,7 +119,7 @@ def run(target_users, URM_test):
 
 URM_test = sps.csr_matrix(sps.load_npz("../../../dataset/data_test.npz"))
 URM_val = sps.csr_matrix(sps.load_npz("../../../dataset/data_validation.npz"))
-targetUsers = util.get_target_users("../../../dataset/target_users.csv")
+targetUsers = util.get_target_users("../../../dataset/target_users_other.csv")
 
 print("TESTING")
 res_test = run(targetUsers, URM_test)
@@ -130,7 +130,9 @@ res_val = run(targetUsers, URM_val)
 print(res_val["MAP"])
 #print(res_val)
 
+print((res_val["MAP"]+res_test["MAP"])/2)
 
+'''''
 with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
     f.write("user_id\n")
     for i in range(0, 30911):
@@ -138,7 +140,6 @@ with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
             f.write(str(i) + "\n")
 
 
-'''
 with open("../../../Outputs/PureHybrid.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
