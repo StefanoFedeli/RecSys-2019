@@ -5,11 +5,13 @@ import External_Libraries.Recommender_utils as mauri
 import External_Libraries.Notebooks_utils.evaluation_function as eval
 
 
-def normalize(URM_t, min, max):
+def normalize(URM_t, minI, maxI):
+    MaxD = max(URM_t.data)
+    MinD = min(URM_t.data)
     URM = URM_t.copy()
-    print(min,max)
+    print(minI,maxI)
     for i in range(URM.nnz):
-        URM.data[i] = (URM.data[i]-min)/(max-min)
+        URM.data[i] = URM.data[i]*(maxI-minI)/(MaxD-MinD)
     return URM
 
 
@@ -47,8 +49,8 @@ class Reccomender(object):
 
 
 URM_1 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/CB-Sim-train.npz"))
-URM_2 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Col-Sim.npz"))
-URM_3 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Slim-Sim.npz"))
+URM_2 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Col-Sim-train.npz"))
+URM_3 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Slim-Sim-train.npz"))
 URM_4 = normalize(URM_3,min(min(URM_1.data), min(URM_2.data)),max(max(URM_1.data), max(URM_2.data)))
 URM_all = sps.csr_matrix(sps.load_npz("../../../Dataset/data_all.npz"))
 URM_train = sps.csr_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
@@ -61,17 +63,17 @@ print(min(URM_1.data))
 print(min(URM_2.data))
 reccomender = Reccomender(URM_all,URM_train)
 targetUsers = util.get_target_users("../../../dataset/target_users_other.csv")
-for i in range(0,10):
-    for j in range (0,10):
-        for z in range(0,10):
+for i in range(0,3):
+    for j in range (0,3):
+        for z in range(0,3):
             for norm in (False,True):
                 cumulative_precision = 0.0
                 cumulative_recall = 0.0
                 cumulative_MAP = 0.0
                 num_eval = 0
-                a = 1 - i*0.1
-                b = 1 - j*0.1
-                c = 1 - z*0.1
+                a = 1 - i*0.3
+                b = 1 - j*0.3
+                c = 1 - z*0.3
 
                 if norm:
                     similarity_matrix = mauri.similarityMatrixTopK(a*URM_1 + b*URM_2 + c*URM_4, k=25)
@@ -137,6 +139,9 @@ for i in range(0,10):
                     "NORM": norm
                 }
                 print(result_dict)
+
+                with open("../../../Outputs/combTest.txt", 'a+') as f:
+                    f.write(str(result_dict) + "\n")
 
                 #util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/testSslim.csv")
 

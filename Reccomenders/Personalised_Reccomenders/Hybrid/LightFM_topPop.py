@@ -6,6 +6,9 @@ import scipy.sparse as sps
 import External_Libraries.Notebooks_utils.evaluation_function as eval
 import random
 
+utils.compare_csv("../../../Outputs/TopPop_freeze.csv", "../../../Outputs/LightFM_topPop_1_9600_all.csv")
+exit()
+
 URM_all = sps.coo_matrix(sps.load_npz("../../../Dataset/data_all.npz"))
 URM_train = sps.coo_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
 URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
@@ -37,7 +40,7 @@ ICM_all = sps.coo_matrix((ones, (items, features)), shape=ICM_shape)
 ICM_all = ICM_all.tocsr()
 
 cold_u = URM_all.shape[0]-len(utils.get_target_users('../../../Dataset/target_users_freeze.csv'))
-target_users = utils.get_target_users("../../../Dataset/target_users.csv")
+target_users = utils.get_target_users("../../../Dataset/target_users_freeze.csv")
 
 print('The dataset has %s users (%s warm) and %s items, '
       'with %s interactions in the test and %s interactions in the training set.'
@@ -75,8 +78,8 @@ class Recommender(object):
         return scores
 
 
-COMPONENTS = 3
-NUM_EPOCHS = 1200
+COMPONENTS = 1
+NUM_EPOCHS = 9600
 ITEM_ALPHA = 1e-6
 LEARNING = 'adadelta'
 LEARNING_RATE = 1e-5
@@ -136,7 +139,7 @@ result_dict = {
 print(result_dict)
 
 
-with open("../../../Outputs/LightFM_topPop_3_1200_all.csv", 'w') as f:
+with open("../../../Outputs/LightFM_topPop_1_9600_all.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in target_users:
         f.write(str(user_id) + "," + utils.trim(np.array(recommender.recommend(user_id))) + "\n")
