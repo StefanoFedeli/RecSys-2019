@@ -74,8 +74,8 @@ def run(target_users, URM_test):
                                ])
     '''
     #recommendations = mergeCSV([open("../../../Outputs/Coll_I.csv", "r")])
-    recommendations = mergeCSV([open("../../../Outputs/SSlim.csv", "r"),
-                                open("../../../Outputs/TopPop_freeze.csv", "r")
+    recommendations = mergeCSV([open("../../../Outputs/base.csv", "r"),
+                                open("../../../Outputs/LightFM_topPop_1_9600_cold.csv", "r")
                                 ])
     goodUsers = []
 
@@ -143,7 +143,7 @@ with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
             f.write(str(i) + "\n")
 '''
 
-with open("../../../Outputs/SSlim+TopPop.csv", 'w') as f:
+with open("../../../Outputs/lastSubmission.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         f.write(str(user_id) + "," + util.trim(np.array(res_test["RecSys"][user_id])) + "\n")

@@ -63,6 +63,7 @@ print(min(URM_2.data))
 print(min(URM_3.data))
 reccomender = Reccomender(URM_all,URM_all)
 targetUsers = util.get_target_users("../../../dataset/target_users_cold.csv")
+print("OK1")
 #for i in range(0,3):
 #    for j in range (0,3):
 #        for z in range(0,3):
@@ -79,7 +80,9 @@ if norm:
     similarity_matrix = mauri.similarityMatrixTopK(a*URM_1 + b*URM_2 + c*URM_4, k=25)
 else:
     similarity_matrix = mauri.similarityMatrixTopK(a * URM_1 + b * URM_2 + c * URM_3)
+print("OK2")
 reccomender.fit(similarity_matrix)
+print("OK3")
 for user in range(0):
     if num_eval % 1000 == 0:
         print("Evaluated user {} of {}".format(num_eval, len(targetUsers)))
@@ -101,7 +104,7 @@ for user in range(0):
     cumulative_recall += eval.recall(is_relevant, relevant_items)
     cumulative_MAP += eval.MAP(is_relevant, relevant_items)
 
-
+print("OK4")
 with open("../../../Outputs/SSlim-cold.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:

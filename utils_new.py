@@ -1,3 +1,4 @@
+import numpy as np
 import scipy.sparse as sps
 import External_Libraries.Zeus.split_train_validation_leave_k_out as split_data
 
@@ -174,3 +175,17 @@ def mergeFirstChoices(csv):
                 outputs[split[0]].append(split[1])
     return outputs
 
+def filterFile(csv, users, target):
+    userList = {}
+    csv.seek(19)
+    for line in csv:
+        split = line.split(",")
+        userList[(int(split[0]))] = list(map(int, split[1].split()))
+    with open("Outputs/" + target + ".csv", 'w') as f:
+        f.write("user_id,item_list\n")
+        for user in users:
+            f.write(str(user) + "," + trim(np.array(userList.get(user))) + "\n")
+
+#filterFile(open("Outputs/truth.csv", 'r'), get_target_users("Dataset/target_users_cold.csv"), "truth_cold")
+#filterFile(open("Outputs/LightFM_topPop_1_9600_all.csv", 'r'), get_target_users("Dataset/target_users_cold.csv"), "LightFM_topPop_1_9600_cold")
+#compare_csv("Outputs/base.csv", "Outputs/lastSubmission.csv")
