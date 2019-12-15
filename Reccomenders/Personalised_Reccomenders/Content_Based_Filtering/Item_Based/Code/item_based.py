@@ -16,7 +16,7 @@ items = items1 + items2 + items3
 ones = np.ones(len(features))
 
 URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
-URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
+URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
 
 n_items = URM_train.shape[1]
 n_tags = max(features) + 1
@@ -39,7 +39,7 @@ class ItemCBFKNNRecommender(object):
                                                       similarity=similarity)
 
         self.W_sparse = similarity_object.compute_similarity()
-        sps.save_npz("../../../../../Dataset/CB-Sim-train.npz", self.W_sparse)
+        sps.save_npz("../../../../../Dataset/CB-Sim.npz", self.W_sparse)
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
         user_profile = self.URM[user_id]
@@ -96,7 +96,7 @@ pyplot.xlabel('Shrinkage')
 pyplot.savefig("shrink.png")
 
 '''
-recommender = ItemCBFKNNRecommender(URM_all,URM_train,ICM_all)
+recommender = ItemCBFKNNRecommender(URM_all,URM_all,ICM_all)
 recommender.fit(shrink=20, topK=25, similarity="jaccard")
 
 '''
