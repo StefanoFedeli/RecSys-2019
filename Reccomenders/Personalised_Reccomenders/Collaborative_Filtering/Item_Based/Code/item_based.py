@@ -3,15 +3,17 @@ import numpy as np
 import scipy.sparse as sps
 from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
 from External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
+from External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
+import matplotlib.pyplot as pyplot
 
 URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
 URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
 
 class ItemCFKNNRecommender(object):
 
-    def __init__(self, URM, URM_t):
+    def __init__(self, URM):
         self.URM = URM
-        self.train = URM_t
 
     def fit(self, topK, shrink, normalize=True, similarity="jaccard"):
         similarity_object = Compute_Similarity_Python(self.URM, shrink=shrink,
@@ -35,22 +37,22 @@ class ItemCFKNNRecommender(object):
         return ranking[:at]
 
     def filter_seen(self, user_id, scores):
-        start_pos = self.train.indptr[user_id]
-        end_pos = self.train.indptr[user_id + 1]
+        start_pos = self.URM.indptr[user_id]
+        end_pos = self.URM.indptr[user_id + 1]
 
-        user_profile = self.train.indices[start_pos:end_pos]
+        user_profile = self.URM.indices[start_pos:end_pos]
 
         scores[user_profile] = -np.inf
 
         return scores
 
-'''
-x_tick = [500, 750, 1000]
+
+x_tick = [10, 20, 50, 100, 200]
 MAP_per_k = []
 
 for topK in x_tick:
     recommender = ItemCFKNNRecommender(URM_train)
-    recommender.fit(shrink=0.0, topK=topK)
+    recommender.fit(shrink=50, topK=topK)
 
     result_dict = evaluate_algorithm(URM_test, recommender)
     MAP_per_k.append(result_dict["MAP"])
@@ -60,13 +62,14 @@ pyplot.ylabel('MAP')
 pyplot.xlabel('TopK')
 pyplot.savefig("topk.png")
 
+print("DONE")
 
-x_tick = [0, 10, 50, 100, 200, 500]
+x_tick = [10, 20, 50, 100, 200]
 MAP_per_shrinkage = []
 
 for shrink in x_tick:
     recommender = ItemCFKNNRecommender(URM_train)
-    recommender.fit(shrink=shrink, topK=1000)
+    recommender.fit(shrink=shrink, topK=10)
 
     result_dict = evaluate_algorithm(URM_test, recommender)
     MAP_per_shrinkage.append(result_dict["MAP"])
@@ -76,12 +79,12 @@ pyplot.plot(x_tick, MAP_per_shrinkage)
 pyplot.ylabel('MAP')
 pyplot.xlabel('Shrinkage')
 pyplot.savefig("shrink.png")
+
+
 '''
-
-
 recommender = ItemCFKNNRecommender(URM_all,URM_train)
 recommender.fit(shrink=200, topK=500)
-'''
+
 #users = utils.get_target_users("../../../../../Dataset/users_clusters/Coll_I.csv")
 users = utils.get_target_users("../../../../../Dataset/target_users.csv")
 with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
