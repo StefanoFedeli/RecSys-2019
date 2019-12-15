@@ -19,7 +19,7 @@ class ItemCFKNNRecommender(object):
                                                       similarity=similarity)
 
         self.W_sparse = similarity_object.compute_similarity()
-        sps.save_npz("../../../../../Dataset/Col-Sim.npz", self.W_sparse)
+        sps.save_npz("../../../../../Dataset/Col-Sim-train.npz", self.W_sparse)
 
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
@@ -80,12 +80,12 @@ pyplot.savefig("shrink.png")
 
 
 recommender = ItemCFKNNRecommender(URM_all,URM_train)
-recommender.fit(shrink=50, topK=10)
-
+recommender.fit(shrink=200, topK=500)
+'''
 #users = utils.get_target_users("../../../../../Dataset/users_clusters/Coll_I.csv")
 users = utils.get_target_users("../../../../../Dataset/target_users.csv")
 with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:
         f.write(str(user_id) + ", " + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
-
+'''
