@@ -16,7 +16,7 @@ items = items1 + items2 + items3
 ones = np.ones(len(features))
 
 URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
-URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
 
 n_items = URM_train.shape[1]
 n_tags = max(features) + 1
@@ -39,7 +39,7 @@ class ItemCBFKNNRecommender(object):
                                                       similarity=similarity)
 
         self.W_sparse = similarity_object.compute_similarity()
-        sps.save_npz("../../../../../Dataset/CB-Sim.npz", self.W_sparse)
+        sps.save_npz("../../../../../Dataset/CB-Sim-train.npz", self.W_sparse)
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
         user_profile = self.URM[user_id]
@@ -97,7 +97,9 @@ pyplot.savefig("shrink.png")
 
 '''
 recommender = ItemCBFKNNRecommender(URM_all,URM_train,ICM_all)
-recommender.fit(shrink=50, topK=10, similarity="jaccard")
+recommender.fit(shrink=20, topK=25, similarity="jaccard")
+
+'''
 #users = utils.get_target_users("../../../../../Dataset/users_clusters/CBI.csv")
 users = utils.get_target_users("../../../../../Dataset/target_users.csv")
 with open("../../../../../Outputs/CBI.csv", 'w') as f:
@@ -105,4 +107,4 @@ with open("../../../../../Outputs/CBI.csv", 'w') as f:
     for user_id in users:
         f.write(str(user_id) + "," + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
 
-
+'''

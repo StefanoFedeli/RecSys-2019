@@ -48,7 +48,7 @@ class Reccomender(object):
         return scores
 
 
-URM_1 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/CB-Sim.npz"))
+URM_1 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/CB-Sim-train.npz"))
 URM_2 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Col-Sim.npz"))
 URM_3 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Slim-Sim.npz"))
 URM_4 = normalize(URM_3,min(min(URM_1.data), min(URM_2.data)),max(max(URM_1.data), max(URM_2.data)))
