@@ -5,11 +5,13 @@ import External_Libraries.Recommender_utils as mauri
 import External_Libraries.Notebooks_utils.evaluation_function as eval
 
 
-def normalize(URM_t, min, max):
+def normalize(URM_t, minI, maxI):
+    MaxD = max(URM_t.data)
+    MinD = min(URM_t.data)
     URM = URM_t.copy()
-    print(min,max)
+    print(minI,maxI)
     for i in range(URM.nnz):
-        URM.data[i] = (URM.data[i]-min)/(max-min)
+        URM.data[i] = URM.data[i]*(maxI-minI)/(MaxD-MinD)
     return URM
 
 
@@ -137,6 +139,9 @@ for i in range(0,10):
                     "NORM": norm
                 }
                 print(result_dict)
+
+                with open("../../../Outputs/combTest.txt", 'a+') as f:
+                    f.write(str(result_dict) + "\n")
 
                 #util.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/testSslim.csv")
 
