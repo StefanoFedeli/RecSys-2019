@@ -77,6 +77,15 @@ class TopPopRecommender(object):
             recommended_items = self.popularItems[0:at]
         return recommended_items
 
+class TopPopClusterRecommender(object):
+
+    def fit(self):
+        with open('../../../Dataset/topPopular.p', 'rb') as fp:
+            self.outputs = pickle.load(fp)
+
+    def recommend(self, user_id, at=10, remove_seen=True):
+        return self.outputs[user_id]
+
 def create_recommendations():
     interaction_age, user_age, age = utils.create_tuples("../../../Dataset/UCM_age.csv",14)
     interaction_region, user_region, region = utils.create_tuples("../../../Dataset/UCM_region.csv",14)
