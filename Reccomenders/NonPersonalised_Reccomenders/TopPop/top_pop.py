@@ -8,6 +8,9 @@ class TopPopRecommender(object):
         itemPopularity = (URM_train > 0).sum(axis=0)
         itemPopularity = np.array(itemPopularity).squeeze()
 
+        print(itemPopularity[itemPopularity > 200])
+        print(len(itemPopularity[itemPopularity > 200]))
+
         # We are not interested in sorting the popularity value,
         # but to order the items according to it
         self.popularItems = np.argsort(itemPopularity)
@@ -22,9 +25,9 @@ URM_train = sps.load_npz("../../../Dataset/data_all.npz")
 topPopRecommender = TopPopRecommender()
 topPopRecommender.fit(URM_train)
 
-users = utils.get_target_users("../../../Dataset/target_users_freeze.csv")
-with open("../../../Outputs/TopPop_freeze.csv", 'w') as f:
+#users = utils.get_target_users("../../../Dataset/target_users_freeze.csv")
+#with open("../../../Outputs/TopPop_freeze.csv", 'w') as f:
     # f.write("user_id,item_list\n")
-    for user_id in users:
-        f.write(str(user_id) + ", " + utils.trim(topPopRecommender.recommend(user_id, at=10)) + "\n")
+#    for user_id in users:
+#        f.write(str(user_id) + ", " + utils.trim(topPopRecommender.recommend(user_id, at=10)) + "\n")
 

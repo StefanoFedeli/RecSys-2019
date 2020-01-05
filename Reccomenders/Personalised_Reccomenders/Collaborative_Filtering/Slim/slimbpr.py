@@ -1,187 +1,31 @@
-# %% [code]
-import random
-from scipy import stats
-from scipy.optimize import fmin
 import scipy.sparse as sps
 import time
 import numpy as np
-import pandas as pd
+import random
+import External_Libraries.Recommender_utils as mauri
+import External_Libraries.Notebooks_utils.evaluation_function as evaluate
 
-# %% [code]
-# This Python 3 environment comes with many helpful analytics libraries installed
-# It is defined by the kaggle/python docker image: https://github.com/kaggle/docker-python
-# For example, here's several helpful packages to load in
-
-# Input data files are available in the "../input/" directory.
-# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
-
-import os
-
-for dirname, _, filenames in os.walk('/kaggle/input'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
-
-# Any results you write to the current directory are saved as output.
-
-# %% [code]
-URM = sps.load_npz("../input/datasetrecsys/data_all.npz")
+URM = sps.load_npz("../../../../Dataset/data_train.npz")
 URM = URM.tocsr()
 URM_mask = URM.copy()
 URM_mask.eliminate_zeros()
-URM_mask
-
-# %% [code]
 n_users = URM_mask.shape[0]
 n_items = URM_mask.shape[1]
 
-eligibleUsers = []
 
-for user_id in range(n_users):
-
-    start_pos = URM_mask.indptr[user_id]
-    end_pos = URM_mask.indptr[user_id + 1]
-
-    if len(URM_mask.indices[start_pos:end_pos]) > 0:
-        eligibleUsers.append(user_id)
-eligibleUsers
-
-
-# %% [code]
-def sampleTriplet():
-    # By randomly selecting a user in this way we could end up
-    # with a user with no interactions
-    # user_id = np.random.randint(0, n_users)
-
-    user_id = np.random.choice(eligibleUsers)
-
-    # Get user seen items and choose one
-    userSeenItems = URM_mask[user_id, :].indices
-    pos_item_id = np.random.choice(userSeenItems)
-
-    negItemSelected = False
-
-    # It's faster to just try again then to build a mapping of the non-seen items
-    while (not negItemSelected):
-        neg_item_id = np.random.randint(0, n_items)
-
-        if (neg_item_id not in userSeenItems):
-            negItemSelected = True
-
-    return user_id, pos_item_id, neg_item_id
-
-
-# %% [code]
-similarity_matrix = np.zeros((n_items, n_items))
-
-user_id, posItem, negItem = sampleTriplet()
-userSeenItems = URM_mask[user_id, :].indices
-
-print(posItem)
-x_i = similarity_matrix[posItem, userSeenItems]
-print(x_i)
-x_i = similarity_matrix[posItem, userSeenItems].sum()
-x_j = similarity_matrix[negItem, userSeenItems].sum()
-
-print("x_i is {:.2f}, x_j is {:.2f}".format(x_i, x_j))
-
-
-# %% [code]
-
-def similarityMatrixTopK(item_weights, forceSparseOutput=True, k=120, verbose=False, inplace=True):
-    """
-    The function selects the TopK most similar elements, column-wise
-
-    :param item_weights:
-    :param forceSparseOutput:
-    :param k:
-    :param verbose:
-    :param inplace: Default True, WARNING matrix will be modified
-    :return:
-    """
-
-    assert (item_weights.shape[0] == item_weights.shape[1]), "selectTopK: ItemWeights is not a square matrix"
-
-    start_time = time.time()
-
-    if verbose:
-        print("Generating topK matrix")
-
-    nitems = item_weights.shape[1]
-    k = min(k, nitems)
-
-    # for each column, keep only the top-k scored items
-    sparse_weights = not isinstance(item_weights, np.ndarray)
-
-    if not sparse_weights:
-
-        idx_sorted = np.argsort(item_weights, axis=0)  # sort data inside each column
-
-        if inplace:
-            W = item_weights
-        else:
-            W = item_weights.copy()
-
-        # index of the items that don't belong to the top-k similar items of each column
-        not_top_k = idx_sorted[:-k, :]
-        # use numpy fancy indexing to zero-out the values in sim without using a for loop
-        W[not_top_k, np.arange(nitems)] = 0.0
-
-        if forceSparseOutput:
-            W_sparse = sps.csr_matrix(W, shape=(nitems, nitems))
-
-            if verbose:
-                print("Sparse TopK matrix generated in {:.2f} seconds".format(time.time() - start_time))
-
-            return W_sparse
-
-        if verbose:
-            print("Dense TopK matrix generated in {:.2f} seconds".format(time.time() - start_time))
-
-        return W
-
-    else:
-        # iterate over each column and keep only the top-k similar items
-        data, rows_indices, cols_indptr = [], [], []
-
-        item_weights = check_matrix(item_weights, format='csc', dtype=np.float32)
-
-        for item_idx in range(nitems):
-            cols_indptr.append(len(data))
-
-            start_position = item_weights.indptr[item_idx]
-            end_position = item_weights.indptr[item_idx + 1]
-
-            column_data = item_weights.data[start_position:end_position]
-            column_row_index = item_weights.indices[start_position:end_position]
-
-            non_zero_data = column_data != 0
-
-            idx_sorted = np.argsort(column_data[non_zero_data])  # sort by column
-            top_k_idx = idx_sorted[-k:]
-
-            data.extend(column_data[non_zero_data][top_k_idx])
-            rows_indices.extend(column_row_index[non_zero_data][top_k_idx])
-
-        cols_indptr.append(len(data))
-
-        # During testing CSR is faster
-        W_sparse = sps.csc_matrix((data, rows_indices, cols_indptr), shape=(nitems, nitems), dtype=np.float32)
-        W_sparse = W_sparse.tocsr()
-
-        if verbose:
-            print("Sparse TopK matrix generated in {:.2f} seconds".format(time.time() - start_time))
-
-        return W_sparse
-
-
-# %% [code]
 class SLIM_BPR_Recommender(object):
     """ SLIM_BPR recommender with cosine similarity and no shrinkage"""
 
     def __init__(self, URM):
         self.URM = URM
+        self.numEpoch = 0
+
+        self.itemPopularity = np.array((URM > 0).sum(axis=0)).squeeze()
+        self.itemPopularity[self.itemPopularity < 180] = 0
 
         self.similarity_matrix = np.zeros((n_items, n_items))
+        self.similarity_matrix_K = self.similarity_matrix
+        #self.similarity_matrix = sps.csr_matrix(sps.load_npz("../../../../Dataset/similarities/Col-Sim-train.npz")).todense().getA()
 
         self.URM_mask = self.URM.copy()
         self.URM_mask.eliminate_zeros()
@@ -213,20 +57,21 @@ class SLIM_BPR_Recommender(object):
         pos_item_id = np.random.choice(userSeenItems)
 
         negItemSelected = False
-
+        neg_item_id = 0
+        lanci = 0
         # It's faster to just try again then to build a mapping of the non-seen items
         while (not negItemSelected):
             neg_item_id = np.random.randint(0, n_items)
-
-            if (neg_item_id not in userSeenItems):
+            lanci += 1
+            if neg_item_id not in userSeenItems and (self.numEpoch < self.epochs/2 or self.itemPopularity[neg_item_id] != 0 or lanci > n_items-5):
                 negItemSelected = True
 
         return user_id, pos_item_id, neg_item_id
 
-    def epochIteration(self):
+    def epochIteration(self, dropoff = 0.05):
 
         # Get number of available interactions
-        numPositiveIteractions = int(self.URM_mask.nnz * 0.05)
+        numPositiveIteractions = int(self.URM_mask.nnz * dropoff)
 
         start_time_epoch = time.time()
         start_time_batch = time.time()
@@ -255,7 +100,7 @@ class SLIM_BPR_Recommender(object):
             self.similarity_matrix[negative_item_id, userSeenItems] -= self.learning_rate * gradient
             self.similarity_matrix[negative_item_id, negative_item_id] = 0
 
-            if (time.time() - start_time_batch >= 30 or num_sample == numPositiveIteractions - 1):
+            '''if (time.time() - start_time_batch >= 30 or num_sample == numPositiveIteractions - 1):
                 print("Processed {} ( {:.2f}% ) in {:.2f} seconds. Sample per second: {:.0f}".format(
                     num_sample,
                     100.0 * float(num_sample) / numPositiveIteractions,
@@ -263,26 +108,28 @@ class SLIM_BPR_Recommender(object):
                     float(num_sample) / (time.time() - start_time_epoch)))
 
                 start_time_batch = time.time()
+            '''
 
-    def fit(self, learning_rate=1e-3, epochs=100):
+    def fit(self, learning_rate=1e-2, epochs=48, dropoff=0.05):
 
         self.learning_rate = learning_rate
         self.epochs = epochs
 
-        for numEpoch in range(self.epochs):
-            print("Epoch N°" + str(numEpoch))
-            self.epochIteration()
+        for self.numEpoch in range(self.epochs):
+            # print("Epoch N°" + str(self.numEpoch))
+            self.epochIteration(dropoff)
 
         self.similarity_matrix = self.similarity_matrix.T
 
-        self.similarity_matrix = similarityMatrixTopK(self.similarity_matrix, verbose=True, k=50)
+    def compute_similarity(self,k=25):
+        self.similarity_matrix_K = mauri.similarityMatrixTopK(self.similarity_matrix, verbose=True, k=k)
 
     def recommend(self, user_id, at=10, exclude_seen=True):
         if not isinstance(user_id, int):
             print("eRR")
         # compute the scores using the dot product
         user_profile = self.URM[user_id]
-        scores = user_profile.dot(self.similarity_matrix).toarray().ravel()
+        scores = user_profile.dot(self.similarity_matrix_K).toarray().ravel()
 
         if exclude_seen:
             scores = self.filter_seen(user_id, scores)
@@ -304,38 +151,14 @@ class SLIM_BPR_Recommender(object):
         return scores
 
 
-# %% [code]
-recommender = SLIM_BPR_Recommender(URM)
-recommender.fit()
+for learning_rate in [1e-4,1e-2]:
+    for epocs in [50,70]:
+        for dropoff in [0.007,0.009,0.02,0.04,0.06]:
+            recommender = SLIM_BPR_Recommender(URM)
+            recommender.fit(learning_rate,epocs,dropoff)
+            for k in [15,50]:
+                print("LR:{0}, EPOCHS:{1}, DROPOFF:{2}, k={3}".format(learning_rate,epocs,dropoff,k))
+                recommender.compute_similarity(k)
 
-# %% [code]
-validation = pd.read_csv("../input/datasetrecsys/target_users_other.csv", skiprows=1, names=["user"])
-validation.head()
-
-# %% [code]
-with open("output.csv", "w") as f:
-    count = 0
-    for row in validation.itertuples():
-        if count % 500 == 0:
-            print("Elaborated {} users on {}".format(count, validation.user.count))
-        recommendations = str(recommender.recommend(row.user))
-        recommendations = recommendations.replace("[", "")
-        recommendations = recommendations.replace("]", "")
-        f.write(str(row.user) + ", " + recommendations + "\n")
-        count += 1
-
-# %% [code]
-validation = pd.read_csv("../input/datasetrecsys/target_users.csv", skiprows=1, names=["user"])
-validation.head()
-
-# %% [code]
-with open("output_all.csv", "w") as f:
-    count = 0
-    for row in validation.itertuples():
-        if count % 500 == 0:
-            print("Elaborated {} users on {}".format(count, validation.user.count))
-        recommendations = str(recommender.recommend(row.user))
-        recommendations = recommendations.replace("[", "")
-        recommendations = recommendations.replace("]", "")
-        f.write(str(row.user) + ", " + recommendations + "\n")
-        count += 1
+                print(evaluate.evaluate_algorithm(sps.load_npz("../../../../Dataset/data_test.npz"), recommender, 10))
+                print("\n")
