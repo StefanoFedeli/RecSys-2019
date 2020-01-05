@@ -1,18 +1,26 @@
 CONTENT BASED
     ITEM BASED
         A un utente piacciono item simili
+            ste PURE CONTENT BASED
     USER BASED
         A utenti simili piacciono gli stessi item
+            mat PURE CONTENT BASED
 COLLABORATIVE FILTERING
     USER BASED
         Due utenti sono simili se hanno le stesse opinioni su degli item (/vi hanno interagito)
+            mat PURE COLLABORATIVE
     ITEM BASED
         Due item sono simili se molti utenti condividono la stessa opinione su di essi (/vi hanno interagito)
+            ste PURE COLLABORATIVE
+            mat SVD
+            mat FUNK SVD
+            mat LIGHTFM
+            ste SLIM BPR
+            ste SLIM ELASTICNET
+            ste SSLIM
+            ste COLLABORATIVE BOOSTED FW
+            mat MF BPR
+NON PERSONALISED
+            top pop
+            light fm as top pop
 
-IBRIDO COLLABORATIVE-CONTENT
-    primo split tra cold users e warm users
-    COLD USERS
-        si clusterizzano i cold users secondo la ucm, ogni coppia età-regione costituisce un cluster, ci saranno
-        utenti completamente contenuti in un cluster e utenti a metà tra più cluster (condividono solo età/regione).
-    WARM USERS
-        collaborative si fa ugualmente

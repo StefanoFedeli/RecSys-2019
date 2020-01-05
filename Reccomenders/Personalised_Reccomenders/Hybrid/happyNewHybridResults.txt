@@ -1,0 +1,142 @@
+ALPHA:1.0, BETA: 1.0, GAMMA:0.25, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0213
+
+ALPHA:1.0, BETA: 1.0, GAMMA:0.5, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0201
+
+ALPHA:1.0, BETA: 0.5, GAMMA:1.0, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0208
+
+ALPHA:1.0, BETA: 0.5, GAMMA:0.25, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0210
+
+ALPHA:1.0, BETA: 0.3333333333333333, GAMMA:0.5, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0211
+
+ALPHA:1.0, BETA: 0.3333333333333333, GAMMA:0.25, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0209
+
+ALPHA:0.5, BETA: 1.0, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0217
+
+ALPHA:0.5, BETA: 1.0, GAMMA:0.25, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0207
+
+ALPHA:0.5, BETA: 0.5, GAMMA:0.3333333333333333, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0213
+
+ALPHA:0.5, BETA: 0.5, GAMMA:0.25, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0201
+
+ALPHA:0.5, BETA: 0.3333333333333333, GAMMA:0.25, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0199
+
+ALPHA:0.5, BETA: 0.3333333333333333, GAMMA:0.5, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0207
+
+ALPHA:0.3333333333333333, BETA: 1.0, GAMMA:1.0, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0203
+
+ALPHA:0.3333333333333333, BETA: 1.0, GAMMA:1.0, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0202
+
+ALPHA:0.3333333333333333, BETA: 0.5, GAMMA:0.5, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0202
+
+ALPHA:0.3333333333333333, BETA: 0.5, GAMMA:0.5, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0184
+
+ALPHA:0.3333333333333333, BETA: 0.3333333333333333, GAMMA:1.0, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0192
+
+ALPHA:0.3333333333333333, BETA: 0.3333333333333333, GAMMA:0.3333333333333333, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0204
+
+--------------------------------------------------------------------------------------
+
+ALPHA:0.4, BETA: 0.4, GAMMA:1.0, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0197
+
+ALPHA:0.4, BETA: 0.4, GAMMA:0.5, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0209
+
+ALPHA:0.4, BETA: 0.9, GAMMA:1.0, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0198
+
+ALPHA:0.4, BETA: 0.9, GAMMA:0.3333333333333333, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0192
+
+ALPHA:0.4, BETA: 1.1, GAMMA:0.3333333333333333, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0215
+
+ALPHA:0.4, BETA: 1.1, GAMMA:0.5, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0212
+
+ALPHA:0.6, BETA: 0.4, GAMMA:0.5, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0207
+
+ALPHA:0.6, BETA: 0.4, GAMMA:1.0, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0197
+
+ALPHA:0.6, BETA: 0.9, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0217
+
+ALPHA:0.6, BETA: 0.9, GAMMA:1.0, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0204
+
+ALPHA:0.6, BETA: 1.1, GAMMA:0.3333333333333333, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0211
+
+ALPHA:0.6, BETA: 1.1, GAMMA:0.5, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0201
+
+ALPHA:0.9, BETA: 0.4, GAMMA:0.3333333333333333, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0197
+
+ALPHA:0.9, BETA: 0.4, GAMMA:0.5, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0209
+
+ALPHA:0.9, BETA: 0.9, GAMMA:0.3333333333333333, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0201
+
+ALPHA:0.9, BETA: 0.9, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0216
+
+ALPHA:0.9, BETA: 1.1, GAMMA:0.3333333333333333, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0213
+
+ALPHA:0.9, BETA: 1.1, GAMMA:0.25, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0200
+
+ALPHA:1.1, BETA: 0.4, GAMMA:0.25, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0209
+
+ALPHA:1.1, BETA: 0.4, GAMMA:0.25, DELTA:0.5
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0205
+
+ALPHA:1.1, BETA: 0.9, GAMMA:0.3333333333333333, DELTA:1.0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0201
+
+ALPHA:1.1, BETA: 0.9, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0214
+
+ALPHA:1.1, BETA: 1.1, GAMMA:0.3333333333333333, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0214
+
+ALPHA:1.1, BETA: 1.1, GAMMA:1.0, DELTA:0.3333333333333333
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0214
+
+------------------------------------------------------------------------------------------
+
+ALPHA:0, BETA: 1, GAMMA:0, DELTA:0
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0204
+
+-------------------------------------------------------------------------------------------
+ALPHA:0.9, BETA: 0.9, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0216
+
+ALPHA:0.6, BETA: 0.9, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0217
+
+ALPHA:0.5, BETA: 1.0, GAMMA:0.5, DELTA:0.25
+Recommender performance is: Precision = 0.0000, Recall = 0.8699, MAP@10 = 0.0217

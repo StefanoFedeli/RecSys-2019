@@ -69,7 +69,7 @@ def evaluate_algorithm(URM_test, recommender_object, at=5):
 
             relevant_items = URM_test.indices[start_pos:end_pos]
 
-            recommended_items = recommender_object.recommend(user_id, at=at)
+            recommended_items = recommender_object.recommend(user_id, at)
             num_eval+=1
 
             is_relevant = np.in1d(recommended_items, relevant_items, assume_unique=True)

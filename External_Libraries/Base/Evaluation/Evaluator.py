@@ -11,9 +11,9 @@ import scipy.sparse as sps
 import time, sys, copy
 
 from enum import Enum
-from External_Libraries.Utils.seconds_to_biggest_unit import seconds_to_biggest_unit
+from Utils.seconds_to_biggest_unit import seconds_to_biggest_unit
 
-from External_Libraries.Evaluation.metrics import roc_auc, precision, precision_recall_min_denominator, recall, MAP, MRR, ndcg, arhr, rmse, \
+from Base.Evaluation.metrics import roc_auc, precision, precision_recall_min_denominator, recall, MAP, MRR, ndcg, arhr, rmse, \
     Novelty, Coverage_Item, Metrics_Object, Coverage_User, Gini_Diversity, Shannon_Entropy, Diversity_MeanInterList, Diversity_Herfindahl, AveragePopularity
 
 
