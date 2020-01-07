@@ -1,52 +1,12 @@
 import utils_new as utils
-import numpy as np
 import scipy.sparse as sps
-from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
-from External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
-from External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
 import matplotlib.pyplot as pyplot
+import evaluator as evaluate
 
-URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
-URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
-URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
+from External_Libraries.KNN.ItemKNNCFRecommender import ItemKNNCFRecommender as reccomender
+from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 
-class ItemCFKNNRecommender(object):
-
-    def __init__(self, URM):
-        self.URM = URM
-
-    def fit(self, topK, shrink, normalize=True, similarity="jaccard"):
-        similarity_object = Compute_Similarity_Python(self.URM, shrink=shrink,
-                                                      topK=topK, normalize=normalize,
-                                                      similarity=similarity)
-
-        self.W_sparse = similarity_object.compute_similarity()
-        sps.save_npz("../../../../../Dataset/Col-Sim-train.npz", self.W_sparse)
-
-    def recommend(self, user_id, at=None, exclude_seen=True):
-        # compute the scores using the dot product
-        user_profile = self.URM[user_id]
-        scores = user_profile.dot(self.W_sparse).toarray().ravel()
-
-        if exclude_seen:
-            scores = self.filter_seen(user_id, scores)
-
-        # rank items
-        ranking = scores.argsort()[::-1]
-
-        return ranking[:at]
-
-    def filter_seen(self, user_id, scores):
-        start_pos = self.URM.indptr[user_id]
-        end_pos = self.URM.indptr[user_id + 1]
-
-        user_profile = self.URM.indices[start_pos:end_pos]
-
-        scores[user_profile] = -np.inf
-
-        return scores
-
-
+'''
 x_tick = [10, 20, 50, 100, 200]
 MAP_per_k = []
 
@@ -80,11 +40,6 @@ pyplot.ylabel('MAP')
 pyplot.xlabel('Shrinkage')
 pyplot.savefig("shrink.png")
 
-
-'''
-recommender = ItemCFKNNRecommender(URM_all,URM_train)
-recommender.fit(shrink=200, topK=500)
-
 #users = utils.get_target_users("../../../../../Dataset/users_clusters/Coll_I.csv")
 users = utils.get_target_users("../../../../../Dataset/target_users.csv")
 with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
@@ -92,3 +47,16 @@ with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
     for user_id in users:
         f.write(str(user_id) + ", " + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
 '''
+URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
+users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=8)
+URM = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+validator = validate(URM_test, [10])
+
+mauri_recsys = reccomender(URM)
+mauri_recsys.fit(shrink=25, topK=10, similarity="jaccard", feature_weighting="TF-IDF",normalize=False)
+print(evaluate.evaluate(users, mauri_recsys, URM_test, 10)["MAP"])
+results = validator.evaluateRecommender(mauri_recsys)
+print(results[0][10]["MAP"])
+
+
+# SHRINK:10, K:100, SIMILARITY:asymmetric, FEATURE=none, NORM=False @ 0.023746

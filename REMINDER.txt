@@ -15,7 +15,7 @@ COLLABORATIVE FILTERING
             mat SVD
             mat FUNK SVD
             mat LIGHTFM
-            ste SLIM BPR
+            *SLIM BPR*
             ste SLIM ELASTICNET
             ste SSLIM
             ste COLLABORATIVE BOOSTED FW

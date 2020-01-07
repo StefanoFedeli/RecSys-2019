@@ -1,67 +1,46 @@
 import utils_new as utils
 import numpy as np
 import scipy.sparse as sps
-from External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
+import evaluator as evaluate
 
-features1 = utils.get_second_column("../../../../../Dataset/ICM_sub_class.csv")
-features2 = utils.get_second_column("../../../../../Dataset/ICM_price.csv")
-features3 = utils.get_second_column("../../../../../Dataset/ICM_asset.csv")
+from External_Libraries.KNN.ItemKNNCBFRecommender import ItemKNNCBFRecommender as reccomender
+from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
+
+features1 = utils.get_second_column("../../../../../Dataset/ICM_sub_class.csv",seek=13)
+features2 = utils.get_second_column("../../../../../Dataset/ICM_price.csv",seek=13)
+features3 = utils.get_second_column("../../../../../Dataset/ICM_asset.csv",seek=13)
 features = features1 + features2 + features3
 
-items1 = utils.get_first_column("../../../../../Dataset/ICM_sub_class.csv")
-items2 = utils.get_first_column("../../../../../Dataset/ICM_price.csv")
-items3 = utils.get_first_column("../../../../../Dataset/ICM_asset.csv")
+items1 = utils.get_first_column("../../../../../Dataset/ICM_sub_class.csv",seek=13)
+items2 = utils.get_first_column("../../../../../Dataset/ICM_price.csv",seek=13)
+items3 = utils.get_first_column("../../../../../Dataset/ICM_asset.csv",seek=13)
 items = items1 + items2 + items3
 
+
+URM = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+
+n_items = URM.shape[1]
+n_tags = max(features) + 1
+
+itemPopularity = URM.sum(axis=0)
+itemPopularity = np.array(itemPopularity).squeeze()
+popularItems = np.argsort(itemPopularity)[:int(n_items*0.1)]
+coldItem = np.argsort(itemPopularity[itemPopularity == 0])
+
+
+for i in range(len(popularItems)):
+    items.append(popularItems[i])
+    features.append(n_tags+1)
+for i in range(len(coldItem)):
+    items.append(coldItem[i])
+    features.append(n_tags+2)
+
 ones = np.ones(len(features))
-
-URM_train = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
-URM_all = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
-
-n_items = URM_train.shape[1]
 n_tags = max(features) + 1
 
 ICM_shape = (n_items, n_tags)
 ICM_all = sps.coo_matrix((ones, (items, features)), shape=ICM_shape)
 ICM_all = ICM_all.tocsr()
-
-
-class ItemCBFKNNRecommender(object):
-
-    def __init__(self, URM, URM_t, ICM):
-        self.URM = URM
-        self.ICM = ICM
-        self.train = URM_t
-
-    def fit(self, topK, shrink, similarity, normalize = True):
-        similarity_object = Compute_Similarity_Python(self.ICM.T, shrink=shrink,
-                                                      topK=topK, normalize=normalize,
-                                                      similarity=similarity)
-
-        self.W_sparse = similarity_object.compute_similarity()
-        sps.save_npz("../../../../../Dataset/CB-Sim.npz", self.W_sparse)
-    def recommend(self, user_id, at=None, exclude_seen=True):
-        # compute the scores using the dot product
-        user_profile = self.URM[user_id]
-        scores = user_profile.dot(self.W_sparse).toarray().ravel()
-
-        if exclude_seen:
-            scores = self.filter_seen(user_id, scores)
-
-        # rank items
-        ranking = scores.argsort()[::-1]
-
-        return ranking[:at]
-
-    def filter_seen(self, user_id, scores):
-        start_pos = self.train.indptr[user_id]
-        end_pos = self.train.indptr[user_id + 1]
-
-        user_profile = self.train.indices[start_pos:end_pos]
-
-        scores[user_profile] = -np.inf
-
-        return scores
 
 '''
 x_tick = [10, 50, 100, 200, 500]
@@ -96,15 +75,16 @@ pyplot.xlabel('Shrinkage')
 pyplot.savefig("shrink.png")
 
 '''
-recommender = ItemCBFKNNRecommender(URM_all,URM_all,ICM_all)
-recommender.fit(shrink=20, topK=25, similarity="jaccard")
+URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
+users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=8)
+validator = validate(URM_test, [10])
 
-'''
-#users = utils.get_target_users("../../../../../Dataset/users_clusters/CBI.csv")
-users = utils.get_target_users("../../../../../Dataset/target_users.csv")
-with open("../../../../../Outputs/CBI.csv", 'w') as f:
-    f.write("user_id,item_list\n")
-    for user_id in users:
-        f.write(str(user_id) + "," + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
+mauri_recsys = reccomender(URM, ICM_all)
+mauri_recsys.fit(shrink=10, topK=10, similarity="asymmetric", feature_weighting="none", normalize=True)
+print(evaluate.evaluate(users, mauri_recsys, URM_test, 10)["MAP"])
+results = validator.evaluateRecommender(mauri_recsys)
+print(results[0][10]["MAP"])
+print("\n")
 
-'''
+# SHRINK:10, K:10, SIMILARITY:asymmetric, FEATURE=none, NORM=True @ 0.0088
+# SHRINK:25, K:10, SIMILARITY:cosine, FEATURE=none, NORM=True @ 0.0088

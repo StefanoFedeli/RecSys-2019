@@ -71,21 +71,24 @@ def create_coo(path, filter = None, shape = None):
     else:
         return sps.coo_matrix((interactionList, (entityList, featuresList)))
 
-def get_first_column(path):
-    interactionList, entityList, featuresList = create_tuples(path, 14)
+
+def get_first_column(path, seek=14):
+    interactionList, entityList, featuresList = create_tuples(path, seek)
     return entityList
 
-def get_second_column(path):
-    interactionList, entityList, featuresList = create_tuples(path, 14)
+
+def get_second_column(path, seek=14):
+    interactionList, entityList, featuresList = create_tuples(path, seek)
     return featuresList
 
-def get_third_column(path):
-    interactionList, entityList, featuresList = create_tuples(path, 14)
+
+def get_third_column(path, seek=14):
+    interactionList, entityList, featuresList = create_tuples(path, seek)
     return interactionList
 
-def get_target_users(path):
+def get_target_users(path,seek=9):
     file = open(path, 'r')
-    file.seek(9)
+    file.seek(seek)
     print("Opened: " + path)
 
     column = []

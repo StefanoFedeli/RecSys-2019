@@ -6,12 +6,12 @@
 
 import numpy as np
 import scipy.sparse as sps
-
-from sklearn.preprocessing import normalize
-from External_Libraries.Base.Recommender_utils import check_matrix, similarityMatrixTopK
-
-from External_Libraries.Base.BaseSimilarityMatrixRecommender import BaseItemSimilarityMatrixRecommender
 import time, sys
+from sklearn.preprocessing import normalize
+
+from External_Libraries.Base.Recommender_utils import check_matrix, similarityMatrixTopK
+from External_Libraries.Base.BaseSimilarityMatrixRecommender import BaseItemSimilarityMatrixRecommender
+
 
 
 

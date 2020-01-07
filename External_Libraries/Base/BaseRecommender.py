@@ -7,7 +7,6 @@
 
 import numpy as np
 from External_Libraries.Base.DataIO import DataIO
-import os
 from External_Libraries.Base.Recommender_utils import check_matrix
 
 

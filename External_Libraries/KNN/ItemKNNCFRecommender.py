@@ -11,6 +11,7 @@ from External_Libraries.Base.BaseSimilarityMatrixRecommender import BaseItemSimi
 
 from External_Libraries.Base.IR_feature_weighting import okapi_BM_25, TF_IDF
 import numpy as np
+import scipy.sparse as sps
 
 from External_Libraries.Base.Similarity.Compute_Similarity import Compute_Similarity
 
@@ -52,3 +53,4 @@ class ItemKNNCFRecommender(BaseItemSimilarityMatrixRecommender):
 
         self.W_sparse = similarity.compute_similarity()
         self.W_sparse = check_matrix(self.W_sparse, format='csr')
+        # sps.save_npz("../../../../../Dataset/similarities/Col-Sim.npz", self.W_sparse)

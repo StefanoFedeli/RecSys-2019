@@ -1,12 +1,14 @@
 import numpy as np
 import scipy.sparse as sps
-from sklearn.linear_model import ElasticNet
 import time, sys
-from External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
-from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
+import utils_new as utils
+import evaluator as evaluate
+
+from sklearn.linear_model import ElasticNet
+from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 
 
-URM_all = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_all.npz"))
+URM_train = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_train.npz"))
 
 class SLIMElasticNetRecommender(object):
     """
@@ -161,11 +163,18 @@ class SLIMElasticNetRecommender(object):
 
         return scores
 
-URM_train, URM_test = train_test_holdout(URM_all, train_perc=0.8)
-URM_train, URM_validation = train_test_holdout(URM_train, train_perc=0.9)
-recommender = SLIMElasticNetRecommender(URM_train)
+URM_test = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_test.npz"))
+users = utils.get_target_users("../../../../Dataset/target_users.csv",seek=10)
+validator = validate(URM_test, [10])
 
-recommender.fit()
-
-
-evaluate_algorithm(URM_test, recommender)
+for l1 in [0.002,0.6,1.1]:
+    for l2 in [0.3,0.5,1]:
+        for k in [10,50,250,1000]:
+            for pos in [True, False]:
+                print("L1:{0}, L2:{1}, ITEM_POS:{2}, K={3}".format(l1, l2, pos, k))
+                recommender = SLIMElasticNetRecommender(URM_train)
+                recommender.fit(l1,l2,pos,k)
+                print(evaluate.evaluate(users, recommender, URM_test, 10))
+                results = validator.evaluateRecommender(recommender)
+                print(results[1])
+                print("\n")
