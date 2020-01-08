@@ -140,6 +140,7 @@ def compare_csv(csv1, csv2):
     averageCumulativeError = cumulativeError/len(userList1.keys())
     similarity = 100 - averageCumulativeError
     print("Average similarity " + str(similarity) + "%")
+    return str(similarity)
 
 #compare_csv("Outputs/truth.csv", "Outputs/Sslim.csv")
 

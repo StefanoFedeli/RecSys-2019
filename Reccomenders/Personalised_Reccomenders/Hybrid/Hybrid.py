@@ -74,7 +74,7 @@ def run(target_users, URM_test):
                                ])
     '''
     #recommendations = mergeCSV([open("../../../Outputs/Coll_I.csv", "r")])
-    recommendations = mergeCSV([open("../../../Outputs/HappyNewHybrid_0.9_0.9_0.5_0.25.csv", "r"),
+    recommendations = mergeCSV([open("../../../Outputs/itemColl+elasticNet_0.3.csv", "r"),
                                 open("../../../Outputs/TopPop_freeze.csv", "r")
                                 ])
     goodUsers = []
@@ -143,10 +143,10 @@ with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
             f.write(str(i) + "\n")
 '''
 
-with open("../../../Outputs/HappyNewHybrid_0.9_0.9_0.5_0.25_submission.csv", 'w') as f:
+with open("../../../Outputs/itemColl+elasticNet_0.3_submission.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         print(user_id)
         f.write(str(user_id) + "," + util.trim(np.array(res_test["RecSys"][user_id])) + "\n")
         
-util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/HappyNewHybrid_0.9_0.9_0.5_0.25_submission.csv")
+util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/itemColl+elasticNet_0.3_submission.csv")
