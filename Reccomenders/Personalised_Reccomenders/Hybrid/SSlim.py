@@ -26,7 +26,7 @@ class ReccomenderSslim(BaseRecommender):
         super().__init__(URM)
 
     def fit(self, train=""):
-        # to train use train="train"
+        # to train use train="-train"
         URM_1 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/CB-Sim" + train + ".npz"))
         URM_2 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Col-Sim" + train + ".npz"))
         URM_3 = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/Slim-Sim" + train + ".npz"))

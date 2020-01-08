@@ -10,13 +10,6 @@ from External_Libraries.Base.BaseRecommender import BaseRecommender as BaseRecom
 from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 
 
-URM = sps.load_npz("../../../../Dataset/data_all.npz")
-URM = URM.tocsr()
-URM_mask = URM.copy()
-URM_mask.eliminate_zeros()
-n_users = URM_mask.shape[0]
-n_items = URM_mask.shape[1]
-
 class SLIM_BPR_Recommender(BaseRecommender):
     """ SLIM_BPR recommender with cosine similarity and no shrinkage"""
 
@@ -28,16 +21,17 @@ class SLIM_BPR_Recommender(BaseRecommender):
 
         self.itemPopularity = np.array(URM.sum(axis=0)).squeeze()
 
-        self.similarity_matrix = np.zeros((n_items, n_items))
+        self.n_users = self.URM.shape[0]
+        self.n_items = self.URM.shape[1]
+
+        self.similarity_matrix = np.zeros((self.n_items, self.n_items))
         # self.similarity_matrix = sps.csr_matrix(sps.load_npz("../../../../Dataset/similarities/Col-Sim-train.npz")).todense().getA()
 
-        self.n_users = URM.shape[0]
-        self.n_items = URM.shape[1]
 
         # Extract users having at least one interaction to choose from
         self.eligibleUsers = []
 
-        for user_id in range(n_users):
+        for user_id in range(self.n_users):
 
             start_pos = self.URM.indptr[user_id]
             end_pos = self.URM.indptr[user_id + 1]
@@ -56,7 +50,7 @@ class SLIM_BPR_Recommender(BaseRecommender):
         user_id = np.random.choice(self.eligibleUsers)
 
         # Get user seen items and choose one
-        userSeenItems = URM_mask[user_id, :].indices
+        userSeenItems = self.URM[user_id, :].indices
         pos_item_id = np.random.choice(userSeenItems)
 
         negItemSelected = False
@@ -64,9 +58,9 @@ class SLIM_BPR_Recommender(BaseRecommender):
         lanci = 0
         # It's faster to just try again then to build a mapping of the non-seen items
         while (not negItemSelected):
-            neg_item_id = np.random.randint(0, n_items)
+            neg_item_id = np.random.randint(0, self.n_items)
             lanci += 1
-            if neg_item_id not in userSeenItems and (self.numEpoch < self.epochs*2/3 or self.itemPopularity[neg_item_id] != 0 or lanci > n_items-5):
+            if neg_item_id not in userSeenItems and (self.numEpoch < self.epochs*2/3 or self.itemPopularity[neg_item_id] != 0 or lanci > self.n_items-5):
                 negItemSelected = True
 
         return user_id, pos_item_id, neg_item_id
@@ -112,8 +106,8 @@ class SLIM_BPR_Recommender(BaseRecommender):
 
                 start_time_batch = time.time()
 
-    def fit(self, learning_rate=1e-3, epoch=70, ratio=2.5, limit=120):
-        self.similarity_matrix = sps.csr_matrix(sps.load_npz("../../../../Dataset/similarities/Slim-Sim.npz"))
+    def fit(self, learning_rate=1e-3, epoch=70, ratio=2.5, limit=120, path="../../../../"):
+        self.similarity_matrix = sps.csr_matrix(sps.load_npz(path + "Dataset/similarities/Slim-Sim-train.npz"))
         """
         self.itemPopularity[self.itemPopularity < limit] = 0
         self.learning_rate = learning_rate
@@ -146,6 +140,7 @@ class SLIM_BPR_Recommender(BaseRecommender):
 
 
 def main_slim():
+    URM = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_all.npz"))
     URM_test = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_test.npz"))
     users = utils.get_target_users("../../../../Dataset/target_users.csv", seek=10)
     validator = validate(URM_test, [10])
@@ -169,6 +164,6 @@ def main_slim():
     '''
 
 
-main_slim()
+#main_slim()
 
 

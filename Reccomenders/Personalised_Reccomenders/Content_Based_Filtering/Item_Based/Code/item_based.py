@@ -75,9 +75,12 @@ pyplot.xlabel('Shrinkage')
 pyplot.savefig("shrink.png")
 
 '''
+sps.save_npz("../../../../../Dataset/ICM_all.npz",ICM_all)
+
 URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
 users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=8)
 validator = validate(URM_test, [10])
+
 
 mauri_recsys = reccomender(URM, ICM_all)
 mauri_recsys.fit(shrink=10, topK=10, similarity="asymmetric", feature_weighting="none", normalize=True)

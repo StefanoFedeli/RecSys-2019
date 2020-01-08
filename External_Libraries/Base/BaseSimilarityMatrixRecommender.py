@@ -21,6 +21,7 @@ class BaseSimilarityMatrixRecommender(BaseRecommender):
     def __init__(self, URM_train, verbose=True):
         super(BaseSimilarityMatrixRecommender, self).__init__(URM_train, verbose=verbose)
 
+        self.W_sparse = None
         self._URM_train_format_checked = False
         self._W_sparse_format_checked = False
 

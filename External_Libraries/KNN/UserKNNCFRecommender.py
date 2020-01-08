@@ -26,6 +26,8 @@ class UserKNNCFRecommender(BaseUserSimilarityMatrixRecommender):
     def __init__(self, URM_train, verbose = True):
         super(UserKNNCFRecommender, self).__init__(URM_train, verbose = verbose)
 
+        self.W_sparse = None
+
 
 
     def fit(self, topK=50, shrink=100, similarity='cosine', normalize=True, feature_weighting = "none", **similarity_args):
