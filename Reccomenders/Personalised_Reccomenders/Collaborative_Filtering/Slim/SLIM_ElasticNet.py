@@ -1,14 +1,13 @@
 import numpy as np
 import scipy.sparse as sps
-import time, sys
-import utils_new as utils
-import evaluator as evaluate
-
 from sklearn.linear_model import ElasticNet
-from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
+import time, sys
+from External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
+from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
+import utils_new as utils
 
 
-URM_train = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_train.npz"))
+URM_all = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_all.npz"))
 
 class SLIMElasticNetRecommender(object):
     """
@@ -48,14 +47,14 @@ class SLIMElasticNetRecommender(object):
             self.l1_ratio = 1.0
 
         # initialize the ElasticNet model
-        self.model = ElasticNet(alpha=1.0,
+        self.model = ElasticNet(alpha=1e-4,
                                 l1_ratio=self.l1_ratio,
                                 positive=self.positive_only,
                                 fit_intercept=False,
                                 copy_X=False,
                                 precompute=True,
                                 selection='random',
-                                max_iter=1000,
+                                max_iter=10,
                                 tol=1e-4)
 
         URM_train = sps.csc_matrix(self.URM_train)
@@ -124,7 +123,7 @@ class SLIMElasticNetRecommender(object):
             # finally, replace the original values of the j-th column
             URM_train.data[start_pos:end_pos] = current_item_data_backup
 
-            if time.time() - start_time_printBatch > 300 or currentItem == n_items - 1:
+            if time.time() - start_time_printBatch > 50 or currentItem == n_items - 1:
                 print("Processed {} ( {:.2f}% ) in {:.2f} minutes. Items per second: {:.0f}".format(
                     currentItem + 1,
                     100.0 * float(currentItem + 1) / n_items,
@@ -138,6 +137,8 @@ class SLIMElasticNetRecommender(object):
         # generate the sparse weight matrix
         self.W_sparse = sps.csr_matrix((values[:numCells], (rows[:numCells], cols[:numCells])),
                                        shape=(n_items, n_items), dtype=np.float32)
+
+        sps.save_npz("../../../../Dataset/elasticNet_train.npz", self.W_sparse)
 
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
@@ -163,18 +164,15 @@ class SLIMElasticNetRecommender(object):
 
         return scores
 
-URM_test = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_test.npz"))
-users = utils.get_target_users("../../../../Dataset/target_users.csv",seek=10)
-validator = validate(URM_test, [10])
+users = utils.get_target_users("../../../../Dataset/target_users.csv")
+URM_train, URM_test = train_test_holdout(URM_all, train_perc=0.8)
+URM_train, URM_validation = train_test_holdout(URM_train, train_perc=0.9)
+recommender = SLIMElasticNetRecommender(URM_train)
+recommender.fit()
 
-for l1 in [0.002,0.6,1.1]:
-    for l2 in [0.3,0.5,1]:
-        for k in [10,50,250,1000]:
-            for pos in [True, False]:
-                print("L1:{0}, L2:{1}, ITEM_POS:{2}, K={3}".format(l1, l2, pos, k))
-                recommender = SLIMElasticNetRecommender(URM_train)
-                recommender.fit(l1,l2,pos,k)
-                print(evaluate.evaluate(users, recommender, URM_test, 10))
-                results = validator.evaluateRecommender(recommender)
-                print(results[1])
-                print("\n")
+'''
+with open("../../../../Outputs/elasticNet.csv", 'w') as f:
+    f.write("user_id,item_list\n")
+    for user_id in users:
+        f.write(str(user_id) + ", " + utils.trim(recommender.recommend(user_id)[:10]) + "\n")
+'''

@@ -230,37 +230,54 @@ class UserCFKNNRecommender(object):
         return scores
 
 
-itemColl = ItemKNNCFRecommender(URM_all)
-itemColl.fit(shrink=691, topK=830)
+itemColl = ItemKNNCFRecommender(URM_train)
+itemColl.fit(shrink=50, topK=10, similarity="jaccard")
 
-userColl = UserKNNCFRecommender(URM_all)
-userColl.fit(shrink=934, topK=796)
+userColl = UserKNNCFRecommender(URM_train)
+userColl.fit(shrink=50, topK=10)
 
-itemCont = ItemKNNCBFRecommender(URM_all, ICM_all)
+itemCont = ItemKNNCBFRecommender(URM_train, ICM_all)
 itemCont.fit(shrink=50, topK=10)
 
-pureSVD = PureSVDRecommender(URM_all)
+pureSVD = PureSVDRecommender(URM_train)
 pureSVD.fit()
 
-hybridrecommender = ItemKNNScoresHybridRecommender(URM_all, itemColl, userColl, itemCont, pureSVD)
+hybridrecommender = ItemKNNScoresHybridRecommender(URM_train, itemColl, userColl, itemCont, pureSVD)
 
+'''    
 users = utils.get_target_users("../../../Dataset/target_users.csv")
-alpha = 0.5
-beta = 1
-gamma = 0.5
-delta = 0.25
-print("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}".format(alpha, beta, gamma, delta))
-hybridrecommender.fit(alpha, beta, gamma, delta)
 
+with open("../../../Outputs/tuning_results.csv", 'w') as fr:
+    for alpha in [0.25, 0.5, 0.75, 1]:
+        for beta in [0.25, 0.5, 0.75, 1]:
+            for gamma in [0.25, 0.5, 0.75, 1]:
+                for delta in [0.25, 0.5, 0.75, 1]:
+                    print("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}".format(alpha, beta, gamma, delta))
+                    hybridrecommender.fit(alpha, beta, gamma, delta)
+                    with open("../../../Outputs/temp.csv", 'w') as f:
+                        f.write("user_id,item_list\n")
+                        for user_id in users:
+                            recommendations, scores = hybridrecommender.recommend(user_id, return_scores=True)
+                            f.write(str(user_id) + ", " + utils.trim(recommendations[:10]) + "\n")
+                    similarity = utils.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/temp.csv")
+                    fr.write("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}\n".format(alpha, beta, gamma, delta))
+                    fr.write(similarity + "\n\n")
+
+
+'''
 users = utils.get_target_users("../../../Dataset/target_users.csv")
-with open("../../../Outputs/HappyNewHybrid_0.5_1_0.5_0.25.csv", 'w') as f:
+hybridrecommender.fit(1, 0.5, 0.25, 0.25)
+evaluator.evaluate(users, hybridrecommender, URM_test)
+
+'''    
+
+with open("../../../Outputs/HappyNewHybrid_0.75_0.5_0.25_0.25.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:
         recommendations, scores = hybridrecommender.recommend(user_id, return_scores = True)
         f.write(str(user_id) + ", " + utils.trim(recommendations[:10]) + "\n")
 
 
-'''
 users = utils.get_target_users("../../../Dataset/target_users_cold.csv")
 
 topPop = topPop()
