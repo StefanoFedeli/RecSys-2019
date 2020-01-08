@@ -52,7 +52,7 @@ def mergeCSV(filelist):
     userList = {}
     # Be aware that if a user is in both files then is overwritten
     for file in filelist:
-        file.seek(19)
+        file.seek(18)
         for line in file:
             split = line.split(",")
             userList[(int(split[0]))] = list(map(int, split[1].split()))
@@ -74,7 +74,7 @@ def run(target_users, URM_test):
                                ])
     '''
     #recommendations = mergeCSV([open("../../../Outputs/Coll_I.csv", "r")])
-    recommendations = mergeCSV([open("../../../Outputs/itemColl+elasticNet_0.3.csv", "r"),
+    recommendations = mergeCSV([open("../../../Outputs/Sslim.csv", "r"),
                                 open("../../../Outputs/TopPop_freeze.csv", "r")
                                 ])
     goodUsers = []
@@ -120,9 +120,9 @@ def run(target_users, URM_test):
     return result_dict
 
 
-URM_test = sps.csr_matrix(sps.load_npz("../../../dataset/data_test.npz"))
-URM_val = sps.csr_matrix(sps.load_npz("../../../dataset/data_validation.npz"))
-targetUsers = util.get_target_users("../../../dataset/target_users.csv")
+URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
+URM_val = sps.csr_matrix(sps.load_npz("../../../Dataset/data_validation.npz"))
+targetUsers = util.get_target_users("../../../Dataset/target_users.csv",seek=8)
 
 print("TESTING")
 res_test = run(targetUsers, URM_test)
@@ -143,10 +143,10 @@ with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
             f.write(str(i) + "\n")
 '''
 
-with open("../../../Outputs/itemColl+elasticNet_0.3_submission.csv", 'w') as f:
+with open("../../../Outputs/Sslim+TopPop.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         print(user_id)
         f.write(str(user_id) + "," + util.trim(np.array(res_test["RecSys"][user_id])) + "\n")
         
-util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/itemColl+elasticNet_0.3_submission.csv")
+util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/Sslim+TopPop.csv")

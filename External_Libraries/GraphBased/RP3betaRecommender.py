@@ -6,12 +6,12 @@
 
 import numpy as np
 import scipy.sparse as sps
+import time, sys
 
 from sklearn.preprocessing import normalize
-from Base.Recommender_utils import check_matrix, similarityMatrixTopK
+from External_Libraries.Base.Recommender_utils import check_matrix, similarityMatrixTopK
+from External_Libraries. Base.BaseSimilarityMatrixRecommender import BaseItemSimilarityMatrixRecommender
 
-from Base.BaseSimilarityMatrixRecommender import BaseItemSimilarityMatrixRecommender
-import time, sys
 
 class RP3betaRecommender(BaseItemSimilarityMatrixRecommender):
     """ RP3beta recommender """
