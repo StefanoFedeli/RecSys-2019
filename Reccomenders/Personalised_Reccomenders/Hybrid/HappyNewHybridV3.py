@@ -1,28 +1,18 @@
 import utils_new as utils
 import numpy as np
 import scipy.sparse as sps
-from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
-from External_Libraries.Similarity.Compute_Similarity_Python import Compute_Similarity_Python
-from External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
 import matplotlib.pyplot as pyplot
+
 from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout
-from External_Libraries.KNN.ItemKNNCFRecommender import ItemKNNCFRecommender
-from External_Libraries.KNN.UserKNNCFRecommender import UserKNNCFRecommender
+from External_Libraries.GraphBased.P3alphaRecommender import P3alphaRecommender
+from External_Libraries.GraphBased.RP3betaRecommender import RP3betaRecommender
 from External_Libraries.KNN.ItemKNNCBFRecommender import ItemKNNCBFRecommender
-from External_Libraries.ParameterTuning.SearchBayesianSkopt import SearchBayesianSkopt
-from External_Libraries.ParameterTuning.SearchAbstractClass import SearchInputRecommenderArgs
-from skopt.space import Real, Integer, Categorical
-import os
-from External_Libraries.DataIO import DataIO
-from External_Libraries.Base.Recommender_utils import check_matrix, similarityMatrixTopK
-from External_Libraries.Base.BaseSimilarityMatrixRecommender import BaseItemSimilarityMatrixRecommender
-from External_Libraries.SLIM_ElasticNet.SLIMElasticNetRecommender import SLIMElasticNetRecommender
+from External_Libraries.KNN.UserKNNCFRecommender import UserKNNCFRecommender
+from Reccomenders.Personalised_Reccomenders.Collaborative_Filtering.Slim.slimbpr import SLIM_BPR_Recommender
+from Reccomenders.Personalised_Reccomenders.Hybrid.SSlim import ReccomenderSslim
+from External_Libraries.KNN.ItemKNNCFRecommender import ItemKNNCFRecommender
+from Reccomenders.Personalised_Reccomenders.Collaborative_Filtering.Slim.SLIM_ElasticNet import ElasticNetRecommender
 from External_Libraries.MatrixFactorization.PureSVDRecommender import PureSVDRecommender
-import random as rand
-import evaluator
-from Reccomenders.NonPersonalised_Reccomenders.TopPop.top_pop import TopPopRecommender as topPop
-from Reccomenders.NonPersonalised_Reccomenders.TopPop.top_pop_cluster import TopPopClusterRecommender as topPopCluster
-from Reccomenders.NonPersonalised_Reccomenders.TopPop.LightFMTopPop import LightFMTopPopRecommender as lightFMTopPop
 
 def create_clusters():
     user_list = list(range(0, 30911))
@@ -72,7 +62,7 @@ def create_clusters():
 
     clusterSamples = []
     for key in users_dict:
-        clusterSamples.append(users_dict[key][5:15])
+        clusterSamples.append(users_dict[key])
 
     return clusterSamples
 
@@ -106,61 +96,122 @@ clusterSamples = create_clusters()
 maxIndex = len(clusterSamples)
 users = range(0, 30911)
 
-MAP_itemKNNCF_per_group = []
-MAP_userKNNCF_per_group = []
-MAP_itemKNNCBF_per_group = []
 MAP_pureSVD_per_group = []
-MAP_elasticNet_per_group = []
 MAP_sslim_per_group = []
-MAP_topPop_per_group = []
+MAP_CFItem_per_group = []
+MAP_slim_per_group = []
+MAP_CFUser_per_group = []
+MAP_CBItem_per_group = []
+MAP_P3a_per_group = []
+MAP_P3b_per_group = []
+MAP_elasticNet_per_group = []
 cutoff = 10
 
-itemKNNCF = ItemKNNCFRecommender(URM_train)
-itemKNNCF.fit(topK=10, shrink=50, similarity="jaccard")
-
-userKNNCF = UserKNNCFRecommender(URM_train)
-userKNNCF.fit(topK=10, shrink=50, similarity="jaccard")
-
-itemKNNCBF = ItemKNNCBFRecommender(URM_train, ICM_all)
-itemKNNCBF.fit(topK=10, shrink=50, similarity="jaccard")
+elasticNet = ElasticNetRecommender(URM_train)
+elasticNet.fit("train")
 
 pureSVD = PureSVDRecommender(URM_train)
 pureSVD.fit()
 
+sslim = ReccomenderSslim(URM_train)
+sslim.fit(train="-train")
+
+CFItem = ItemKNNCFRecommender(URM_train)
+CFItem.fit(shrink=25, topK=10, similarity="jaccard", feature_weighting="TF-IDF", normalize=False)
+
+slim = SLIM_BPR_Recommender(URM_train)
+slim.fit(path="../../../")
+
+CFUser = UserKNNCFRecommender(URM_train)
+CFUser.fit(703, 25, "asymmetric")
+
+CBItem = ItemKNNCBFRecommender(URM_train,ICM_all)
+CBItem.fit(shrink=120, topK=5, similarity="asymmetric", feature_weighting="none", normalize=True)
+
+P3a = P3alphaRecommender(URM_train)
+P3a.fit(alpha=0.25662502344934046, min_rating=0, topK=25, implicit=True, normalize_similarity=True)
+
+P3b = RP3betaRecommender(URM_train)
+P3b.fit(alpha=0.22218786834129392, beta=0.23468317063424235, min_rating=0, topK=25, implicit=True, normalize_similarity=True)
+
+
+
 for index in range(0, maxIndex):
+
+    max = 0
+    name = "none"
 
     print("Cluster number: " + str(index))
     toIgnore = [x for x in users if x not in clusterSamples[index]]
     evaluator_test = EvaluatorHoldout(URM_test, cutoff_list=[cutoff], ignore_users=toIgnore)
 
-    results, _ = evaluator_test.evaluateRecommender(itemKNNCF)
-    MAP_itemKNNCF_per_group.append(results[cutoff]["MAP"])
-
-    results, _ = evaluator_test.evaluateRecommender(userKNNCF)
-    MAP_userKNNCF_per_group.append(results[cutoff]["MAP"])
-
-    results, _ = evaluator_test.evaluateRecommender(itemKNNCBF)
-    MAP_itemKNNCBF_per_group.append(results[cutoff]["MAP"])
-
     results, _ = evaluator_test.evaluateRecommender(pureSVD)
     MAP_pureSVD_per_group.append(results[cutoff]["MAP"])
+    max = MAP_pureSVD_per_group[index]
+    name = "pureSVD"
 
-    #results, _ = evaluator_test.evaluateRecommender(elasticNet)
-    #MAP_elasticNet_per_group.append(results[cutoff]["MAP"])
+    results, _ = evaluator_test.evaluateRecommender(sslim)
+    MAP_sslim_per_group.append(results[cutoff]["MAP"])
+    if MAP_sslim_per_group[index] > max:
+        max = MAP_sslim_per_group[index]
+        name = "sslim"
 
-    #results, _ = evaluator_test.evaluateRecommender(sslim)
-    #MAP_sslim_per_group.append(results[cutoff]["MAP"])
+    results, _ = evaluator_test.evaluateRecommender(CFItem)
+    MAP_CFItem_per_group.append(results[cutoff]["MAP"])
+    if MAP_CFItem_per_group[index] > max:
+        max = MAP_CFItem_per_group[index]
+        name = "CFItem"
 
-    #results, _ = evaluator_test.evaluateRecommender(topPop)
-    #MAP_topPop_per_group.append(results[cutoff]["MAP"])
+    results, _ = evaluator_test.evaluateRecommender(slim)
+    MAP_slim_per_group.append(results[cutoff]["MAP"])
+    if MAP_slim_per_group[index] > max:
+        max = MAP_slim_per_group[index]
+        name = "slim"
 
-pyplot.plot(MAP_itemKNNCF_per_group, label="itemKNNCF")
-pyplot.plot(MAP_userKNNCF_per_group, label="userKNNCF")
-pyplot.plot(MAP_itemKNNCBF_per_group, label="itemKNNCBF")
+    results, _ = evaluator_test.evaluateRecommender(CFUser)
+    MAP_CFUser_per_group.append(results[cutoff]["MAP"])
+    if MAP_CFUser_per_group[index] > max:
+        max = MAP_CFUser_per_group[index]
+        name = "CFUser"
+
+    results, _ = evaluator_test.evaluateRecommender(CBItem)
+    MAP_CBItem_per_group.append(results[cutoff]["MAP"])
+    if MAP_CBItem_per_group[index] > max:
+        max = MAP_CBItem_per_group[index]
+        name = "CBItem"
+
+    results, _ = evaluator_test.evaluateRecommender(P3a)
+    MAP_P3a_per_group.append(results[cutoff]["MAP"])
+    if MAP_P3a_per_group[index] > max:
+        max = MAP_P3a_per_group[index]
+        name = "P3a"
+
+    results, _ = evaluator_test.evaluateRecommender(P3b)
+    MAP_P3b_per_group.append(results[cutoff]["MAP"])
+    if MAP_P3b_per_group[index] > max:
+        max = MAP_P3b_per_group[index]
+        name = "P3b"
+
+    results, _ = evaluator_test.evaluateRecommender(elasticNet)
+    MAP_elasticNet_per_group.append(results[cutoff]["MAP"])
+    if MAP_elasticNet_per_group[index] > max:
+        max = MAP_elasticNet_per_group[index]
+        name = "elasticNet"
+
+    print("The best is " + name + " with: " + str(max))
+
+
+
 pyplot.plot(MAP_pureSVD_per_group, label="pureSVD")
-pyplot.plot(MAP_elasticNet_per_group, label="elasticNet")
 pyplot.plot(MAP_sslim_per_group, label="sslim")
-pyplot.plot(MAP_topPop_per_group, label="topPop")
+pyplot.plot(MAP_CFItem_per_group, label="CFItem")
+pyplot.plot(MAP_slim_per_group, label="slim")
+pyplot.plot(MAP_CFUser_per_group, label="CFUser")
+pyplot.plot(MAP_CBItem_per_group, label="CBItem")
+pyplot.plot(MAP_P3a_per_group, label="P3a")
+pyplot.plot(MAP_P3b_per_group, label="P3b")
+pyplot.plot(MAP_elasticNet_per_group, label="elasticNet")
+
 pyplot.ylabel('MAP')
 pyplot.xlabel('User Group')
 pyplot.legend()

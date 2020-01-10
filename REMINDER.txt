@@ -2,9 +2,6 @@ CONTENT BASED
     ITEM BASED
         A un utente piacciono item simili
             ste PURE CONTENT BASED
-    USER BASED
-        A utenti simili piacciono gli stessi item
-            mat PURE CONTENT BASED
 COLLABORATIVE FILTERING
     USER BASED
         Due utenti sono simili se hanno le stesse opinioni su degli item (/vi hanno interagito)
@@ -12,14 +9,15 @@ COLLABORATIVE FILTERING
     ITEM BASED
         Due item sono simili se molti utenti condividono la stessa opinione su di essi (/vi hanno interagito)
             ste PURE COLLABORATIVE
-            mat SVD
-            mat FUNK SVD
-            mat LIGHTFM
+                mat SVD
+                mat FUNK SVD
+            X mat LIGHTFM
             *SLIM BPR*
             ste SLIM ELASTICNET
             ste SSLIM
-            ste COLLABORATIVE BOOSTED FW
-            mat MF BPR
+                ste COLLABORATIVE BOOSTED FW
+                mat MF BPR
+            ste graph based
 NON PERSONALISED
             top pop
             light fm as top pop

@@ -232,19 +232,19 @@ class UserCFKNNRecommender(object):
 URM_train, URM_test = train_test_holdout(URM_all, train_perc=0.8)
 URM_train, URM_validation = train_test_holdout(URM_train, train_perc = 0.9)
 
-itemColl = ItemKNNCFRecommender(URM_all)
-itemColl.fit(shrink=106, topK=63, similarity="jaccard")
+itemColl = ItemKNNCFRecommender(URM_train)
+#itemColl.fit(shrink=106, topK=63, similarity="jaccard")
 
-userColl = UserKNNCFRecommender(URM_all)
-userColl.fit(shrink=100, topK=3, similarity="jaccard")
+userColl = UserKNNCFRecommender(URM_train)
+userColl.fit(shrink=100, topK=3, similarity="cosine")
 
 itemCont = ItemKNNCBFRecommender(URM_all, ICM_all)
-itemCont.fit(shrink=120, topK=5, similarity="jaccard")
+#itemCont.fit(shrink=120, topK=5, similarity="jaccard")
 
 pureSVD = PureSVDRecommender(URM_all)
-pureSVD.fit()
+#pureSVD.fit()
 
-hybridrecommender = ItemKNNScoresHybridRecommender(URM_all, itemColl, userColl, itemCont, pureSVD)
+hybridrecommender = ItemKNNScoresHybridRecommender(URM_train, userColl, userColl, userColl, userColl)
 
 
 
@@ -282,13 +282,15 @@ evaluator.evaluate(users, hybridrecommender, URM_test)
 
 '''
 
-hybridrecommender.fit(0.8, 0.25, 0.15, 0.05)
+hybridrecommender.fit(1, 0, 0, 0)
+evaluator.evaluate(users, hybridrecommender, URM_test)
+'''
 with open("../../../Outputs/HappyNewHybrid_0.8_0.25_0.15_0.05.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:
         recommendations, scores = hybridrecommender.recommend(user_id, return_scores = True)
         f.write(str(user_id) + ", " + utils.trim(recommendations[:10]) + "\n")
-
+'''
 '''
 users = utils.get_target_users("../../../Dataset/target_users_cold.csv")
 

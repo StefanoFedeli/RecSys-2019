@@ -2,8 +2,8 @@ import utils_new as utils
 import scipy.sparse as sps
 import matplotlib.pyplot as pyplot
 import evaluator as evaluate
-
-from External_Libraries.KNN.ItemKNNCFRecommender import ItemKNNCFRecommender as reccomender
+from External_Libraries.DataIO import DataIO
+from External_Libraries.KNN.ItemKNNCFRecommender import ItemKNNCFRecommender
 from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 
 '''
@@ -48,12 +48,12 @@ with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
         f.write(str(user_id) + ", " + utils.trim(recommender.recommend(user_id, at=10)) + "\n")
 '''
 URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
-users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=8)
-URM = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=9)
+URM = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
 validator = validate(URM_test, [10])
 
-mauri_recsys = reccomender(URM)
-mauri_recsys.fit(shrink=25, topK=10, similarity="jaccard", feature_weighting="TF-IDF",normalize=False)
+mauri_recsys = ItemKNNCFRecommender(URM)
+mauri_recsys.fit(shrink=106, topK=63, similarity="jaccard", feature_weighting="TF-IDF",normalize=False)
 print(evaluate.evaluate(users, mauri_recsys, URM_test, 10)["MAP"])
 results = validator.evaluateRecommender(mauri_recsys)
 print(results[0][10]["MAP"])

@@ -6,18 +6,18 @@ import evaluator as evaluate
 from External_Libraries.KNN.ItemKNNCBFRecommender import ItemKNNCBFRecommender as reccomender
 from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 
-features1 = utils.get_second_column("../../../../../Dataset/ICM_sub_class.csv",seek=13)
-features2 = utils.get_second_column("../../../../../Dataset/ICM_price.csv",seek=13)
-features3 = utils.get_second_column("../../../../../Dataset/ICM_asset.csv",seek=13)
+features1 = utils.get_second_column("../../../../../Dataset/ICM_sub_class.csv",seek=14)
+features2 = utils.get_second_column("../../../../../Dataset/ICM_price.csv",seek=14)
+features3 = utils.get_second_column("../../../../../Dataset/ICM_asset.csv",seek=14)
 features = features1 + features2 + features3
 
-items1 = utils.get_first_column("../../../../../Dataset/ICM_sub_class.csv",seek=13)
-items2 = utils.get_first_column("../../../../../Dataset/ICM_price.csv",seek=13)
-items3 = utils.get_first_column("../../../../../Dataset/ICM_asset.csv",seek=13)
+items1 = utils.get_first_column("../../../../../Dataset/ICM_sub_class.csv",seek=14)
+items2 = utils.get_first_column("../../../../../Dataset/ICM_price.csv",seek=14)
+items3 = utils.get_first_column("../../../../../Dataset/ICM_asset.csv",seek=14)
 items = items1 + items2 + items3
 
 
-URM = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_all.npz"))
+URM = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_train.npz"))
 
 n_items = URM.shape[1]
 n_tags = max(features) + 1
@@ -78,12 +78,12 @@ pyplot.savefig("shrink.png")
 sps.save_npz("../../../../../Dataset/ICM_all.npz",ICM_all)
 
 URM_test = sps.csr_matrix(sps.load_npz("../../../../../Dataset/data_test.npz"))
-users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=8)
+users = utils.get_target_users("../../../../../Dataset/target_users.csv", seek=9)
 validator = validate(URM_test, [10])
 
 
 mauri_recsys = reccomender(URM, ICM_all)
-mauri_recsys.fit(shrink=10, topK=10, similarity="asymmetric", feature_weighting="none", normalize=True)
+mauri_recsys.fit(shrink=120, topK=5, similarity="jaccard", feature_weighting="none", normalize=True)
 print(evaluate.evaluate(users, mauri_recsys, URM_test, 10)["MAP"])
 results = validator.evaluateRecommender(mauri_recsys)
 print(results[0][10]["MAP"])

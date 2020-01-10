@@ -13,11 +13,13 @@ from Reccomenders.Personalised_Reccomenders.Hybrid.SSlim import ReccomenderSslim
 from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 from External_Libraries.Base.BaseSimilarityMatrixRecommender import BaseItemSimilarityMatrixRecommender
 from External_Libraries.KNN.ItemKNNCFRecommender import ItemKNNCFRecommender
+from Reccomenders.Personalised_Reccomenders.Collaborative_Filtering.Slim.SLIM_ElasticNet import ElasticNetRecommender
+from External_Libraries.MatrixFactorization.PureSVDRecommender import PureSVDRecommender
 
 class HybridReccomender(BaseItemSimilarityMatrixRecommender):
     RECOMMENDER_NAME = "ItemKNNScoresHybridRecommender"
 
-    def __init__(self, URM_train, Recommender_1, Recommender_2, Recommender_3, Rec_4, Rec_5, Rec_6, Rec_7):
+    def __init__(self, URM_train, Recommender_1, Recommender_2, Recommender_3, Rec_4, Rec_5, Rec_6, Rec_7, Rec_8):
         super(HybridReccomender, self).__init__(URM_train)
 
         self.Recommender_1 = Recommender_1
@@ -27,6 +29,7 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
         self.Recommender_5 = Rec_5
         self.Recommender_6 = Rec_6
         self.Recommender_7 = Rec_7
+        self.Recommender_8 = Rec_8
 
         self.alpha = 0
         self.beta = 0
@@ -35,11 +38,12 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
         self.e = 0
         self.f = 0
         self.g = 0
+        self.h = 0
 
     def __str__(self):
-        print("A:{0:.3f}, B:{1:.3f}, C:{2:.3f}, D:{3:.3f}, E:{4:.3f}, F:{5:.3f}, G:{6:.3f}".format(
+        print("A:{0:.3f}, B:{1:.3f}, C:{2:.3f}, D:{3:.3f}, E:{4:.3f}, F:{5:.3f}, G:{6:.3f}, H:{7:.3f}".format(
                                                                        self.alpha, self.beta, self.gamma,
-                                                                       self.d, self.e, self.f, self.g))
+                                                                       self.d, self.e, self.f, self.g, self.h))
 
     def fit(self, alpha=0., beta=0., gamma=0., d=0., e=0., f=0., g=0.):
         self.alpha = alpha
@@ -49,6 +53,7 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
         self.e = e
         self.f = f
         self.g = g
+        self.h = h
 
     def _compute_item_score(self, user_id_array, items_to_compute=False):
         item_weights_1 = self.Recommender_1._compute_item_score(user_id_array)
@@ -58,6 +63,7 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
         item_weights_5 = self.Recommender_5._compute_item_score(user_id_array)
         item_weights_6 = self.Recommender_6._compute_item_score(user_id_array)
         item_weights_7 = self.Recommender_7._compute_item_score(user_id_array)
+        item_weights_8 = self.Recommender_8._compute_item_score(user_id_array)
 
         item_weights = item_weights_1 * self.alpha +\
                        item_weights_2 * self.beta +\
@@ -65,7 +71,8 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
                        item_weights_4 * self.d +\
                        item_weights_5 * self.e +\
                        item_weights_6 * self.f +\
-                       item_weights_7 * self.g
+                       item_weights_7 * self.g +\
+                       item_weights_8 * self.h
 
         return item_weights
 
@@ -99,13 +106,19 @@ CFUser = UserKNNCFRecommender(URM)
 CFUser.fit(703, 25, "asymmetric")
 
 CBItem = ItemKNNCBFRecommender(URM,ICM_all)
-CBItem.fit(shrink=10, topK=10, similarity="asymmetric", feature_weighting="none", normalize=True)
+CBItem.fit(shrink=120, topK=5, similarity="asymmetric", feature_weighting="none", normalize=True)
 
 P3a = P3alphaRecommender(URM)
 P3a.fit(alpha=0.25662502344934046, min_rating=0, topK=25, implicit=True, normalize_similarity=True)
 
 P3b = RP3betaRecommender(URM)
 P3b.fit(alpha=0.22218786834129392, beta=0.23468317063424235, min_rating=0, topK=25, implicit=True, normalize_similarity=True)
+
+elasticNet = ElasticNetRecommender(URM)
+elasticNet.fit("train")
+
+pureSVD = PureSVDRecommender(URM_train)
+pureSVD.fit()
 
 """
 rec_sys = HybridReccomender(URM, CFItem, CFUser, slim, CBItem, P3a, P3b, sslim)

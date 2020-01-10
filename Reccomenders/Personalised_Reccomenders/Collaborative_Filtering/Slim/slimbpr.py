@@ -107,7 +107,7 @@ class SLIM_BPR_Recommender(BaseRecommender):
                 start_time_batch = time.time()
 
     def fit(self, learning_rate=1e-3, epoch=70, ratio=2.5, limit=120, path="../../../../"):
-        self.similarity_matrix = sps.csr_matrix(sps.load_npz(path + "Dataset/similarities/Slim-Sim.npz"))
+        self.similarity_matrix = sps.csr_matrix(sps.load_npz(path + "Dataset/similarities/Slim-Sim-train.npz"))
         """
         self.itemPopularity[self.itemPopularity < limit] = 0
         self.learning_rate = learning_rate
