@@ -59,20 +59,20 @@ def tuning():
     evaluator_validation = EvaluatorHoldout(URM_validation, cutoff_list=[5])
     evaluator_test = EvaluatorHoldout(URM_test, cutoff_list=[5, 10])
 
-    recommender_class = UserKNNCFRecommender
+    recommender_class = ItemKNNCBFRecommender
 
     parameterSearch = SearchBayesianSkopt(recommender_class,
                                           evaluator_validation=evaluator_validation,
                                           evaluator_test=evaluator_test)
 
     hyperparameters_range_dictionary = {}
-    hyperparameters_range_dictionary["topK"] = Integer(5, 1000)
-    hyperparameters_range_dictionary["shrink"] = Integer(0, 1000)
+    hyperparameters_range_dictionary["topK"] = Integer(5, 70)
+    hyperparameters_range_dictionary["shrink"] = Integer(20, 120)
     hyperparameters_range_dictionary["similarity"] = Categorical(["jaccard"])
-    hyperparameters_range_dictionary["normalize"] = Categorical([True, False])
+    hyperparameters_range_dictionary["normalize"] = Categorical([False])
 
     recommender_input_args = SearchInputRecommenderArgs(
-        CONSTRUCTOR_POSITIONAL_ARGS=[URM_train],
+        CONSTRUCTOR_POSITIONAL_ARGS=[URM_train, ICM_all],
         CONSTRUCTOR_KEYWORD_ARGS={},
         FIT_POSITIONAL_ARGS=[],
         FIT_KEYWORD_ARGS={}
@@ -83,7 +83,7 @@ def tuning():
     if not os.path.exists(output_folder_path):
         os.makedirs(output_folder_path)
 
-    n_cases = 2
+    n_cases = 10
     metric_to_optimize = "MAP"
 
     parameterSearch.search(recommender_input_args,
@@ -229,39 +229,50 @@ class UserCFKNNRecommender(object):
 
         return scores
 
+URM_train, URM_test = train_test_holdout(URM_all, train_perc=0.8)
+URM_train, URM_validation = train_test_holdout(URM_train, train_perc = 0.9)
 
-itemColl = ItemKNNCFRecommender(URM_train)
-itemColl.fit(shrink=50, topK=10, similarity="jaccard")
+itemColl = ItemKNNCFRecommender(URM_all)
+itemColl.fit(shrink=106, topK=63, similarity="jaccard")
 
-userColl = UserKNNCFRecommender(URM_train)
-userColl.fit(shrink=50, topK=10)
+userColl = UserKNNCFRecommender(URM_all)
+userColl.fit(shrink=100, topK=3, similarity="jaccard")
 
-itemCont = ItemKNNCBFRecommender(URM_train, ICM_all)
-itemCont.fit(shrink=50, topK=10)
+itemCont = ItemKNNCBFRecommender(URM_all, ICM_all)
+itemCont.fit(shrink=120, topK=5, similarity="jaccard")
 
-pureSVD = PureSVDRecommender(URM_train)
+pureSVD = PureSVDRecommender(URM_all)
 pureSVD.fit()
 
-hybridrecommender = ItemKNNScoresHybridRecommender(URM_train, itemColl, userColl, itemCont, pureSVD)
+hybridrecommender = ItemKNNScoresHybridRecommender(URM_all, itemColl, userColl, itemCont, pureSVD)
 
-'''    
+
+
 users = utils.get_target_users("../../../Dataset/target_users.csv")
-
+evaluator_validation = EvaluatorHoldout(URM_validation, cutoff_list=[5])
+evaluator_test = EvaluatorHoldout(URM_test, cutoff_list=[5, 10])
+'''
 with open("../../../Outputs/tuning_results.csv", 'w') as fr:
-    for alpha in [0.25, 0.5, 0.75, 1]:
-        for beta in [0.25, 0.5, 0.75, 1]:
-            for gamma in [0.25, 0.5, 0.75, 1]:
-                for delta in [0.25, 0.5, 0.75, 1]:
-                    print("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}".format(alpha, beta, gamma, delta))
-                    hybridrecommender.fit(alpha, beta, gamma, delta)
-                    with open("../../../Outputs/temp.csv", 'w') as f:
-                        f.write("user_id,item_list\n")
-                        for user_id in users:
-                            recommendations, scores = hybridrecommender.recommend(user_id, return_scores=True)
-                            f.write(str(user_id) + ", " + utils.trim(recommendations[:10]) + "\n")
-                    similarity = utils.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/temp.csv")
-                    fr.write("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}\n".format(alpha, beta, gamma, delta))
-                    fr.write(similarity + "\n\n")
+'''
+'''
+for alpha in [0.7, 0.75, 0.8]:
+    for beta in [0.2, 0.25, 0.3, 0.35]:
+        print("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}".format(alpha, beta, 0.15, 0.05))
+        hybridrecommender.fit(alpha, 0.25, 0.15, 0.05)
+        #evaluator.evaluate(users, hybridrecommender, URM_test)
+        print(evaluator_test.evaluateRecommender(hybridrecommender))
+
+     
+        with open("../../../Outputs/temp.csv", 'w') as f:
+            f.write("user_id,item_list\n")
+            for user_id in users:
+                recommendations, scores = hybridrecommender.recommend(user_id, return_scores=True)
+                f.write(str(user_id) + ", " + utils.trim(recommendations[:10]) + "\n")
+        similarity = utils.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/temp.csv")
+        fr.write("ALPHA:{0}, BETA: {1}, GAMMA:{2}, DELTA:{3}\n".format(alpha, beta, gamma, delta))
+        fr.write(similarity + "\n\n")
+        '''
+
 
 
 '''
@@ -269,15 +280,16 @@ users = utils.get_target_users("../../../Dataset/target_users.csv")
 hybridrecommender.fit(1, 0.5, 0.25, 0.25)
 evaluator.evaluate(users, hybridrecommender, URM_test)
 
-'''    
+'''
 
-with open("../../../Outputs/HappyNewHybrid_0.75_0.5_0.25_0.25.csv", 'w') as f:
+hybridrecommender.fit(0.8, 0.25, 0.15, 0.05)
+with open("../../../Outputs/HappyNewHybrid_0.8_0.25_0.15_0.05.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:
         recommendations, scores = hybridrecommender.recommend(user_id, return_scores = True)
         f.write(str(user_id) + ", " + utils.trim(recommendations[:10]) + "\n")
 
-
+'''
 users = utils.get_target_users("../../../Dataset/target_users_cold.csv")
 
 topPop = topPop()

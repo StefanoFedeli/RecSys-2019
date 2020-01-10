@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on 07/09/17
-
 @author: Maurizio Ferrari Dacrema
 """
 
@@ -192,15 +191,12 @@ class MatrixFactorization_BPR_Cython(_MatrixFactorization_Cython):
 class MatrixFactorization_FunkSVD_Cython(_MatrixFactorization_Cython):
     """
     Subclas allowing only for FunkSVD model
-
     Reference: http://sifter.org/~simon/journal/20061211.html
-
     Factorizes the rating matrix R into the dot product of two matrices U and V of latent factors.
     U represent the user latent factors, V the item latent factors.
     The model is learned by solving the following regularized Least-squares objective function with Stochastic Gradient Descent
     \operatornamewithlimits{argmin} \limits_{U,V}\frac{1}{2}||R - UV^T||^2_2 + \frac{\lambda}{2}(||U||^2_F + ||V||^2_F)
     Latent factors are initialized from a Normal distribution with given mean and std.
-
     """
 
     RECOMMENDER_NAME = "MatrixFactorization_FunkSVD_Cython_Recommender"
@@ -219,14 +215,11 @@ class MatrixFactorization_FunkSVD_Cython(_MatrixFactorization_Cython):
 class MatrixFactorization_AsySVD_Cython(_MatrixFactorization_Cython):
     """
     Subclas allowing only for AsymmetricSVD model
-
     Reference: Factorization Meets the Neighborhood: a Multifaceted Collaborative Filtering Model (Koren, 2008)
-
     Factorizes the rating matrix R into two matrices X and Y of latent factors, which both represent item latent features.
     Users are represented by aggregating the latent features in Y of items they have already rated.
     Rating prediction is performed by computing the dot product of this accumulated user profile with the target item's
     latent factor in X.
-
     The model is learned by solving the following regularized Least-squares objective function with Stochastic Gradient Descent
     \operatornamewithlimits{argmin}\limits_{x*,y*}\frac{1}{2}\sum_{i,j \in R}(r_{ij} - x_j^T \sum_{l \in R(i)} r_{il}y_l)^2 + \frac{\lambda}{2}(\sum_{i}{||x_i||^2} + \sum_{j}{||y_j||^2})
     """
@@ -252,7 +245,6 @@ class MatrixFactorization_AsySVD_Cython(_MatrixFactorization_Cython):
         """
         AsymmetricSVD Computes two |n_items| x |n_features| matrices of latent factors
         ITEM_factors_Y must be used to estimate user's latent factors via the items they interacted with
-
         :return:
         """
 
@@ -300,4 +292,3 @@ class MatrixFactorization_AsySVD_Cython(_MatrixFactorization_Cython):
             print("{}: Estimating user factors... done!".format(self.algorithm_name))
 
         return USER_factors
-

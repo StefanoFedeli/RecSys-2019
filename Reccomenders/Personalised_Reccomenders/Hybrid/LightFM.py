@@ -1,10 +1,12 @@
 import numpy as np
 from lightfm import LightFM
+from lightfm.evaluation import auc_score
 from lightfm.evaluation import precision_at_k
 import utils_new as utils
 import scipy.sparse as sps
 import External_Libraries.Notebooks_utils.evaluation_function as eval
 import random
+import evaluator
 
 URM_all = sps.coo_matrix(sps.load_npz("../../../Dataset/data_all.npz"))
 URM_train = sps.coo_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
@@ -44,6 +46,7 @@ print('The dataset has %s users (%s warm) and %s items, '
       % (URM_train.shape[0], cold_u, URM_train.shape[1], URM_test.getnnz(), URM_train.getnnz()))
 URM_all = sps.csr_matrix(URM_all)
 URM_train = sps.csr_matrix(URM_train)
+
 class Recommender(object):
 
     def __init__(self, URM, model):
@@ -74,11 +77,11 @@ class Recommender(object):
         return scores
 
 
-COMPONENTS = 72
-NUM_EPOCHS = 120
-ITEM_ALPHA = 1e-6
+COMPONENTS = 128
+NUM_EPOCHS = 200
+ITEM_ALPHA = 1e-3
 LEARNING = 'adadelta'
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-4
 LOSS = 'warp'
 
 # Let's fit a WARP model: these generally have the best performance.
@@ -91,8 +94,20 @@ model = LightFM(loss=LOSS,
 print("Currently using LOSS:{0}, COMPONENTS:{1}, LEARNING:{2}, RATE:{3}".format(LOSS, COMPONENTS, LEARNING, LEARNING_RATE))
 
 # Run 3 epochs and time it.
-model = model.fit(URM_all, user_features=UCM_all, item_features=ICM_all, epochs=NUM_EPOCHS, verbose=True)
-recommender = Recommender(URM_all, model)
+model = model.fit(URM_train, epochs=NUM_EPOCHS, verbose=True)
+
+'''
+train_precision = precision_at_k(model, URM_train, k=10).mean()
+test_precision = precision_at_k(model, URM_test, k=10).mean()
+
+train_auc = auc_score(model, URM_train).mean()
+test_auc = auc_score(model, URM_test).mean()
+
+print('Precision: train %.2f, test %.2f.' % (train_precision, test_precision))
+print('AUC: train %.2f, test %.2f.' % (train_auc, test_auc))
+'''
+
+recommender = Recommender(URM_train, model)
 
 cumulative_precision = 0.0
 cumulative_recall = 0.0
@@ -134,9 +149,10 @@ result_dict = {
 }
 print(result_dict)
 
-
+'''
 with open("../../../Outputs/LightFM_120_72_e5_all.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in target_users:
         f.write(str(user_id) + "," + utils.trim(np.array(recommender.recommend(user_id))) + "\n")
 utils.compare_csv("../../../Outputs/truth.csv", "../../../Outputs/LightFM_120_72_e5_all.csv")
+'''

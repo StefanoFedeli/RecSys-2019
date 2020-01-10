@@ -52,5 +52,5 @@ class ItemKNNCBFRecommender(BaseItemSimilarityMatrixRecommender):
 
         self.W_sparse = similarity.compute_similarity()
         self.W_sparse = check_matrix(self.W_sparse, format='csr')
-        sps.save_npz("../../../../../Dataset/similarities/CB-Sim.npz", self.W_sparse)
+        #sps.save_npz("../../../../../Dataset/similarities/CB-Sim.npz", self.W_sparse)
 

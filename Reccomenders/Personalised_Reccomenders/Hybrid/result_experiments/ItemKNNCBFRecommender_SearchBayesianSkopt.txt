@@ -1,0 +1,612 @@
+SearchBayesianSkopt: Config 0 Exception. Config: {'topK': 110, 'shrink': 146, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 1 Exception. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 2 Exception. Config: {'topK': 199, 'shrink': 198, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 3 Exception. Config: {'topK': 196, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 4 Exception. Config: {'topK': 5, 'shrink': 195, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 5 Exception. Config: {'topK': 198, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 6 Exception. Config: {'topK': 5, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 7 Exception. Config: {'topK': 6, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 8 Exception. Config: {'topK': 199, 'shrink': 198, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 9 Exception. Config: {'topK': 5, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 10 Exception. Config: {'topK': 199, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 11 Exception. Config: {'topK': 200, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 12 Exception. Config: {'topK': 7, 'shrink': 196, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 13 Exception. Config: {'topK': 199, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 14 Exception. Config: {'topK': 6, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 15 Exception. Config: {'topK': 5, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 16 Exception. Config: {'topK': 199, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 17 Exception. Config: {'topK': 199, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 18 Exception. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 19 Exception. Config: {'topK': 7, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 20 Exception. Config: {'topK': 198, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 21 Exception. Config: {'topK': 6, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 22 Exception. Config: {'topK': 200, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 23 Exception. Config: {'topK': 5, 'shrink': 198, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 24 Exception. Config: {'topK': 199, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 25 Exception. Config: {'topK': 197, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 26 Exception. Config: {'topK': 6, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 27 Exception. Config: {'topK': 6, 'shrink': 4, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 28 Exception. Config: {'topK': 198, 'shrink': 198, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 29 Exception. Config: {'topK': 198, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 30 Exception. Config: {'topK': 6, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 31 Exception. Config: {'topK': 5, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 32 Exception. Config: {'topK': 199, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 33 Exception. Config: {'topK': 199, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 34 Exception. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 35 Exception. Config: {'topK': 200, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 36 Exception. Config: {'topK': 6, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 37 Exception. Config: {'topK': 198, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 38 Exception. Config: {'topK': 6, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 39 Exception. Config: {'topK': 5, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 40 Exception. Config: {'topK': 198, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 41 Exception. Config: {'topK': 5, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 42 Exception. Config: {'topK': 198, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 43 Exception. Config: {'topK': 199, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 44 Exception. Config: {'topK': 8, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 45 Exception. Config: {'topK': 200, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 46 Exception. Config: {'topK': 6, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 47 Exception. Config: {'topK': 5, 'shrink': 198, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 48 Exception. Config: {'topK': 198, 'shrink': 198, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 49 Exception. Config: {'topK': 198, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 50 Exception. Config: {'topK': 6, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 51 Exception. Config: {'topK': 6, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 52 Exception. Config: {'topK': 198, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 53 Exception. Config: {'topK': 199, 'shrink': 1, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 54 Exception. Config: {'topK': 200, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 55 Exception. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 56 Exception. Config: {'topK': 7, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 57 Exception. Config: {'topK': 6, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: Config 58 Exception. Config: {'topK': 5, 'shrink': 199, 'similarity': 'jaccard', 'normalize': False} - Exception: Traceback (most recent call last):
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 362, in _objective_function
+    result_dict, result_string, recommender_instance, train_time, evaluation_time = self._evaluate_on_validation(current_fit_parameters_dict)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 267, in _evaluate_on_validation
+    recommender_instance, train_time = self._fit_model(current_fit_parameters)
+  File "C:\Users\mimmi\PycharmProjects\recsys\External_Libraries\ParameterTuning\SearchAbstractClass.py", line 249, in _fit_model
+    **self.recommender_input_args.CONSTRUCTOR_KEYWORD_ARGS)
+TypeError: __init__() missing 1 required positional argument: 'ICM_train'
+
+SearchBayesianSkopt: New best config found. Config 0: {'topK': 150, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0219504, PRECISION: 0.0071863, PRECISION_RECALL_MIN_DEN: 0.0189130, RECALL: 0.0186211, MAP: 0.0106203, MRR: 0.0197204, NDCG: 0.0146285, F1: 0.0103704, HIT_RATE: 0.0359315, ARHR: 0.0199860, RMSE: 0.9425797, NOVELTY: 0.0026511, AVERAGE_POPULARITY: 0.0697316, DIVERSITY_MEAN_INTER_LIST: 0.9962676, DIVERSITY_HERFINDAHL: 0.9992396, COVERAGE_ITEM: 0.5623141, COVERAGE_USER: 0.4627802, DIVERSITY_GINI: 0.3441259, SHANNON_ENTROPY: 11.9078918, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 150, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0361041, PRECISION: 0.0122830, PRECISION_RECALL_MIN_DEN: 0.0226533, RECALL: 0.0204758, MAP: 0.0130650, MRR: 0.0327179, NDCG: 0.0182608, F1: 0.0153549, HIT_RATE: 0.0614152, ARHR: 0.0338054, RMSE: 0.9492060, NOVELTY: 0.0027160, AVERAGE_POPULARITY: 0.0665739, DIVERSITY_MEAN_INTER_LIST: 0.9959858, DIVERSITY_HERFINDAHL: 0.9991874, COVERAGE_ITEM: 0.6508786, COVERAGE_USER: 0.6579211, DIVERSITY_GINI: 0.3344302, SHANNON_ENTROPY: 12.0438121, 
+CUTOFF: 10 - ROC_AUC: 0.0534048, PRECISION: 0.0087279, PRECISION_RECALL_MIN_DEN: 0.0279807, RECALL: 0.0274928, MAP: 0.0131082, MRR: 0.0357755, NDCG: 0.0215139, F1: 0.0132496, HIT_RATE: 0.0872793, ARHR: 0.0372779, RMSE: 0.9492060, NOVELTY: 0.0055707, AVERAGE_POPULARITY: 0.0582960, DIVERSITY_MEAN_INTER_LIST: 0.9952079, DIVERSITY_HERFINDAHL: 0.9995159, COVERAGE_ITEM: 0.7988105, COVERAGE_USER: 0.6579211, DIVERSITY_GINI: 0.3415293, SHANNON_ENTROPY: 12.4844522, 
+
+SearchBayesianSkopt: New best config found. Config 1: {'topK': 5, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0222125, PRECISION: 0.0076756, PRECISION_RECALL_MIN_DEN: 0.0202400, RECALL: 0.0199559, MAP: 0.0114892, MRR: 0.0205930, NDCG: 0.0156691, F1: 0.0110869, HIT_RATE: 0.0383782, ARHR: 0.0209903, RMSE: 0.9993326, NOVELTY: 0.0026833, AVERAGE_POPULARITY: 0.0669216, DIVERSITY_MEAN_INTER_LIST: 0.9959168, DIVERSITY_HERFINDAHL: 0.9991694, COVERAGE_ITEM: 0.5433360, COVERAGE_USER: 0.4627802, DIVERSITY_GINI: 0.3220391, SHANNON_ENTROPY: 11.7634814, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 5, 'shrink': 200, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0357681, PRECISION: 0.0127157, PRECISION_RECALL_MIN_DEN: 0.0231278, RECALL: 0.0210267, MAP: 0.0130448, MRR: 0.0332268, NDCG: 0.0185889, F1: 0.0158477, HIT_RATE: 0.0635787, ARHR: 0.0340898, RMSE: 0.9993636, NOVELTY: 0.0027463, AVERAGE_POPULARITY: 0.0640335, DIVERSITY_MEAN_INTER_LIST: 0.9951455, DIVERSITY_HERFINDAHL: 0.9990193, COVERAGE_ITEM: 0.6337929, COVERAGE_USER: 0.6579211, DIVERSITY_GINI: 0.3127192, SHANNON_ENTROPY: 11.8849044, 
+CUTOFF: 10 - ROC_AUC: 0.0555795, PRECISION: 0.0094704, PRECISION_RECALL_MIN_DEN: 0.0292719, RECALL: 0.0288068, MAP: 0.0132193, MRR: 0.0368736, NDCG: 0.0222941, F1: 0.0142546, HIT_RATE: 0.0947042, ARHR: 0.0382320, RMSE: 0.9993636, NOVELTY: 0.0056662, AVERAGE_POPULARITY: 0.0565701, DIVERSITY_MEAN_INTER_LIST: 0.9907328, DIVERSITY_HERFINDAHL: 0.9990684, COVERAGE_ITEM: 0.7994052, COVERAGE_USER: 0.6579211, DIVERSITY_GINI: 0.3073065, SHANNON_ENTROPY: 12.1804981, 
+
+SearchBayesianSkopt: New best config found. Config 0: {'topK': 42, 'shrink': 140, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0207234, PRECISION: 0.0069805, PRECISION_RECALL_MIN_DEN: 0.0182652, RECALL: 0.0179944, MAP: 0.0103880, MRR: 0.0188715, NDCG: 0.0141978, F1: 0.0100589, HIT_RATE: 0.0349025, ARHR: 0.0191014, RMSE: 0.9983019, NOVELTY: 0.0026474, AVERAGE_POPULARITY: 0.0669940, DIVERSITY_MEAN_INTER_LIST: 0.9964118, DIVERSITY_HERFINDAHL: 0.9992683, COVERAGE_ITEM: 0.5587997, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3452549, SHANNON_ENTROPY: 11.9173616, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 42, 'shrink': 140, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0337206, PRECISION: 0.0120518, PRECISION_RECALL_MIN_DEN: 0.0226078, RECALL: 0.0205697, MAP: 0.0127096, MRR: 0.0309994, NDCG: 0.0178888, F1: 0.0151987, HIT_RATE: 0.0602592, ARHR: 0.0318880, RMSE: 0.9984573, NOVELTY: 0.0027195, AVERAGE_POPULARITY: 0.0641637, DIVERSITY_MEAN_INTER_LIST: 0.9958806, DIVERSITY_HERFINDAHL: 0.9991664, COVERAGE_ITEM: 0.6520141, COVERAGE_USER: 0.6614150, DIVERSITY_GINI: 0.3299525, SHANNON_ENTROPY: 12.0253545, 
+CUTOFF: 10 - ROC_AUC: 0.0514041, PRECISION: 0.0084617, PRECISION_RECALL_MIN_DEN: 0.0277546, RECALL: 0.0273404, MAP: 0.0128043, MRR: 0.0338122, NDCG: 0.0209799, F1: 0.0129236, HIT_RATE: 0.0846173, ARHR: 0.0351217, RMSE: 0.9984573, NOVELTY: 0.0056028, AVERAGE_POPULARITY: 0.0562059, DIVERSITY_MEAN_INTER_LIST: 0.9950255, DIVERSITY_HERFINDAHL: 0.9994977, COVERAGE_ITEM: 0.8026494, COVERAGE_USER: 0.6614150, DIVERSITY_GINI: 0.3348278, SHANNON_ENTROPY: 12.4589936, 
+
+SearchBayesianSkopt: New best config found. Config 1: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0212277, PRECISION: 0.0069664, PRECISION_RECALL_MIN_DEN: 0.0183485, RECALL: 0.0180515, MAP: 0.0107067, MRR: 0.0194227, NDCG: 0.0144709, F1: 0.0100532, HIT_RATE: 0.0348322, ARHR: 0.0196468, RMSE: 0.9386738, NOVELTY: 0.0026316, AVERAGE_POPULARITY: 0.0681426, DIVERSITY_MEAN_INTER_LIST: 0.9962490, DIVERSITY_HERFINDAHL: 0.9992358, COVERAGE_ITEM: 0.5589078, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3388084, SHANNON_ENTROPY: 11.8760592, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0349841, PRECISION: 0.0125214, PRECISION_RECALL_MIN_DEN: 0.0231491, RECALL: 0.0209781, MAP: 0.0132004, MRR: 0.0320510, NDCG: 0.0184289, F1: 0.0156823, HIT_RATE: 0.0626070, ARHR: 0.0330032, RMSE: 0.9467780, NOVELTY: 0.0027059, AVERAGE_POPULARITY: 0.0650387, DIVERSITY_MEAN_INTER_LIST: 0.9957801, DIVERSITY_HERFINDAHL: 0.9991463, COVERAGE_ITEM: 0.6500135, COVERAGE_USER: 0.6614150, DIVERSITY_GINI: 0.3267079, SHANNON_ENTROPY: 11.9932536, 
+CUTOFF: 10 - ROC_AUC: 0.0533050, PRECISION: 0.0088432, PRECISION_RECALL_MIN_DEN: 0.0283466, RECALL: 0.0278990, MAP: 0.0132367, MRR: 0.0350308, NDCG: 0.0216332, F1: 0.0134296, HIT_RATE: 0.0884324, ARHR: 0.0364352, RMSE: 0.9467780, NOVELTY: 0.0055600, AVERAGE_POPULARITY: 0.0571048, DIVERSITY_MEAN_INTER_LIST: 0.9949791, DIVERSITY_HERFINDAHL: 0.9994930, COVERAGE_ITEM: 0.8027575, COVERAGE_USER: 0.6614150, DIVERSITY_GINI: 0.3344975, SHANNON_ENTROPY: 12.4500066, 
+
+SearchBayesianSkopt: Config 2 is suboptimal. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0209404, PRECISION: 0.0072479, PRECISION_RECALL_MIN_DEN: 0.0190756, RECALL: 0.0188130, MAP: 0.0102797, MRR: 0.0186921, NDCG: 0.0143411, F1: 0.0104643, HIT_RATE: 0.0362395, ARHR: 0.0188750, RMSE: 0.9728817, NOVELTY: 0.0026657, AVERAGE_POPULARITY: 0.0646799, DIVERSITY_MEAN_INTER_LIST: 0.9959776, DIVERSITY_HERFINDAHL: 0.9991815, COVERAGE_ITEM: 0.5450122, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3260778, SHANNON_ENTROPY: 11.7874506, 
+SearchBayesianSkopt: Config 3 is suboptimal. Config: {'topK': 100, 'shrink': 150, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0204536, PRECISION: 0.0068398, PRECISION_RECALL_MIN_DEN: 0.0180869, RECALL: 0.0178172, MAP: 0.0104017, MRR: 0.0187554, NDCG: 0.0141301, F1: 0.0098849, HIT_RATE: 0.0341989, ARHR: 0.0189794, RMSE: 0.9978004, NOVELTY: 0.0026457, AVERAGE_POPULARITY: 0.0672087, DIVERSITY_MEAN_INTER_LIST: 0.9964803, DIVERSITY_HERFINDAHL: 0.9992820, COVERAGE_ITEM: 0.5727494, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3479892, SHANNON_ENTROPY: 11.9628684, 
+SearchBayesianSkopt: Config 4 is suboptimal. Config: {'topK': 5, 'shrink': 150, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0209052, PRECISION: 0.0072479, PRECISION_RECALL_MIN_DEN: 0.0190756, RECALL: 0.0188130, MAP: 0.0102783, MRR: 0.0186851, NDCG: 0.0143394, F1: 0.0104643, HIT_RATE: 0.0362395, ARHR: 0.0188680, RMSE: 0.9991383, NOVELTY: 0.0026658, AVERAGE_POPULARITY: 0.0646839, DIVERSITY_MEAN_INTER_LIST: 0.9959778, DIVERSITY_HERFINDAHL: 0.9991815, COVERAGE_ITEM: 0.5450662, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3260905, SHANNON_ENTROPY: 11.7876094, 
+SearchBayesianSkopt: Config 5 is suboptimal. Config: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0212277, PRECISION: 0.0069664, PRECISION_RECALL_MIN_DEN: 0.0183485, RECALL: 0.0180515, MAP: 0.0107067, MRR: 0.0194227, NDCG: 0.0144709, F1: 0.0100532, HIT_RATE: 0.0348322, ARHR: 0.0196468, RMSE: 0.9386738, NOVELTY: 0.0026316, AVERAGE_POPULARITY: 0.0681426, DIVERSITY_MEAN_INTER_LIST: 0.9962490, DIVERSITY_HERFINDAHL: 0.9992358, COVERAGE_ITEM: 0.5589078, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3388084, SHANNON_ENTROPY: 11.8760592, 
+SearchBayesianSkopt: Config 6 is suboptimal. Config: {'topK': 5, 'shrink': 2, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0209228, PRECISION: 0.0072479, PRECISION_RECALL_MIN_DEN: 0.0190756, RECALL: 0.0188130, MAP: 0.0102790, MRR: 0.0186886, NDCG: 0.0143403, F1: 0.0104643, HIT_RATE: 0.0362395, ARHR: 0.0188715, RMSE: 0.9791651, NOVELTY: 0.0026658, AVERAGE_POPULARITY: 0.0646839, DIVERSITY_MEAN_INTER_LIST: 0.9959778, DIVERSITY_HERFINDAHL: 0.9991815, COVERAGE_ITEM: 0.5450662, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3260905, SHANNON_ENTROPY: 11.7876094, 
+SearchBayesianSkopt: Config 7 is suboptimal. Config: {'topK': 100, 'shrink': 148, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0204536, PRECISION: 0.0068679, PRECISION_RECALL_MIN_DEN: 0.0181186, RECALL: 0.0178363, MAP: 0.0103827, MRR: 0.0186851, NDCG: 0.0141156, F1: 0.0099172, HIT_RATE: 0.0343396, ARHR: 0.0189091, RMSE: 0.9977716, NOVELTY: 0.0026468, AVERAGE_POPULARITY: 0.0672018, DIVERSITY_MEAN_INTER_LIST: 0.9964836, DIVERSITY_HERFINDAHL: 0.9992827, COVERAGE_ITEM: 0.5733982, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3478859, SHANNON_ENTROPY: 11.9638958, 
+SearchBayesianSkopt: Config 8 is suboptimal. Config: {'topK': 5, 'shrink': 150, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0209052, PRECISION: 0.0072479, PRECISION_RECALL_MIN_DEN: 0.0190756, RECALL: 0.0188130, MAP: 0.0102783, MRR: 0.0186851, NDCG: 0.0143394, F1: 0.0104643, HIT_RATE: 0.0362395, ARHR: 0.0188680, RMSE: 0.9991383, NOVELTY: 0.0026658, AVERAGE_POPULARITY: 0.0646839, DIVERSITY_MEAN_INTER_LIST: 0.9959778, DIVERSITY_HERFINDAHL: 0.9991815, COVERAGE_ITEM: 0.5450662, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3260905, SHANNON_ENTROPY: 11.7876094, 
+SearchBayesianSkopt: Config 9 is suboptimal. Config: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0212277, PRECISION: 0.0069664, PRECISION_RECALL_MIN_DEN: 0.0183485, RECALL: 0.0180515, MAP: 0.0107067, MRR: 0.0194227, NDCG: 0.0144709, F1: 0.0100532, HIT_RATE: 0.0348322, ARHR: 0.0196468, RMSE: 0.9386738, NOVELTY: 0.0026316, AVERAGE_POPULARITY: 0.0681426, DIVERSITY_MEAN_INTER_LIST: 0.9962490, DIVERSITY_HERFINDAHL: 0.9992358, COVERAGE_ITEM: 0.5589078, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3388084, SHANNON_ENTROPY: 11.8760592, 
+SearchBayesianSkopt: Config 10 is suboptimal. Config: {'topK': 6, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0206823, PRECISION: 0.0069383, PRECISION_RECALL_MIN_DEN: 0.0182265, RECALL: 0.0179294, MAP: 0.0101936, MRR: 0.0189677, NDCG: 0.0140684, F1: 0.0100049, HIT_RATE: 0.0346914, ARHR: 0.0191659, RMSE: 0.9720966, NOVELTY: 0.0026791, AVERAGE_POPULARITY: 0.0646561, DIVERSITY_MEAN_INTER_LIST: 0.9962464, DIVERSITY_HERFINDAHL: 0.9992353, COVERAGE_ITEM: 0.5493917, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3318453, SHANNON_ENTROPY: 11.8409365, 
+SearchBayesianSkopt: Config 11 is suboptimal. Config: {'topK': 99, 'shrink': 149, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0207644, PRECISION: 0.0069664, PRECISION_RECALL_MIN_DEN: 0.0183145, RECALL: 0.0180500, MAP: 0.0101310, MRR: 0.0185080, NDCG: 0.0140241, F1: 0.0100529, HIT_RATE: 0.0348322, ARHR: 0.0187754, RMSE: 0.9977964, NOVELTY: 0.0026421, AVERAGE_POPULARITY: 0.0671457, DIVERSITY_MEAN_INTER_LIST: 0.9964643, DIVERSITY_HERFINDAHL: 0.9992788, COVERAGE_ITEM: 0.5714517, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3477838, SHANNON_ENTROPY: 11.9581596, 
+SearchBayesianSkopt: Config 12 is suboptimal. Config: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0212277, PRECISION: 0.0069664, PRECISION_RECALL_MIN_DEN: 0.0183485, RECALL: 0.0180515, MAP: 0.0107067, MRR: 0.0194227, NDCG: 0.0144709, F1: 0.0100532, HIT_RATE: 0.0348322, ARHR: 0.0196468, RMSE: 0.9386738, NOVELTY: 0.0026316, AVERAGE_POPULARITY: 0.0681426, DIVERSITY_MEAN_INTER_LIST: 0.9962490, DIVERSITY_HERFINDAHL: 0.9992358, COVERAGE_ITEM: 0.5589078, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3388084, SHANNON_ENTROPY: 11.8760592, 
+SearchBayesianSkopt: Config 13 is suboptimal. Config: {'topK': 5, 'shrink': 150, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0209052, PRECISION: 0.0072479, PRECISION_RECALL_MIN_DEN: 0.0190756, RECALL: 0.0188130, MAP: 0.0102783, MRR: 0.0186851, NDCG: 0.0143394, F1: 0.0104643, HIT_RATE: 0.0362395, ARHR: 0.0188680, RMSE: 0.9991383, NOVELTY: 0.0026658, AVERAGE_POPULARITY: 0.0646839, DIVERSITY_MEAN_INTER_LIST: 0.9959778, DIVERSITY_HERFINDAHL: 0.9991815, COVERAGE_ITEM: 0.5450662, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3260905, SHANNON_ENTROPY: 11.7876094, 
+SearchBayesianSkopt: Config 14 is suboptimal. Config: {'topK': 6, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0206823, PRECISION: 0.0069383, PRECISION_RECALL_MIN_DEN: 0.0182265, RECALL: 0.0179294, MAP: 0.0101936, MRR: 0.0189677, NDCG: 0.0140684, F1: 0.0100049, HIT_RATE: 0.0346914, ARHR: 0.0191659, RMSE: 0.9720966, NOVELTY: 0.0026791, AVERAGE_POPULARITY: 0.0646561, DIVERSITY_MEAN_INTER_LIST: 0.9962464, DIVERSITY_HERFINDAHL: 0.9992353, COVERAGE_ITEM: 0.5493917, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3318453, SHANNON_ENTROPY: 11.8409365, 
+SearchBayesianSkopt: Config 15 is suboptimal. Config: {'topK': 100, 'shrink': 150, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0204536, PRECISION: 0.0068398, PRECISION_RECALL_MIN_DEN: 0.0180869, RECALL: 0.0178172, MAP: 0.0104017, MRR: 0.0187554, NDCG: 0.0141301, F1: 0.0098849, HIT_RATE: 0.0341989, ARHR: 0.0189794, RMSE: 0.9978004, NOVELTY: 0.0026457, AVERAGE_POPULARITY: 0.0672087, DIVERSITY_MEAN_INTER_LIST: 0.9964803, DIVERSITY_HERFINDAHL: 0.9992820, COVERAGE_ITEM: 0.5727494, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3479892, SHANNON_ENTROPY: 11.9628684, 
+SearchBayesianSkopt: Config 16 is suboptimal. Config: {'topK': 5, 'shrink': 149, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0209052, PRECISION: 0.0072479, PRECISION_RECALL_MIN_DEN: 0.0190756, RECALL: 0.0188130, MAP: 0.0102783, MRR: 0.0186851, NDCG: 0.0143394, F1: 0.0104643, HIT_RATE: 0.0362395, ARHR: 0.0188680, RMSE: 0.9991327, NOVELTY: 0.0026658, AVERAGE_POPULARITY: 0.0646839, DIVERSITY_MEAN_INTER_LIST: 0.9959778, DIVERSITY_HERFINDAHL: 0.9991815, COVERAGE_ITEM: 0.5450662, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3260905, SHANNON_ENTROPY: 11.7876094, 
+SearchBayesianSkopt: Config 17 is suboptimal. Config: {'topK': 99, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0213860, PRECISION: 0.0070790, PRECISION_RECALL_MIN_DEN: 0.0186557, RECALL: 0.0183728, MAP: 0.0104241, MRR: 0.0189032, NDCG: 0.0143445, F1: 0.0102202, HIT_RATE: 0.0353951, ARHR: 0.0191589, RMSE: 0.9389723, NOVELTY: 0.0026344, AVERAGE_POPULARITY: 0.0678891, DIVERSITY_MEAN_INTER_LIST: 0.9962489, DIVERSITY_HERFINDAHL: 0.9992357, COVERAGE_ITEM: 0.5577724, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3389831, SHANNON_ENTROPY: 11.8748067, 
+SearchBayesianSkopt: Config 18 is suboptimal. Config: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0212277, PRECISION: 0.0069664, PRECISION_RECALL_MIN_DEN: 0.0183485, RECALL: 0.0180515, MAP: 0.0107067, MRR: 0.0194227, NDCG: 0.0144709, F1: 0.0100532, HIT_RATE: 0.0348322, ARHR: 0.0196468, RMSE: 0.9386738, NOVELTY: 0.0026316, AVERAGE_POPULARITY: 0.0681426, DIVERSITY_MEAN_INTER_LIST: 0.9962490, DIVERSITY_HERFINDAHL: 0.9992358, COVERAGE_ITEM: 0.5589078, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3388084, SHANNON_ENTROPY: 11.8760592, 
+SearchBayesianSkopt: Config 19 is suboptimal. Config: {'topK': 100, 'shrink': 150, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0204536, PRECISION: 0.0068398, PRECISION_RECALL_MIN_DEN: 0.0180869, RECALL: 0.0178172, MAP: 0.0104017, MRR: 0.0187554, NDCG: 0.0141301, F1: 0.0098849, HIT_RATE: 0.0341989, ARHR: 0.0189794, RMSE: 0.9978004, NOVELTY: 0.0026457, AVERAGE_POPULARITY: 0.0672087, DIVERSITY_MEAN_INTER_LIST: 0.9964803, DIVERSITY_HERFINDAHL: 0.9992820, COVERAGE_ITEM: 0.5727494, COVERAGE_USER: 0.4597393, DIVERSITY_GINI: 0.3479892, SHANNON_ENTROPY: 11.9628684, 
+SearchBayesianSkopt: Search complete. Best config is 1: {'topK': 100, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False}
+SearchBayesianSkopt: New best config found. Config 0: {'topK': 22, 'shrink': 117, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0203092, PRECISION: 0.0068576, PRECISION_RECALL_MIN_DEN: 0.0192197, RECALL: 0.0189693, MAP: 0.0106433, MRR: 0.0183358, NDCG: 0.0144769, F1: 0.0100735, HIT_RATE: 0.0342881, ARHR: 0.0185146, RMSE: 0.9983464, NOVELTY: 0.0026709, AVERAGE_POPULARITY: 0.0659362, DIVERSITY_MEAN_INTER_LIST: 0.9967160, DIVERSITY_HERFINDAHL: 0.9993293, COVERAGE_ITEM: 0.5624763, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3472748, SHANNON_ENTROPY: 11.9604727, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 22, 'shrink': 117, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0357201, PRECISION: 0.0119971, PRECISION_RECALL_MIN_DEN: 0.0225743, RECALL: 0.0206889, MAP: 0.0134308, MRR: 0.0325113, NDCG: 0.0186676, F1: 0.0151873, HIT_RATE: 0.0599853, ARHR: 0.0333530, RMSE: 0.9984385, NOVELTY: 0.0027377, AVERAGE_POPULARITY: 0.0635406, DIVERSITY_MEAN_INTER_LIST: 0.9961872, DIVERSITY_HERFINDAHL: 0.9992277, COVERAGE_ITEM: 0.6471479, COVERAGE_USER: 0.6585034, DIVERSITY_GINI: 0.3323390, SHANNON_ENTROPY: 12.0552994, 
+CUTOFF: 10 - ROC_AUC: 0.0522437, PRECISION: 0.0084156, PRECISION_RECALL_MIN_DEN: 0.0275756, RECALL: 0.0272122, MAP: 0.0135487, MRR: 0.0352970, NDCG: 0.0216860, F1: 0.0128556, HIT_RATE: 0.0841562, ARHR: 0.0365903, RMSE: 0.9984385, NOVELTY: 0.0056201, AVERAGE_POPULARITY: 0.0553987, DIVERSITY_MEAN_INTER_LIST: 0.9952139, DIVERSITY_HERFINDAHL: 0.9995165, COVERAGE_ITEM: 0.7970262, COVERAGE_USER: 0.6585034, DIVERSITY_GINI: 0.3369846, SHANNON_ENTROPY: 12.4715603, 
+
+SearchBayesianSkopt: New best config found. Config 1: {'topK': 70, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0213023, PRECISION: 0.0071224, PRECISION_RECALL_MIN_DEN: 0.0192116, RECALL: 0.0189452, MAP: 0.0109890, MRR: 0.0194799, NDCG: 0.0149126, F1: 0.0103528, HIT_RATE: 0.0356122, ARHR: 0.0197273, RMSE: 0.9455385, NOVELTY: 0.0026394, AVERAGE_POPULARITY: 0.0689160, DIVERSITY_MEAN_INTER_LIST: 0.9963338, DIVERSITY_HERFINDAHL: 0.9992529, COVERAGE_ITEM: 0.5576102, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3408587, SHANNON_ENTROPY: 11.8902667, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 70, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0371899, PRECISION: 0.0129403, PRECISION_RECALL_MIN_DEN: 0.0240424, RECALL: 0.0219497, MAP: 0.0138775, MRR: 0.0341145, NDCG: 0.0195081, F1: 0.0162818, HIT_RATE: 0.0647015, ARHR: 0.0351511, RMSE: 0.9530827, NOVELTY: 0.0027064, AVERAGE_POPULARITY: 0.0663198, DIVERSITY_MEAN_INTER_LIST: 0.9959013, DIVERSITY_HERFINDAHL: 0.9991705, COVERAGE_ITEM: 0.6462828, COVERAGE_USER: 0.6585034, DIVERSITY_GINI: 0.3262877, SHANNON_ENTROPY: 11.9972627, 
+CUTOFF: 10 - ROC_AUC: 0.0556273, PRECISION: 0.0090199, PRECISION_RECALL_MIN_DEN: 0.0291565, RECALL: 0.0287550, MAP: 0.0139452, MRR: 0.0370991, NDCG: 0.0226841, F1: 0.0137323, HIT_RATE: 0.0901990, ARHR: 0.0385617, RMSE: 0.9530827, NOVELTY: 0.0055772, AVERAGE_POPULARITY: 0.0580311, DIVERSITY_MEAN_INTER_LIST: 0.9951182, DIVERSITY_HERFINDAHL: 0.9995069, COVERAGE_ITEM: 0.7996215, COVERAGE_USER: 0.6585034, DIVERSITY_GINI: 0.3344404, SHANNON_ENTROPY: 12.4547736, 
+
+SearchBayesianSkopt: Config 2 is suboptimal. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211978, PRECISION: 0.0070667, PRECISION_RECALL_MIN_DEN: 0.0194543, RECALL: 0.0191518, MAP: 0.0106389, MRR: 0.0190582, NDCG: 0.0146033, F1: 0.0103240, HIT_RATE: 0.0353335, ARHR: 0.0190989, RMSE: 0.9723485, NOVELTY: 0.0026786, AVERAGE_POPULARITY: 0.0660378, DIVERSITY_MEAN_INTER_LIST: 0.9959978, DIVERSITY_HERFINDAHL: 0.9991857, COVERAGE_ITEM: 0.5464720, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3259421, SHANNON_ENTROPY: 11.7913269, 
+SearchBayesianSkopt: Config 3 is suboptimal. Config: {'topK': 70, 'shrink': 118, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0203440, PRECISION: 0.0070667, PRECISION_RECALL_MIN_DEN: 0.0191721, RECALL: 0.0189073, MAP: 0.0107589, MRR: 0.0187516, NDCG: 0.0146525, F1: 0.0102881, HIT_RATE: 0.0353335, ARHR: 0.0189990, RMSE: 0.9976045, NOVELTY: 0.0026457, AVERAGE_POPULARITY: 0.0682014, DIVERSITY_MEAN_INTER_LIST: 0.9964778, DIVERSITY_HERFINDAHL: 0.9992817, COVERAGE_ITEM: 0.5670722, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3465269, SHANNON_ENTROPY: 11.9453687, 
+SearchBayesianSkopt: Config 4 is suboptimal. Config: {'topK': 5, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211803, PRECISION: 0.0070528, PRECISION_RECALL_MIN_DEN: 0.0194404, RECALL: 0.0191448, MAP: 0.0106354, MRR: 0.0190408, NDCG: 0.0145967, F1: 0.0103081, HIT_RATE: 0.0352638, ARHR: 0.0190815, RMSE: 0.9989219, NOVELTY: 0.0026786, AVERAGE_POPULARITY: 0.0660285, DIVERSITY_MEAN_INTER_LIST: 0.9959987, DIVERSITY_HERFINDAHL: 0.9991859, COVERAGE_ITEM: 0.5466883, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3259682, SHANNON_ENTROPY: 11.7919297, 
+SearchBayesianSkopt: Config 5 is suboptimal. Config: {'topK': 70, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0213023, PRECISION: 0.0071224, PRECISION_RECALL_MIN_DEN: 0.0192116, RECALL: 0.0189452, MAP: 0.0109890, MRR: 0.0194799, NDCG: 0.0149126, F1: 0.0103528, HIT_RATE: 0.0356122, ARHR: 0.0197273, RMSE: 0.9455385, NOVELTY: 0.0026394, AVERAGE_POPULARITY: 0.0689160, DIVERSITY_MEAN_INTER_LIST: 0.9963338, DIVERSITY_HERFINDAHL: 0.9992529, COVERAGE_ITEM: 0.5576102, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3408587, SHANNON_ENTROPY: 11.8902667, 
+SearchBayesianSkopt: Config 6 is suboptimal. Config: {'topK': 5, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211978, PRECISION: 0.0070667, PRECISION_RECALL_MIN_DEN: 0.0194543, RECALL: 0.0191518, MAP: 0.0106389, MRR: 0.0190582, NDCG: 0.0146033, F1: 0.0103240, HIT_RATE: 0.0353335, ARHR: 0.0190989, RMSE: 0.9723485, NOVELTY: 0.0026786, AVERAGE_POPULARITY: 0.0660378, DIVERSITY_MEAN_INTER_LIST: 0.9959978, DIVERSITY_HERFINDAHL: 0.9991857, COVERAGE_ITEM: 0.5464720, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3259421, SHANNON_ENTROPY: 11.7913269, 
+SearchBayesianSkopt: Config 7 is suboptimal. Config: {'topK': 70, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0203615, PRECISION: 0.0070946, PRECISION_RECALL_MIN_DEN: 0.0191999, RECALL: 0.0189174, MAP: 0.0107835, MRR: 0.0188468, NDCG: 0.0146746, F1: 0.0103192, HIT_RATE: 0.0354729, ARHR: 0.0191082, RMSE: 0.9976430, NOVELTY: 0.0026460, AVERAGE_POPULARITY: 0.0682034, DIVERSITY_MEAN_INTER_LIST: 0.9964781, DIVERSITY_HERFINDAHL: 0.9992817, COVERAGE_ITEM: 0.5670722, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3465262, SHANNON_ENTROPY: 11.9454191, 
+SearchBayesianSkopt: Config 8 is suboptimal. Config: {'topK': 6, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0206286, PRECISION: 0.0072200, PRECISION_RECALL_MIN_DEN: 0.0195554, RECALL: 0.0192673, MAP: 0.0106685, MRR: 0.0188689, NDCG: 0.0146652, F1: 0.0105039, HIT_RATE: 0.0361001, ARHR: 0.0190582, RMSE: 0.9988531, NOVELTY: 0.0026913, AVERAGE_POPULARITY: 0.0652284, DIVERSITY_MEAN_INTER_LIST: 0.9962621, DIVERSITY_HERFINDAHL: 0.9992385, COVERAGE_ITEM: 0.5528521, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3324578, SHANNON_ENTROPY: 11.8511144, 
+SearchBayesianSkopt: Config 9 is suboptimal. Config: {'topK': 70, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0213023, PRECISION: 0.0071224, PRECISION_RECALL_MIN_DEN: 0.0192116, RECALL: 0.0189452, MAP: 0.0109890, MRR: 0.0194799, NDCG: 0.0149126, F1: 0.0103528, HIT_RATE: 0.0356122, ARHR: 0.0197273, RMSE: 0.9455385, NOVELTY: 0.0026394, AVERAGE_POPULARITY: 0.0689160, DIVERSITY_MEAN_INTER_LIST: 0.9963338, DIVERSITY_HERFINDAHL: 0.9992529, COVERAGE_ITEM: 0.5576102, COVERAGE_USER: 0.4642037, DIVERSITY_GINI: 0.3408587, SHANNON_ENTROPY: 11.8902667, 
+SearchBayesianSkopt: Search complete. Best config is 1: {'topK': 70, 'shrink': 0, 'similarity': 'jaccard', 'normalize': False}
+SearchBayesianSkopt: New best config found. Config 0: {'topK': 13, 'shrink': 26, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0191689, PRECISION: 0.0065583, PRECISION_RECALL_MIN_DEN: 0.0181094, RECALL: 0.0179014, MAP: 0.0099063, MRR: 0.0174297, NDCG: 0.0136179, F1: 0.0095997, HIT_RATE: 0.0327914, ARHR: 0.0175791, RMSE: 0.9942864, NOVELTY: 0.0026830, AVERAGE_POPULARITY: 0.0631092, DIVERSITY_MEAN_INTER_LIST: 0.9966633, DIVERSITY_HERFINDAHL: 0.9993188, COVERAGE_ITEM: 0.5631252, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3438353, SHANNON_ENTROPY: 11.9433067, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 13, 'shrink': 26, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0361218, PRECISION: 0.0120507, PRECISION_RECALL_MIN_DEN: 0.0216120, RECALL: 0.0197951, MAP: 0.0126670, MRR: 0.0328540, NDCG: 0.0180111, F1: 0.0149812, HIT_RATE: 0.0602533, ARHR: 0.0337425, RMSE: 0.9947159, NOVELTY: 0.0027449, AVERAGE_POPULARITY: 0.0608180, DIVERSITY_MEAN_INTER_LIST: 0.9961828, DIVERSITY_HERFINDAHL: 0.9992268, COVERAGE_ITEM: 0.6500135, COVERAGE_USER: 0.6614797, DIVERSITY_GINI: 0.3290872, SHANNON_ENTROPY: 12.0469870, 
+CUTOFF: 10 - ROC_AUC: 0.0524510, PRECISION: 0.0084854, PRECISION_RECALL_MIN_DEN: 0.0266657, RECALL: 0.0263022, MAP: 0.0127361, MRR: 0.0356413, NDCG: 0.0210446, F1: 0.0128312, HIT_RATE: 0.0848535, ARHR: 0.0370239, RMSE: 0.9947159, NOVELTY: 0.0056449, AVERAGE_POPULARITY: 0.0538107, DIVERSITY_MEAN_INTER_LIST: 0.9948389, DIVERSITY_HERFINDAHL: 0.9994790, COVERAGE_ITEM: 0.7992430, COVERAGE_USER: 0.6614797, DIVERSITY_GINI: 0.3326497, SHANNON_ENTROPY: 12.4383850, 
+
+SearchBayesianSkopt: New best config found. Config 1: {'topK': 70, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0198289, PRECISION: 0.0068918, PRECISION_RECALL_MIN_DEN: 0.0185980, RECALL: 0.0183847, MAP: 0.0099234, MRR: 0.0179577, NDCG: 0.0138831, F1: 0.0100254, HIT_RATE: 0.0344588, ARHR: 0.0181580, RMSE: 0.9976567, NOVELTY: 0.0026576, AVERAGE_POPULARITY: 0.0662268, DIVERSITY_MEAN_INTER_LIST: 0.9963901, DIVERSITY_HERFINDAHL: 0.9992642, COVERAGE_ITEM: 0.5670181, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3477930, SHANNON_ENTROPY: 11.9418486, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 70, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0367373, PRECISION: 0.0123343, PRECISION_RECALL_MIN_DEN: 0.0222143, RECALL: 0.0202050, MAP: 0.0129380, MRR: 0.0332054, NDCG: 0.0183330, F1: 0.0153178, HIT_RATE: 0.0616716, ARHR: 0.0341949, RMSE: 0.9978867, NOVELTY: 0.0027107, AVERAGE_POPULARITY: 0.0642074, DIVERSITY_MEAN_INTER_LIST: 0.9960519, DIVERSITY_HERFINDAHL: 0.9992006, COVERAGE_ITEM: 0.6559070, COVERAGE_USER: 0.6614797, DIVERSITY_GINI: 0.3330435, SHANNON_ENTROPY: 12.0536990, 
+CUTOFF: 10 - ROC_AUC: 0.0532801, PRECISION: 0.0083875, PRECISION_RECALL_MIN_DEN: 0.0262606, RECALL: 0.0258640, MAP: 0.0128460, MRR: 0.0358093, NDCG: 0.0210287, F1: 0.0126672, HIT_RATE: 0.0838754, ARHR: 0.0371785, RMSE: 0.9978867, NOVELTY: 0.0055829, AVERAGE_POPULARITY: 0.0562617, DIVERSITY_MEAN_INTER_LIST: 0.9952728, DIVERSITY_HERFINDAHL: 0.9995224, COVERAGE_ITEM: 0.8039470, COVERAGE_USER: 0.6614797, DIVERSITY_GINI: 0.3382854, SHANNON_ENTROPY: 12.4860997, 
+
+SearchBayesianSkopt: New best config found. Config 2: {'topK': 5, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211489, PRECISION: 0.0072113, PRECISION_RECALL_MIN_DEN: 0.0193090, RECALL: 0.0190715, MAP: 0.0104281, MRR: 0.0190820, NDCG: 0.0145449, F1: 0.0104655, HIT_RATE: 0.0360567, ARHR: 0.0192291, RMSE: 0.9989235, NOVELTY: 0.0026752, AVERAGE_POPULARITY: 0.0650422, DIVERSITY_MEAN_INTER_LIST: 0.9959545, DIVERSITY_HERFINDAHL: 0.9991771, COVERAGE_ITEM: 0.5524736, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3243604, SHANNON_ENTROPY: 11.7924817, 
+SearchBayesianSkopt: Best config evaluated with evaluator_test. Config: {'topK': 5, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results:
+CUTOFF: 5 - ROC_AUC: 0.0369247, PRECISION: 0.0126376, PRECISION_RECALL_MIN_DEN: 0.0226064, RECALL: 0.0205474, MAP: 0.0132610, MRR: 0.0337833, NDCG: 0.0187246, F1: 0.0156498, HIT_RATE: 0.0631878, ARHR: 0.0346228, RMSE: 0.9989781, NOVELTY: 0.0027521, AVERAGE_POPULARITY: 0.0625267, DIVERSITY_MEAN_INTER_LIST: 0.9951920, DIVERSITY_HERFINDAHL: 0.9990287, COVERAGE_ITEM: 0.6371992, COVERAGE_USER: 0.6614797, DIVERSITY_GINI: 0.3108792, SHANNON_ENTROPY: 11.8848559, 
+CUTOFF: 10 - ROC_AUC: 0.0559960, PRECISION: 0.0094390, PRECISION_RECALL_MIN_DEN: 0.0287127, RECALL: 0.0282933, MAP: 0.0134761, MRR: 0.0374014, NDCG: 0.0224407, F1: 0.0141556, HIT_RATE: 0.0943904, ARHR: 0.0388065, RMSE: 0.9989781, NOVELTY: 0.0056731, AVERAGE_POPULARITY: 0.0556028, DIVERSITY_MEAN_INTER_LIST: 0.9907779, DIVERSITY_HERFINDAHL: 0.9990729, COVERAGE_ITEM: 0.8045418, COVERAGE_USER: 0.6614797, DIVERSITY_GINI: 0.3060289, SHANNON_ENTROPY: 12.1844370, 
+
+SearchBayesianSkopt: Config 3 is suboptimal. Config: {'topK': 70, 'shrink': 21, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0198810, PRECISION: 0.0068918, PRECISION_RECALL_MIN_DEN: 0.0185980, RECALL: 0.0183847, MAP: 0.0099338, MRR: 0.0180098, NDCG: 0.0138924, F1: 0.0100254, HIT_RATE: 0.0344588, ARHR: 0.0182101, RMSE: 0.9885856, NOVELTY: 0.0026575, AVERAGE_POPULARITY: 0.0662407, DIVERSITY_MEAN_INTER_LIST: 0.9963893, DIVERSITY_HERFINDAHL: 0.9992640, COVERAGE_ITEM: 0.5670181, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3477844, SHANNON_ENTROPY: 11.9417384, 
+SearchBayesianSkopt: Config 4 is suboptimal. Config: {'topK': 5, 'shrink': 20, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211489, PRECISION: 0.0072113, PRECISION_RECALL_MIN_DEN: 0.0193090, RECALL: 0.0190715, MAP: 0.0104281, MRR: 0.0190820, NDCG: 0.0145449, F1: 0.0104655, HIT_RATE: 0.0360567, ARHR: 0.0192291, RMSE: 0.9944291, NOVELTY: 0.0026752, AVERAGE_POPULARITY: 0.0650422, DIVERSITY_MEAN_INTER_LIST: 0.9959545, DIVERSITY_HERFINDAHL: 0.9991771, COVERAGE_ITEM: 0.5524736, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3243604, SHANNON_ENTROPY: 11.7924817, 
+SearchBayesianSkopt: Config 5 is suboptimal. Config: {'topK': 70, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0198289, PRECISION: 0.0068918, PRECISION_RECALL_MIN_DEN: 0.0185980, RECALL: 0.0183847, MAP: 0.0099234, MRR: 0.0179577, NDCG: 0.0138831, F1: 0.0100254, HIT_RATE: 0.0344588, ARHR: 0.0181580, RMSE: 0.9976567, NOVELTY: 0.0026576, AVERAGE_POPULARITY: 0.0662268, DIVERSITY_MEAN_INTER_LIST: 0.9963901, DIVERSITY_HERFINDAHL: 0.9992642, COVERAGE_ITEM: 0.5670181, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3477930, SHANNON_ENTROPY: 11.9418486, 
+SearchBayesianSkopt: Config 6 is suboptimal. Config: {'topK': 5, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211489, PRECISION: 0.0072113, PRECISION_RECALL_MIN_DEN: 0.0193090, RECALL: 0.0190715, MAP: 0.0104281, MRR: 0.0190820, NDCG: 0.0145449, F1: 0.0104655, HIT_RATE: 0.0360567, ARHR: 0.0192291, RMSE: 0.9989235, NOVELTY: 0.0026752, AVERAGE_POPULARITY: 0.0650422, DIVERSITY_MEAN_INTER_LIST: 0.9959545, DIVERSITY_HERFINDAHL: 0.9991771, COVERAGE_ITEM: 0.5524736, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3243604, SHANNON_ENTROPY: 11.7924817, 
+SearchBayesianSkopt: Config 7 is suboptimal. Config: {'topK': 70, 'shrink': 20, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0197420, PRECISION: 0.0068918, PRECISION_RECALL_MIN_DEN: 0.0185980, RECALL: 0.0183847, MAP: 0.0099344, MRR: 0.0178593, NDCG: 0.0138842, F1: 0.0100254, HIT_RATE: 0.0344588, ARHR: 0.0180596, RMSE: 0.9881219, NOVELTY: 0.0026583, AVERAGE_POPULARITY: 0.0662045, DIVERSITY_MEAN_INTER_LIST: 0.9963870, DIVERSITY_HERFINDAHL: 0.9992636, COVERAGE_ITEM: 0.5666937, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3478522, SHANNON_ENTROPY: 11.9412384, 
+SearchBayesianSkopt: Config 8 is suboptimal. Config: {'topK': 5, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0211489, PRECISION: 0.0072113, PRECISION_RECALL_MIN_DEN: 0.0193090, RECALL: 0.0190715, MAP: 0.0104281, MRR: 0.0190820, NDCG: 0.0145449, F1: 0.0104655, HIT_RATE: 0.0360567, ARHR: 0.0192291, RMSE: 0.9989235, NOVELTY: 0.0026752, AVERAGE_POPULARITY: 0.0650422, DIVERSITY_MEAN_INTER_LIST: 0.9959545, DIVERSITY_HERFINDAHL: 0.9991771, COVERAGE_ITEM: 0.5524736, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3243604, SHANNON_ENTROPY: 11.7924817, 
+SearchBayesianSkopt: Config 9 is suboptimal. Config: {'topK': 69, 'shrink': 21, 'similarity': 'jaccard', 'normalize': False} - results: ROC_AUC: 0.0199447, PRECISION: 0.0070029, PRECISION_RECALL_MIN_DEN: 0.0185737, RECALL: 0.0183545, MAP: 0.0098795, MRR: 0.0179346, NDCG: 0.0138751, F1: 0.0101379, HIT_RATE: 0.0350146, ARHR: 0.0180886, RMSE: 0.9886506, NOVELTY: 0.0026580, AVERAGE_POPULARITY: 0.0667854, DIVERSITY_MEAN_INTER_LIST: 0.9964096, DIVERSITY_HERFINDAHL: 0.9992681, COVERAGE_ITEM: 0.5705866, COVERAGE_USER: 0.4656595, DIVERSITY_GINI: 0.3470357, SHANNON_ENTROPY: 11.9468908, 
+SearchBayesianSkopt: Search complete. Best config is 2: {'topK': 5, 'shrink': 120, 'similarity': 'jaccard', 'normalize': False}

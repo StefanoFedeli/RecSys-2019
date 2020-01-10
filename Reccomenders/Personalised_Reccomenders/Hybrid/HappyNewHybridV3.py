@@ -127,8 +127,6 @@ itemKNNCBF.fit(topK=10, shrink=50, similarity="jaccard")
 pureSVD = PureSVDRecommender(URM_train)
 pureSVD.fit()
 
-
-
 for index in range(0, maxIndex):
 
     print("Cluster number: " + str(index))
@@ -147,14 +145,14 @@ for index in range(0, maxIndex):
     results, _ = evaluator_test.evaluateRecommender(pureSVD)
     MAP_pureSVD_per_group.append(results[cutoff]["MAP"])
 
-    results, _ = evaluator_test.evaluateRecommender(elasticNet)
-    MAP_elasticNet_per_group.append(results[cutoff]["MAP"])
+    #results, _ = evaluator_test.evaluateRecommender(elasticNet)
+    #MAP_elasticNet_per_group.append(results[cutoff]["MAP"])
 
-    results, _ = evaluator_test.evaluateRecommender(sslim)
-    MAP_sslim_per_group.append(results[cutoff]["MAP"])
+    #results, _ = evaluator_test.evaluateRecommender(sslim)
+    #MAP_sslim_per_group.append(results[cutoff]["MAP"])
 
-    results, _ = evaluator_test.evaluateRecommender(topPop)
-    MAP_topPop_per_group.append(results[cutoff]["MAP"])
+    #results, _ = evaluator_test.evaluateRecommender(topPop)
+    #MAP_topPop_per_group.append(results[cutoff]["MAP"])
 
 pyplot.plot(MAP_itemKNNCF_per_group, label="itemKNNCF")
 pyplot.plot(MAP_userKNNCF_per_group, label="userKNNCF")
@@ -166,4 +164,4 @@ pyplot.plot(MAP_topPop_per_group, label="topPop")
 pyplot.ylabel('MAP')
 pyplot.xlabel('User Group')
 pyplot.legend()
-pyplot.savefig("userWise.jpg")
+pyplot.savefig("userWise.png")

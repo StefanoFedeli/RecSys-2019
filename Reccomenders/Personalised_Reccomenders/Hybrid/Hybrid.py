@@ -52,7 +52,7 @@ def mergeCSV(filelist):
     userList = {}
     # Be aware that if a user is in both files then is overwritten
     for file in filelist:
-        file.seek(18)
+        file.seek(19)
         for line in file:
             split = line.split(",")
             userList[(int(split[0]))] = list(map(int, split[1].split()))
@@ -74,7 +74,7 @@ def run(target_users, URM_test):
                                ])
     '''
     #recommendations = mergeCSV([open("../../../Outputs/Coll_I.csv", "r")])
-    recommendations = mergeCSV([open("../../../Outputs/Sslim.csv", "r"),
+    recommendations = mergeCSV([open("../../../Outputs/HappyNewHybrid_0.8_0.25_0.15_0.05.csv", "r"),
                                 open("../../../Outputs/TopPop_freeze.csv", "r")
                                 ])
     goodUsers = []
@@ -122,7 +122,7 @@ def run(target_users, URM_test):
 
 URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
 URM_val = sps.csr_matrix(sps.load_npz("../../../Dataset/data_validation.npz"))
-targetUsers = util.get_target_users("../../../Dataset/target_users.csv",seek=8)
+targetUsers = util.get_target_users("../../../Dataset/target_users.csv")
 
 print("TESTING")
 res_test = run(targetUsers, URM_test)
@@ -143,10 +143,10 @@ with open("../../../Dataset/users_clusters/Coll_U.csv", 'w') as f:
             f.write(str(i) + "\n")
 '''
 
-with open("../../../Outputs/Sslim+TopPop.csv", 'w') as f:
+with open("../../../Outputs/HappyNewHybrid_0.8_0.25_0.15_0.05_submission.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         print(user_id)
         f.write(str(user_id) + "," + util.trim(np.array(res_test["RecSys"][user_id])) + "\n")
         
-util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/Sslim+TopPop.csv")
+#util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/HappyNewHybrid_0.8_0.25_0.15_0055.csv")
