@@ -2,6 +2,7 @@ import evaluator as evaluate
 import scipy.sparse as sps
 import utils_new as utils
 import random
+import numpy as np
 
 from External_Libraries.GraphBased.P3alphaRecommender import P3alphaRecommender
 from External_Libraries.GraphBased.RP3betaRecommender import RP3betaRecommender
@@ -45,39 +46,48 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
         self.beta = beta
         self.gamma = gamma
         self.d = d
-        #self.e = e
-        #self.f = f
-        #self.g = g
+        self.e = e
+        self.f = f
+        self.g = g
 
     def _compute_item_score(self, user_id_array, items_to_compute=False):
         item_weights_1 = self.Recommender_1._compute_item_score(user_id_array)
         item_weights_2 = self.Recommender_2._compute_item_score(user_id_array)
         item_weights_3 = self.Recommender_3._compute_item_score(user_id_array)
         item_weights_4 = self.Recommender_4._compute_item_score(user_id_array)
-        #item_weights_5 = self.Recommender_5._compute_item_score(user_id_array)
-        #item_weights_6 = self.Recommender_6._compute_item_score(user_id_array)
-        #item_weights_7 = self.Recommender_7._compute_item_score(user_id_array)
+        item_weights_5 = self.Recommender_5._compute_item_score(user_id_array)
+        item_weights_6 = self.Recommender_6._compute_item_score(user_id_array)
+        item_weights_7 = self.Recommender_7._compute_item_score(user_id_array)
 
         item_weights = item_weights_1 * self.alpha +\
                        item_weights_2 * self.beta +\
                        item_weights_3 * self.gamma +\
-                       item_weights_4 * self.d
-                       #item_weights_5 * self.e +\
-                       #item_weights_6 * self.f +\
-                       #item_weights_7 * self.g
+                       item_weights_4 * self.d +\
+                       item_weights_5 * self.e +\
+                       item_weights_6 * self.f +\
+                       item_weights_7 * self.g
 
         return item_weights
+
+    def recommend(self, user_id_array, cutoff=None, remove_seen_flag=True, items_to_compute=None, at=10,
+                  remove_top_pop_flag=False, remove_custom_items_flag=False, return_scores=False):
+        result = super().recommend(user_id_array, cutoff, remove_seen_flag, items_to_compute, remove_top_pop_flag,
+                                   remove_custom_items_flag, return_scores)
+        if return_scores is True:
+            return result
+        else:
+            return result[:at]
 
 
 URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
 ICM_all = sps.csr_matrix(sps.load_npz("../../../Dataset/ICM_all.npz"))
 users = utils.get_target_users("../../../Dataset/target_users.csv", seek=8)
-URM = sps.csr_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
+URM = sps.csr_matrix(sps.load_npz("../../../Dataset/data_all.npz"))
 validator = validate(URM_test, [10])
 
 
 sslim = ReccomenderSslim(URM)
-sslim.fit(train="-train")
+sslim.fit(train="")
 
 CFItem = ItemKNNCFRecommender(URM)
 CFItem.fit(shrink=25, topK=10, similarity="jaccard", feature_weighting="TF-IDF", normalize=False)
@@ -102,17 +112,31 @@ rec_sys = HybridReccomender(URM, CFItem, CFUser, slim, CBItem, P3a, P3b, sslim)
 rec_sys.fit(0.223, 0.166, 0.331, 0.725, 2.031, 2.524, 1.777)
 """
 
-rec_sys = HybridReccomender(URM, CBItem, P3a, P3b, sslim,None,None,None)
-for i in range(100):
+rec_sys = HybridReccomender(URM, CBItem, P3a, P3b, sslim, slim, CFItem, CFUser)
+rec_sys.fit(0.186, 1.812, 1.746, 1.744, 0, 0, 0)
+
+"""
+for i in range(120):
     SS = random.uniform(0.1, 2.3)
     Ga = random.uniform(0.1, 2.3)
     Gb = random.uniform(0.1, 2.3)
     CBI = random.uniform(0.1, min(SS,Ga,Gb))
-    rec_sys.fit(CBI, Ga, Gb, SS)
+    CFI = random.uniform(0.1, 2.3)
+    CFU = random.uniform(0.1, 2.3)
+    Sli = random.uniform(0.1, 2.3)
+    SS = SS if bool(random.getrandbits(1)) is False else 0
+    Ga = Ga if bool(random.getrandbits(1)) is False else 0
+    Gb = Gb if bool(random.getrandbits(1)) is False else 0
+    CBI = CBI if bool(random.getrandbits(1)) is False else 0
+    CFI = CFI if bool(random.getrandbits(1)) is False else 0
+    CFU = CFU if bool(random.getrandbits(1)) is False else 0
+    Sli = Sli if bool(random.getrandbits(1)) is False else 0
+
+    rec_sys.fit(CBI, Ga, Gb, SS, Sli, CFI, CFU)
     #print(rec_sys.__str__())
     #print(evaluate.evaluate(users, rec_sys, URM_test, 10)["MAP"])
     results = validator.evaluateRecommender(rec_sys)
-    if results[0][10]["MAP"] > 0.02757:
+    if results[0][10]["MAP"] > 0.0288:
         print("***** GOT IT ******* GOT IT")
         print(rec_sys.__str__())
         print(results[0][10]["MAP"])
@@ -120,6 +144,12 @@ for i in range(100):
     #print(results[0][10])
     print("\n")
 
-
+"""
     #A:0.223, B:0.169, C:0.331, D:0.725, E:2.031, F:2.524, G:1.777 @ 0.027578921007649693
     #A:0.186, B:1.812, C:1.746, D:1.744, E:0.000, F:0.000, G:0.000 @ 0.02787492028548719
+
+with open("../../../Outputs/HybridSte.csv", 'w') as f:
+    f.write("user_id,item_list\n")
+    for user_id in users:
+        # print(user_id)
+        f.write(str(user_id) + "," + utils.trim(np.array(rec_sys.recommend(user_id))) + "\n")
