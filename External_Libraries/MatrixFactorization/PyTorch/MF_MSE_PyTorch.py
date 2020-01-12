@@ -7,8 +7,8 @@ Created on 06/07/2018
 """
 
 
-from Base.Incremental_Training_Early_Stopping import Incremental_Training_Early_Stopping
-from Base.BaseRecommender import BaseRecommender
+from External_Libraries.Base.Incremental_Training_Early_Stopping import Incremental_Training_Early_Stopping
+from External_Libraries.Base.BaseRecommender import BaseRecommender
 import os, sys
 import numpy as np, pickle
 
@@ -32,7 +32,7 @@ class MF_MSE_PyTorch(BaseRecommender, Incremental_Training_Early_Stopping):
     def __init__(self, URM_train, positive_threshold=4):
 
 
-        super(MF_MSE_PyTorch, self).__init__()
+        super(MF_MSE_PyTorch, self).__init__(URM_train)
 
 
         self.URM_train = URM_train
@@ -91,7 +91,7 @@ class MF_MSE_PyTorch(BaseRecommender, Incremental_Training_Early_Stopping):
             self.device = torch.device('cpu')
             print("MF_MSE_PyTorch: Using CPU")
 
-        from MatrixFactorization.PyTorch.MF_MSE_PyTorch_model import MF_MSE_PyTorch_model, DatasetIterator_URM
+        from External_Libraries.MatrixFactorization.PyTorch.MF_MSE_PyTorch_model import MF_MSE_PyTorch_model, DatasetIterator_URM
 
         n_users, n_items = self.URM_train.shape
 
