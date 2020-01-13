@@ -100,7 +100,7 @@ class HybridReccomender(BaseItemSimilarityMatrixRecommender):
 
 URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
 ICM_all = sps.csr_matrix(sps.load_npz("../../../Dataset/ICM_all.npz"))
-users = utils.get_target_users("../../../Dataset/target_users.csv", seek=8)
+users = utils.get_target_users("../../../Dataset/target_users.csv", seek=9)
 URM = sps.csr_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
 validator = validate(URM_test, [10])
 
@@ -112,7 +112,7 @@ CFItem = ItemKNNCFRecommender(URM)
 CFItem.fit(shrink=25, topK=10, similarity="jaccard", feature_weighting="TF-IDF", normalize=False)
 
 slim = SLIM_BPR_Recommender(URM)
-slim.fit(path="../../../")
+slim.fit(path="../../../", train="-train")
 
 CFUser = UserKNNCFRecommender(URM)
 CFUser.fit(703, 25, "asymmetric")
@@ -142,7 +142,9 @@ rec_sys.fit(0.186, 1.812, 1.746, 1.744, 0, 0, 0)
 
 rec_sys = HybridReccomender(URM, CBItem, P3a, P3b, sslim, slim, CFItem, CFUser, elasticNet, pureSVD, NMF)
 
+
 for i in range(150):
+
     SS = random.uniform(0.1, 2.3)
     Ga = random.uniform(0.1, 2.3)
     Gb = random.uniform(0.1, 2.3)
@@ -180,9 +182,9 @@ for i in range(150):
 
 """
 rec_sys.fit(0, 1.866, 0.589, 0.421, 1.219, 0, 0, 1.254, 1.415, 0)
-with open("../../../Outputs/HybridSte.csv", 'w') as f:
+with open("../../../Outputs/HybridSteNew.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in users:
         # print(user_id)
         f.write(str(user_id) + "," + utils.trim(np.array(rec_sys.recommend(user_id))) + "\n")
-        """
+"""

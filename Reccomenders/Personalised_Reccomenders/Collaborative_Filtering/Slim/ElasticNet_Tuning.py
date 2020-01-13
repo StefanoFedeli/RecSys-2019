@@ -5,6 +5,7 @@ import time, sys
 from External_Libraries.Notebooks_utils.evaluation_function import evaluate_algorithm
 from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
 import utils_new as utils
+import evaluator
 
 
 class SLIMElasticNetRecommender(object):
@@ -138,6 +139,7 @@ class SLIMElasticNetRecommender(object):
         # generate the sparse weight matrix
         self.W_sparse = sps.csr_matrix((values[:numCells], (rows[:numCells], cols[:numCells])),
                                        shape=(n_items, n_items), dtype=np.float32)
+        sps.save_npz("ElasticNet-Sim2.npz", self.W_sparse)
 
     def recommend(self, user_id, at=None, exclude_seen=True):
         # compute the scores using the dot product
@@ -164,18 +166,22 @@ class SLIMElasticNetRecommender(object):
         return scores
 
 
-users = utils.get_target_users("../../../../Dataset/target_users.csv")
 URM_all = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_all.npz"))
-URM_train, URM_test = train_test_holdout(URM_all, train_perc=0.8)
-URM_train, URM_validation = train_test_holdout(URM_train, train_perc=0.9)
+URM_train = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_train.npz"))
+URM_test = sps.csr_matrix(sps.load_npz("../../../../Dataset/data_test.npz"))
 
-for alpha in [1e-5, 1e-4, 1e-3, 1e-2]:
-    for max_iter in [5, 10, 20, 50]:
-        for tol in [1e-5, 1e-4, 1e-3, 1e-2]:
-            for topK in [5, 10, 20, 50, 100]:
-                recommender = SLIMElasticNetRecommender(URM_train, alpha, max_iter, tol, topK)
-                recommender.fit()
-                toPrint = evaluate_algorithm(URM_test, recommender)
-                with open("tuning_results.csv", 'w') as fr:
-                    fr.write("ALPHA:{0}, MAX_ITER: {1}, TOL:{2}, TOPK:{3}\n".format(alpha, max_iter, tol, topK))
-                    fr.write(str(toPrint) + "\n\n")
+for alpha in [2e-4]:
+    for max_iter in [10]:
+        for tol in [1e-3]:
+            recommender = SLIMElasticNetRecommender(URM_train, alpha, max_iter, tol, 100)
+            recommender.fit()
+            toPrint = evaluate_algorithm(URM_test, recommender)
+            #toPrint = evaluator.evaluate(users, recommender, URM_test, 10)
+            with open("tuning_results.csv", 'a') as fr:
+                fr.write("ALPHA:{0}, MAX_ITER: {1}, TOL:{2}, TOPK:{3}\n".format(alpha, max_iter, tol, 100))
+                fr.write(str(toPrint) + "\n\n")
+
+'''
+recommender = SLIMElasticNetRecommender(URM_all, 2e-4, 10, 1e-3, 100)
+recommender.fit()
+'''

@@ -34,9 +34,9 @@ class ElasticNetRecommender(SLIMElasticNetRecommender):
 
     def fit(self, mode='train'):
         if mode == "train":
-            self.W_sparse = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/elasticNet-train.npz"))
+            self.W_sparse = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/ElasticNet-Sim-train2.npz"))
         else:
-            self.W_sparse = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/elasticNet-all.npz"))
+            self.W_sparse = sps.csr_matrix(sps.load_npz("../../../Dataset/similarities/ElasticNet-Sim2.npz"))
 
     def recommend(self, user_id_array, cutoff=None, remove_seen_flag=True, items_to_compute=None, at=10,
                   remove_top_pop_flag=False, remove_custom_items_flag=False, return_scores=False):

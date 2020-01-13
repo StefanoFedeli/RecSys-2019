@@ -20,10 +20,7 @@ def create_clusters():
 
     interaction_age, user_age, age = utils.create_tuples("../../../Dataset/UCM_age.csv",14)
     interaction_region, user_region, region = utils.create_tuples("../../../Dataset/UCM_region.csv",14)
-    counter = 0
-    interactions = interaction_age + interaction_region
-    users = user_age + user_region
-    features = age + region
+
     for u in user_list:
         try:
             index = user_age.index(u)
