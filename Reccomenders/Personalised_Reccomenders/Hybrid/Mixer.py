@@ -17,28 +17,24 @@ from External_Libraries.MatrixFactorization.PureSVDRecommender import PureSVDRec
 from External_Libraries.MatrixFactorization.NMFRecommender import NMFRecommender
 from Reccomenders.Personalised_Reccomenders.Hybrid.PureHybrid import HybridReccomender
 
+from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout
+from External_Libraries.Notebooks_utils.data_splitter import train_test_holdout
 
+URM_all = sps.csr_matrix(sps.load_npz("../../../Dataset/data_all.npz"))
 URM_test = sps.csr_matrix(sps.load_npz("../../../Dataset/data_test.npz"))
 ICM_all = sps.csr_matrix(sps.load_npz("../../../Dataset/ICM_all.npz"))
-users = utils.get_target_users("../../../Dataset/target_users.csv", seek=8)
+users = utils.get_target_users("../../../Dataset/target_users.csv", seek=9)
 URM = sps.csr_matrix(sps.load_npz("../../../Dataset/data_train.npz"))
 validator = validate(URM_test, [10])
 
-
-sslim = ReccomenderSslim(URM)
-sslim.fit(train="-train")
+CBItem = ItemKNNCBFRecommender(URM,ICM_all)
+CBItem.fit(shrink=120, topK=5, similarity="asymmetric", feature_weighting="none", normalize=True)
 
 CFItem = ItemKNNCFRecommender(URM)
 CFItem.fit(shrink=25, topK=10, similarity="jaccard", feature_weighting="TF-IDF", normalize=False)
 
-slim = SLIM_BPR_Recommender(URM)
-slim.fit(path="../../../", train="-train")
-
 CFUser = UserKNNCFRecommender(URM)
 CFUser.fit(703, 25, "asymmetric")
-
-CBItem = ItemKNNCBFRecommender(URM,ICM_all)
-CBItem.fit(shrink=120, topK=5, similarity="asymmetric", feature_weighting="none", normalize=True)
 
 P3a = P3alphaRecommender(URM)
 P3a.fit(alpha=0.25662502344934046, min_rating=0, topK=25, implicit=True, normalize_similarity=True)
@@ -48,6 +44,13 @@ P3b.fit(alpha=0.22218786834129392, beta=0.23468317063424235, min_rating=0, topK=
 
 elasticNet = ElasticNetRecommender(URM)
 elasticNet.fit("train")
+
+
+sslim = ReccomenderSslim(URM)
+sslim.fit(train="-train")
+
+slim = SLIM_BPR_Recommender(URM)
+slim.fit(path="../../../", train="-train")
 
 pureSVD = PureSVDRecommender(URM)
 pureSVD.fit(526, True)
@@ -61,33 +64,22 @@ rec_sys.fit(0.186, 1.812, 1.746, 1.744, 0, 0, 0)
 """
 
 rec_sys = HybridReccomender(URM, CBItem, P3a, P3b, sslim, slim, CFItem, CFUser, elasticNet, pureSVD, NMF)
+target_users = utils.get_target_users("../../../Dataset/target_users.csv")
 
+for i in range(200):
 
-for i in range(150):
+    CBI_param = random.uniform(0, 0.5)
+    CFI_param = random.uniform(0.5, 1)
+    CFU_param = random.uniform(0, 0.5)
+    P3a_param = random.uniform(0.5, 1)
+    P3b_param = random.uniform(0.5, 1)
+    elasticNet_param = random.uniform(0.5, 1)
 
-    SS = random.uniform(0.1, 2.3)
-    Ga = random.uniform(0.1, 2.3)
-    Gb = random.uniform(0.1, 2.3)
-    CFI = random.uniform(0.1, 2.3)
-    mas = max(CFI, Ga, Gb, SS) + 0.4
-    Ela = random.uniform(0.1, mas - 1)
-    CBI = random.uniform(0.1, mas)
-    CFU = random.uniform(0.1, mas)
-    Sli = random.uniform(0.1, mas)
-    svd = random.uniform(0.1, mas)
-    nmf = random.uniform(0.1, mas)
-    Ga = Ga if bool(random.getrandbits(1)) is False else 0
-    CBI = CBI if bool(random.getrandbits(1)) is False else 0
-    CFU = CFU if bool(random.getrandbits(1)) is False else 0
-    Sli = Sli if bool(random.getrandbits(1)) is False else 0
-    svd = svd if bool(random.getrandbits(1)) is False else 0
-    nmf = nmf if bool(random.getrandbits(1)) is False else 0
-
-    rec_sys.fit(CBI, Ga, Gb, SS, Sli, CFI, CFU, Ela, svd, nmf)
-    #print(rec_sys.__str__())
-    #print(evaluate.evaluate(users, rec_sys, URM_test, 10)["MAP"])
+    rec_sys.fit(CBI_param, P3a_param, P3b_param, 0, 0, CFI_param, CFU_param, elasticNet_param, 0, 0)
+    # print(rec_sys.__str__())
+    # print(evaluate.evaluate(users, rec_sys, URM_test, 10)["MAP"])
     results = validator.evaluateRecommender(rec_sys)
-    #print(results)
+    # print(results)
     if results[0][10]["MAP"] > 0.0296:
         print("\n***** GOT IT ******* GOT IT")
         print(rec_sys.__str__())
@@ -96,8 +88,9 @@ for i in range(150):
     else:
         print("{0}: {1} @ {2:.5f}".format(i, rec_sys, results[0][10]["MAP"]))
 
+#A:0.186, B:1.812, C:1.746, D:1.744, E:0.000, F:0.000, G:0.000 @ 0.02787492028548719
 
-    #A:0.186, B:1.812, C:1.746, D:1.744, E:0.000, F:0.000, G:0.000 @ 0.02787492028548719
+    #   CBI,    Ga,       Gb,      SS,     Sli,    CFI,      CFU,    Ela,     svd,      nmf
     #A:0.000, B:1.866, C:0.589, D:0.421, E:1.219, F:0.000, G:0.000, H:1.254 I:1.415, L:0.000 @ 0.029694638816818258
 
 """

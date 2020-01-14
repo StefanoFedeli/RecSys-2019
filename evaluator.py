@@ -11,8 +11,8 @@ def evaluate(target_users, recommender, URM, at=10):
 
     for user in target_users:
 
-        if num_eval % 10000 == 0:
-            print("Evaluated user {} of {}".format(num_eval, len(target_users)))
+        #if num_eval % 10000 == 0:
+            #print("Evaluated user {} of {}".format(num_eval, len(target_users)))
 
         start_pos = URM.indptr[user]
         end_pos = URM.indptr[user + 1]
