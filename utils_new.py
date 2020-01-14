@@ -49,7 +49,7 @@ def create_tuples(path, offset, filter = None):
     for line in file:
         numberInteractions += 1
         split = rowSplit(line)
-        if filter:
+        if filter is not None:
             if split[0] in filter:
                 tuples.append(split)
         else:
@@ -65,7 +65,7 @@ def create_tuples(path, offset, filter = None):
     return interactionList, entityList, featuresList
 
 def create_coo(path, filter = None, shape = None):
-    interactionList, entityList, featuresList = create_tuples(path, 14, filter)
+    interactionList, entityList, featuresList = create_tuples(path, 13, filter)
     if shape:
         return sps.coo_matrix((interactionList, (entityList, featuresList)), shape)
     else:
@@ -108,13 +108,13 @@ def trim(array):
     return split[0] + " " + split[1] + " " + split[2] + " " + split[3] + " " + split[4] + " " + split[5] + " " + split[6] + " " + split[7] + " " + split[8] + " " + split[9]
 
 def createDataset(relPath):
-    URM_raw = create_coo(relPath + "/URM.csv")
-    sps.save_npz(relPath + "/data_all.npz", URM_raw)
+    URM_raw = create_coo(relPath + "/URM.csv", shape=(30911, 18495))
+    sps.save_npz(relPath + "/URM/data_all.npz", URM_raw)
     URM_raw, URM_test = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
-    URM_train, URM_validation = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
-    sps.save_npz(relPath + "/data_train.npz", URM_train)
-    sps.save_npz(relPath + "/data_test.npz", URM_test)
-    sps.save_npz(relPath + "/data_validation.npz", URM_validation)
+    #URM_train, URM_validation = split_data.split_train_leave_k_out_user_wise(URM_raw, use_validation_set=False)
+    sps.save_npz(relPath + "/URM/data_train.npz", URM_raw)
+    sps.save_npz(relPath + "/URM/data_test.npz", URM_test)
+    #sps.save_npz(relPath + "/data_validation.npz", URM_validation)
 
 def compare_csv(csv1, csv2):
     f1 = open(csv1, 'r')

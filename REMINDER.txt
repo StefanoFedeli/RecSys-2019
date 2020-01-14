@@ -1,23 +1,21 @@
 CONTENT BASED
     ITEM BASED
         A un utente piacciono item simili
-            ste PURE CONTENT BASED
+            PURE CONTENT BASED (0.040000003 0.007874016)
+
 COLLABORATIVE FILTERING
     USER BASED
         Due utenti sono simili se hanno le stesse opinioni su degli item (/vi hanno interagito)
-            mat PURE COLLABORATIVE
+            PURE COLLABORATIVE
     ITEM BASED
         Due item sono simili se molti utenti condividono la stessa opinione su di essi (/vi hanno interagito)
-            ste PURE COLLABORATIVE
-                mat SVD
-                mat FUNK SVD
-            X mat LIGHTFM
-            *SLIM BPR*
-            ste SLIM ELASTICNET
-            ste SSLIM
-                ste COLLABORATIVE BOOSTED FW
-                mat MF BPR
-            ste graph based
+            PURE COLLABORATIVE (0.39003438 0.0011402508)
+            PURE SVD
+            SLIM BPR (0.2631211 -0.00049750856)
+            SLIM ELASTICNET (0.49978438 2.734966e-06)
+            SSLIM (1.1268666 -0.00064739375)
+            P3
+
 NON PERSONALISED
             top pop
             light fm as top pop
