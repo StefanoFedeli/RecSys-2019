@@ -12,6 +12,7 @@ from External_Libraries.Evaluation.Evaluator import EvaluatorHoldout as validate
 
 class SLIM_BPR_Recommender(BaseRecommender):
     """ SLIM_BPR recommender with cosine similarity and no shrinkage"""
+    RECOMMENDER_NAME = "SLIMRecommender"
 
     def __init__(self, URM):
         self.URM = URM
@@ -106,7 +107,7 @@ class SLIM_BPR_Recommender(BaseRecommender):
 
                 start_time_batch = time.time()
 
-    def fit(self, learning_rate=1e-3, epoch=70, ratio=2.5, limit=120, path="../../../../", train = ""):
+    def fit(self, learning_rate=1e-3, epoch=70, ratio=2.5, limit=120, path="../../../../", train=""):
         self.similarity_matrix = sps.csr_matrix(sps.load_npz(path + "Dataset/similarities/Slim-Sim" + train + ".npz"))
         """
         self.itemPopularity[self.itemPopularity < limit] = 0

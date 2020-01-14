@@ -19,6 +19,8 @@ def normalize(URM_t, minI, maxI):
 
 class ReccomenderSslim(BaseRecommender):
 
+    RECOMMENDER_NAME = "S-SLIMElasticNetRecommender"
+
     def __init__(self, URM):
         self.URM = URM
         self.W_sparse = np.array([0])
