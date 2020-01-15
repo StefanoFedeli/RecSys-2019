@@ -47,7 +47,7 @@ with open("../../../../../Outputs/Coll_I.csv", 'w') as f:
 '''
 URM_test = sps.csr_matrix(sps.load_npz("../../../../Dataset/URM/data_test.npz"))
 users = utils.get_target_users("../../../../Dataset/target_users.csv", seek=8)
-URM = sps.csr_matrix(sps.load_npz("../../../../Dataset/URM/data_train.npz"))
+URM = sps.csr_matrix(sps.load_npz("../../../../Dataset/URM/data_all.npz"))
 validator = validate(URM_test, [10])
 
 mauri_recsys = ItemKNNCFRecommender(URM)

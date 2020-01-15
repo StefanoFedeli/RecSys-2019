@@ -82,3 +82,13 @@ Currently using LOSS:warp, COMPONENTS:64, LEARNING:adadelta, RATE:0.1
 
 Currently using LOSS:warp, COMPONENTS:64, LEARNING:adadelta, RATE:0.01
 {'precision': 0.0010643985419198077, 'recall': 0.010643985419198056, 'MAP': 0.00352344307508342}
+
+
+
+
+
+
+***** GOT IT ******* GOT IT
+alpha=13.385, beta=0.000, gamma=9.567, d=14.373, e=13.023, f=1.501, g=8.853, h=11.730 i=0.000, l=7.509, norm:False
+0.049365155775617925
+***** GOT IT ******* GOT IT
