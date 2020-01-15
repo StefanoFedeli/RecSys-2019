@@ -110,8 +110,31 @@ for i in range(35):
 
 
 rec_sys.fit(alpha=2.486, beta=1.606, gamma=10.264, d=7.918, e=1.713, f=5.300, g=1.301, h=11.257, i=0.331, l=2.299, n=True)
-with open("../../../Outputs/hybrid_norm_final.csv", 'w') as f:
+
+
+with open("../../Outputs/hybrid_norm_final2.csv", 'w') as f:
     f.write("user_id,item_list\n")
-    for user_id in users:
-        # print(user_id)
-        f.write(str(user_id) + "," + utils.trim(np.array(rec_sys.recommend(user_id))) + "\n")
+
+    user_batch_start = 0
+    while user_batch_start < len(users):
+        user_batch_end = user_batch_start + 1000
+        user_batch_end = min(user_batch_end, len(users))
+
+        test_user_batch_array = np.array(users[user_batch_start:user_batch_end])
+        user_batch_start = user_batch_end
+
+        # Compute predictions for a batch of users using vectorization, much more efficient than computing it one at a time
+        recommended_items_batch_list, scores_batch = rec_sys.recommend(test_user_batch_array,
+                                                                       remove_seen_flag=True,
+                                                                       cutoff=10,
+                                                                       remove_top_pop_flag=False,
+                                                                       remove_custom_items_flag=False,
+                                                                       return_scores=True)
+        i=0
+        for user_id in test_user_batch_array:
+            # print(user_id)
+            f.write(str(user_id) + "," + utils.trim(np.array(recommended_items_batch_list[i])) + "\n")
+            i=i+1
+
+
+

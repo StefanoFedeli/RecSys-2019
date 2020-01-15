@@ -19,9 +19,9 @@ def run(target_users, URM_test):
     cumulative_MAP = 0.0
     num_eval = 0
 
-    recommendations = mergeCSV([open("../Outputs/TopPop_cold.csv", "r"),
+    recommendations = mergeCSV([open("../Outputs/hybrid_norm_final2.csv", "r"),
                                 open("../Outputs/TopPop_freeze.csv", "r")
-                                ], seek=18)
+                                ], seek=19)
     goodUsers = []
 
     for user in target_users:
@@ -67,7 +67,7 @@ def run(target_users, URM_test):
 
 URM_test = sps.csr_matrix(sps.load_npz("../Dataset/URM/data_test.npz"))
 #URM_val = sps.csr_matrix(sps.load_npz("../Dataset/old/data_validation.npz"))
-targetUsers = util.get_target_users("../Dataset/target_users_cold.csv", seek=8)
+targetUsers = util.get_target_users("../Dataset/target_users.csv", seek=9)
 
 print("TESTING")
 res_test = run(targetUsers, URM_test)
@@ -81,12 +81,12 @@ print(res_val["MAP"])
 
 print((res_val["MAP"]+res_test["MAP"])/2)
 """
-"""''
-with open("../../../Outputs/HybridSte.csv", 'w') as f:
+
+with open("../Outputs/hybrid_norm_15_1_1.csv", 'w') as f:
     f.write("user_id,item_list\n")
     for user_id in targetUsers:
         #print(user_id)
         f.write(str(user_id) + "," + util.trim(np.array(res_test["RecSys"][user_id])) + "\n")
 
-"""
-#util.compare_csv("../../../Outputs/truth2.csv", "../../../Outputs/HappyNewHybrid_0.8_0.25_0.15_0055.csv")
+
+util.compare_csv("../Outputs/truth.csv", "../Outputs/hybrid_norm_15_1_1.csv")

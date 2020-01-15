@@ -302,6 +302,10 @@ class EvaluatorHoldout(Evaluator):
                                                                       return_scores = True
                                                                      )
 
+            print(recommended_items_batch_list)
+            print(recommended_items_batch_list[0])
+            print(recommended_items_batch_list[0][:10])
+
 
             assert len(recommended_items_batch_list) == len(test_user_batch_array), "{}: recommended_items_batch_list contained recommendations for {} users, expected was {}".format(
                 self.EVALUATOR_NAME, len(recommended_items_batch_list), len(test_user_batch_array))
